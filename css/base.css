@@ -1,0 +1,20 @@
+div header nav ul li {
+	float: right;
+	list-style-type: none;
+	display: inline-block;
+}
+
+header nav ul li a {
+	text-decoration: none;
+}
+
+div aside {
+	width: 32%;
+	background-color: grey;
+}
+
+div section div {
+	width: 49%;
+	background-color: grey;
+}
+
