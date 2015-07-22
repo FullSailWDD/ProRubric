@@ -1,0 +1,20 @@
+{
+  "name": "project_delta",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Apextion/Project-Delta",
+  "authors": [
+    "Chapman <chapman@apextion.com>"
+  ],
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
