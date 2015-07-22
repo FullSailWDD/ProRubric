@@ -1,0 +1,65 @@
+div header nav ul li {
+	float: right;
+	list-style-type: none;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+header nav ul li a {
+	text-decoration: none;
+}
+
+#test {
+	background-color: #FF0000;
+	float: left;
+	clear: both;
+	width: 100%;
+}
+
+#test aside {
+	float:left;
+	width: 32%;
+	background-color: #333;
+}
+
+#test section {
+	float:right;
+	background-color: #FF9900;
+	width: 64%;
+}
+
+#test section #robot {
+	width: 49%;
+	float: left;
+	background-color: #FF3399;
+}
+
+#test section #clock {
+	width: 49%;
+	float: right;
+	background-color: #33FFFF;
+}
+
+#studentinfo {
+	background-color: #00FF00;
+	float: right;
+	width: 68%;
+}
+
+#student {
+	float: left;
+	width: 49%;
+	background-color: #3300FF;
+}
+
+#highlights {
+	float:right;
+	width: 49%;
+	background-color: #7D26CD;
+}
+
+#archives {
+	clear: both;
+	background-color: #FF9900;
+
+}
