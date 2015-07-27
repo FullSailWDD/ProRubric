@@ -33,3 +33,31 @@ exports.saveGrad   = function(name,bio,profile_picture,project){
     });
 
 };
+
+exports.allGrads    = function(){
+    GradModel.find({}, function (err, grads){
+        if (err) throw err;
+        console.log(grads);
+        return grads;
+    });
+};
+
+exports.findGrad    = function(_id){
+    GradModel.findOne({'_id':_id}, function (err, grad){
+        if (err) throw err;
+        console.log(grad);
+        return grad;
+    });
+};
+
+
+exports.removeGrad    = function(_id){
+    GradModel.findOneAndRemove({'_id':_id}, function (err, grad){
+        if (err) {
+            throw err;
+        } else if(!err && grad != null) {
+            console.log('User successfully deleted!', grad);
+        }
+    });
+    return true;
+};
