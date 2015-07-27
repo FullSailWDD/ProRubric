@@ -1,8 +1,17 @@
 // npm modules
 var express 				= require('express'),
 		app 						= express(),
-		port 						= process.env.PORT || 3000,
-  	exphbs 					= require('express-handlebars');
+  	exphbs 					= require('express-handlebars'),
+		env 						= require('node-env-file');
+
+
+// View Config
+// =============================================================================
+// Environmental Vars
+env(__dirname+ '/.env');
+
+var db     					= require('./config/db'),
+		port 						= process.env.PORT || 3000;
 
 
 // View Engine
