@@ -7,8 +7,6 @@ var express 				= require('express'),
 
 // View Config
 // =============================================================================
-// Environmental Vars
-env(__dirname + '/.env');
 var db     					= require('./config/db'),
 		port 						= process.env.PORT || 3000;
 

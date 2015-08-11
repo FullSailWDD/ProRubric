@@ -5,7 +5,8 @@ var
     child_process   = require('child_process'),
     nodemon         = require('gulp-nodemon'),
     jeet            = require('jeet'),
-    stylus          = require('gulp-stylus');
+    stylus          = require('gulp-stylus'),
+    connect         = require('gulp-connect');
     
 
 // include, if you want to work with sourcemaps 
@@ -21,7 +22,7 @@ gulp.task('mongod', function() { 
 
 gulp.task('dev', function () {
   nodemon({ script: 'app.js'
-          , ext: 'html js'
+          , ext: 'html js styl'
           , ignore: ['ignored.js'] })
     .on('restart', function () {
       console.log('restarted!')
@@ -32,14 +33,25 @@ gulp.task('dev', function () {
 
 
 // Get one .styl file and render 
-gulp.task('main', function () {
+gulp.task('stylus', function () {
   gulp.src('./assets/css/main.styl')
     .pipe(stylus(
       {use: [jeet()]}
     ))
-    .pipe(gulp.dest('./public/css/build'));
+    .pipe(gulp.dest('./public/css/build'))
+    .pipe(connect.reload());
 });
  
+
+gulp.task('watch', function () {
+  // gulp.watch(['./app/*.html'], ['html']);
+  gulp.watch(['./assets/css/*.styl'], ['stylus']);
+});
+
+
+
+
+
 // Options 
 // Options compress 
 gulp.task('compress', function () {
@@ -91,4 +103,4 @@ gulp.task('sourcemaps-external', function () {
 
 
 
-  gulp.task('default', ['mongod', 'dev']);
+  gulp.task('default', ['mongod', 'dev', 'stylus', 'watch']);
