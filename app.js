@@ -7,7 +7,6 @@ var express 				= require('express'),
 
 // View Config
 // =============================================================================
-var db     					= require('./config/db');
 var		port 						= process.env.PORT || 3000;
 
 
