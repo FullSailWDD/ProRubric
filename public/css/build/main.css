@@ -1,0 +1,34 @@
+* {
+  background: rgba(0,0,0,0.05);
+}
+header {
+  *zoom: 1;
+  width: auto;
+  max-width: 80%;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+header:before,
+header:after {
+  content: '';
+  display: table;
+}
+header:after {
+  clear: both;
+}
+nav {
+  float: right;
+}
+nav ul li {
+  float: right;
+  display: inline-block;
+  margin-left: 1em;
+  header: section;
+}
+#test {
+  clear: both;
+}
