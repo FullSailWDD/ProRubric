@@ -21,7 +21,7 @@ header:after {
   clear: both;
 }
 nav {
-  float: left;
+  float: right;
 }
 nav ul li {
   float: right;
