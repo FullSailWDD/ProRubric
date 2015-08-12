@@ -75,7 +75,7 @@ module.exports = function (){
 
     // Publicly Available
     return {
-        schema:         gradSchema,
+        schema :        gradSchema,
         model :         _model,
         findByID :      _findByID,
         findAll :       _all,

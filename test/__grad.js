@@ -3,7 +3,9 @@ var expect          = require("chai").expect,
     grad            = require('../models/grad.js');
 
 describe('Grad', function() {
+    // test user created before each test
     var testGrad = null;
+    // test user created specifically for the add grad test
     var testGrad2 = null;
 
     beforeEach(function (done) {
