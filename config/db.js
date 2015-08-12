@@ -10,6 +10,6 @@ mongoose.connect(uristring, function(err, res) {
     if (err) {
         console.log('Connection[ERROR]: ' + uristring + '. ' + err);
     } else {
-        console.log('Connection[Success]: ' + uristring);
+        // console.log('Connection[Success]: ' + uristring);
     }
 });

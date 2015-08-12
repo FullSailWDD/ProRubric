@@ -7,13 +7,13 @@ var express 				= require('express'),
 
 // View Config
 // =============================================================================
-var db     					= require('./config/db'),
-		port 						= process.env.PORT || 3000;
+var db     					= require('./config/db');
+var		port 						= process.env.PORT || 3000;
 
 
 // Databse Models
 // =============================================================================
-var Grad            = require('./models/grad.js');
+// var Grad            = require('./models/grad.js');
 
 
 // View Engine
@@ -35,19 +35,3 @@ app.use(express.static(__dirname +'/public'));
 // =============================================================================
 var server 					= app.listen(port);
 console.log('Starting Node Server on Port ' + port);
-
-
-
-
-
-
-// =============================================================================
-// Testing
-// // =============================================================================
-// // Add to DB
-// Grad.saveGrad("Chapman","some bio","https://lynleahz.files.wordpress.com/2012/07/dem-jackass-2_thumb.jpg",{title:"yep, we have one of those"});
-// 
-	// var allGrads = Grad.allGrads();
-	// var gradByID = Grad.findGrad({_id:'55b686d28a60d2c3966888a7'});
-// var removeGrad = Grad.removeGrad({_id:'55b689a1d88efe7c9c0a5ed5'});
-

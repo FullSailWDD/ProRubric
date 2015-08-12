@@ -1,63 +1,85 @@
-var mongoose     = require('mongoose');
-
-var GradSchema   = mongoose.Schema({
-    name: String,
-    bio: String,
-    profile_picture: String,
-    project: Object,
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date, default: Date.now }
-});
-
-// ========= Methods ============
-var GradModel = mongoose.model('grad', GradSchema);
-
-exports.saveGrad   = function(name,bio,profile_picture,project){
-
-	// // creates a new message with the shema in Msg models
-	var addGrad    = new GradModel({
-    	name: name,
-        bio: bio,
-        profile_picture: profile_picture,
-        project: project
-	});
-	
-	// Saves Grad information
-    addGrad.save(function(err) {
-    	
-    	if(err){	
-            console.log('addGrad[ERROR]: ' + name + err );
-    	} else {
-            console.log('addGrad[Success]: ' + name );
-        }
+module.exports = function (){
+    var db          = require('../config/db'),
+        mongoose    = require('mongoose');
+        
+    var gradSchema  = mongoose.Schema({
+        name: String,
+        bio: String,
+        profile_picture: String,
+        project: Object,
+        created_at: { type: Date, default: Date.now },
+        updated_at: { type: Date, default: Date.now }
     });
 
-};
-
-exports.allGrads    = function(){
-    GradModel.find({}, function (err, grads){
-        if (err) throw err;
-        console.log(grads);
-        return grads;
-    });
-};
-
-exports.findGrad    = function(_id){
-    GradModel.findOne({'_id':_id}, function (err, grad){
-        if (err) throw err;
-        console.log(grad);
-        return grad;
-    });
-};
+    var _model = mongoose.model('grad', gradSchema);
 
 
-exports.removeGrad    = function(_id){
-    GradModel.findOneAndRemove({'_id':_id}, function (err, grad){
-        if (err) {
-            throw err;
-        } else if(!err && grad != null) {
-            console.log('User successfully deleted!', grad);
-        }
-    });
-    return true;
-};
+    // CRUD Methods 
+    // ============================================================================================================
+    // Success and Failure are passed in as callbacks
+    
+    // Add new Grad to DB
+    var _save = function (grad, success, fail){
+        var newGrad    = new _model({
+            name:               grad.name,
+            bio:                grad.bio,
+            profile_picture:    grad.profile_picture,
+            project:            grad.project
+        });
+
+        newGrad.save(function(err) {
+            if (err){
+                fail(err);
+            } else {
+                success(newGrad);
+            }
+        });
+    }
+
+
+    var _findByID = function (_id, success, fail){
+        _model.findOne({'_id':_id}, function (err, doc){
+            if (err){
+                fail(err);
+            } else {
+                success(doc);
+            }
+        });
+    }
+
+    // Return All
+    var _all = function (success, fail){
+        _model.find({}, function (err, doc){
+            if (err){
+                fail(err);
+            } else {
+                success(doc);
+            }
+        });
+    }
+
+    // Remove 1 by ID
+    var _removeByID = function (_id, success, fail){
+         _model.findOneAndRemove({'_id':_id}, function (err, doc){
+            if (err) {
+                fail(err);
+            } else if(!err && doc === null) {
+                // No technical error, just logistical
+                fail({error: "No Matching ID to Remove"});
+            } else if(!err && doc != null) {
+                //success
+                success(doc);
+            }
+        });
+    }
+
+    // Publicly Available
+    return {
+        schema:         gradSchema,
+        model :         _model,
+        findByID :      _findByID,
+        findAll :       _all,
+        removeByID :    _removeByID,
+        add:            _save
+    }
+}();
