@@ -1,5 +1,5 @@
 var expect          = require("chai").expect,
-    assert          = require("assert"),
+    should          = require('should'),
     grad            = require('../models/grad.js');
 
 describe('Grad', function() {

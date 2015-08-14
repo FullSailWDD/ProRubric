@@ -6,7 +6,9 @@ var
     nodemon         = require('gulp-nodemon'),
     jeet            = require('jeet'),
     stylus          = require('gulp-stylus'),
-    connect         = require('gulp-connect');
+    connect         = require('gulp-connect'),
+    mocha           = require('gulp-mocha'),
+    util            = require('gulp-util');
     
 
 // include, if you want to work with sourcemaps 
@@ -29,6 +31,17 @@ gulp.task('dev', function () {
     })
 });
 
+gulp.task('runTests', function () {
+    return gulp.src(['test/*.js'], { read: false })
+        .pipe(mocha({ 
+            reporter: 'spec',
+            timeout:2000,
+            // globals: {
+            //     should: require('should')
+            // }
+          }))
+        .on('error', util.log)
+});
 
 
 
@@ -45,62 +58,10 @@ gulp.task('stylus', function () {
 
 gulp.task('watch', function () {
   // gulp.watch(['./app/*.html'], ['html']);
-  gulp.watch(['./assets/css/*.styl'], ['stylus']);
+  gulp.watch(['./assets/css/*.styl', './test/*'], ['stylus']);
 });
 
 
 
-
-
-// Options 
-// Options compress 
-gulp.task('compress', function () {
-  gulp.src('./css/compressed.styl')
-    .pipe(stylus({
-      compress: true
-    }))
-    .pipe(gulp.dest('./css/build'));
-});
- 
- 
-// Set linenos 
-gulp.task('linenos', function () {
-  gulp.src('./css/linenos.styl')
-    .pipe(stylus({linenos: true}))
-    .pipe(gulp.dest('./css/build'));
-});
- 
-// Include css 
-// Stylus has an awkward and perplexing 'incude css' option 
-gulp.task('include-css', function() {
-  gulp.src('./css/*.styl')
-    .pipe(stylus({
-      'include css': true
-    }))
-    .pipe(gulp.dest('./'));
- 
-});
- 
-// Inline sourcemaps 
-gulp.task('sourcemaps-inline', function () {
-  gulp.src('./css/sourcemaps-inline.styl')
-    .pipe(sourcemaps.init())
-    .pipe(stylus())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./css/build'));
-});
- 
-// External sourcemaps 
-gulp.task('sourcemaps-external', function () {
-  gulp.src('./css/sourcemaps-external.styl')
-    .pipe(sourcemaps.init())
-    .pipe(stylus())
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./css/build'));
-});
- 
-
-
-
-
+gulp.task('test', ['runTests']);
   gulp.task('default', ['mongod', 'dev', 'stylus', 'watch']);
