@@ -40,7 +40,12 @@ gulp.task('runTests', function () {
             //     should: require('should')
             // }
           }))
-        .on('error', util.log)
+        .on('error', util.log) 
+
+        // exit on end
+        .once('end', function () {
+          process.exit();
+        });
 });
 
 
@@ -63,5 +68,5 @@ gulp.task('watch', function () {
 
 
 
-gulp.task('test', ['runTests']);
+gulp.task('test', ['mongod', 'runTests']);
   gulp.task('default', ['mongod', 'dev', 'stylus', 'watch']);
