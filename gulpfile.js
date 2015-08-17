@@ -11,18 +11,16 @@ var
     util            = require('gulp-util');
     
 
-// include, if you want to work with sourcemaps 
-var sourcemaps = require('gulp-sourcemaps');
-
 // startup required services to run the app server
 gulp.task('mongod', function() { 
     // spawn in a child process mongodb
     child_process.exec('mongod', function(err,stdout,stderr){
-    	console.log(stdout);
+      console.log(stdout);
     });
 });
 
-gulp.task('dev', function () {
+
+gulp.task('development', function () {
   nodemon({ script: 'app.js'
           , ext: 'html js styl'
           , ignore: ['ignored.js'] })
@@ -49,10 +47,9 @@ gulp.task('runTests', function () {
 });
 
 
-
-// Get one .styl file and render 
-gulp.task('stylus', function () {
-  gulp.src('./assets/css/main.styl')
+gulp.task('css', function () {
+  // Get one .styl file and render 
+  gulp.src('./assets/css/**/*.styl')
     .pipe(stylus(
       {use: [jeet()]}
     ))
@@ -66,7 +63,7 @@ gulp.task('watch', function () {
   gulp.watch(['./assets/css/*.styl', './test/*'], ['stylus']);
 });
 
-
-
+gulp.task('build', ['css']);
 gulp.task('test', ['mongod', 'runTests']);
-  gulp.task('default', ['mongod', 'dev', 'stylus', 'watch']);
+  gulp.task('dev', ['build', 'mongod', 'development', 'watch']);
+gulp.task('default',['build']);

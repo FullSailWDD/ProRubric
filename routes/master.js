@@ -3,8 +3,8 @@ module.exports = function(app) {
     // route /
     app.get('/', function(req, res) {
         res.render('index', {
-            name: 'World',
-            markup: 'none'
+        		seoPageTitle: 'ProRubrics - A Full Sail University Production',
+            h1: 'Dashboard'
         });
     });
 
