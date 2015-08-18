@@ -28,7 +28,7 @@ mongoose.connect(uristring, function(err, res) {
         title : string,
         content : string,
         acronym : string,
-        parent_id : {type : number, default : 0}
+        parent_id : {type : number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
 
@@ -39,7 +39,7 @@ mongoose.connect(uristring, function(err, res) {
 
         title : string,
         content : string,
-        parent_id : {type : number, default : 0}
+        parent_id : {type : number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
 
@@ -49,7 +49,7 @@ mongoose.connect(uristring, function(err, res) {
 
         title : string,
         content : string,
-        parent_id : {type : number, default : 0}
+        parent_id : {type : number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
 
@@ -59,7 +59,7 @@ mongoose.connect(uristring, function(err, res) {
 
         title : string,
         content : string,
-        parent_id : {type : number, default : 0}
+        parent_id : {type : number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
 

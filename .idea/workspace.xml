@@ -37,7 +37,7 @@
       <file leaf-file-name="db.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/db.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="53" selection-start="1855" selection-end="1855" vertical-scroll-proportion="1.4020772" vertical-offset="0" max-vertical-offset="1110">
+            <state line="13" column="5" selection-start="561" selection-end="561" vertical-scroll-proportion="-0.2908012" vertical-offset="391" max-vertical-offset="1110">
               <folding />
             </state>
           </provider>
@@ -257,7 +257,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/db.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="53" selection-start="1855" selection-end="1855" vertical-scroll-proportion="1.4020772" vertical-offset="0" max-vertical-offset="1110">
+        <state line="13" column="5" selection-start="561" selection-end="561" vertical-scroll-proportion="-0.2908012" vertical-offset="391" max-vertical-offset="1110">
           <folding />
         </state>
       </provider>
