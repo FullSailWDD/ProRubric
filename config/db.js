@@ -18,9 +18,8 @@ mongoose.connect(uristring, function(err, res) {
         title : string,
         acronym : string,
         parent_id : {type:number, default:0}
-
-
     });
+    
 
     var courseSchema = new Schema({
 
@@ -28,32 +27,30 @@ mongoose.connect(uristring, function(err, res) {
         content : string,
         acronym: string,
         parent_id: {type:number, default:0}
-
-
     });
+    
 
     var rubricSchema = new Schema({
 
         title : string,
         content : string,
         parent_id: {type:number, default:0}
-
     });
+    
 
     var sectionSchema = new Schema({
 
         title : string,
         content : string,
         parent_id: {type:number, default:0}
-
     });
+    
 
     var lineItemSchema = new Schema({
 
         title : string,
         content : string,
         parent_id: {type:number, default:0}
-
     });
 
 });
