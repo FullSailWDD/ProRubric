@@ -1,8 +1,7 @@
 // npm modules
 var express 				= require('express'),
 		app 						= express(),
-  	exphbs 					= require('express-handlebars'),
-		env 						= require('node-env-file');
+  	exphbs 					= require('express-handlebars');
 
 
 // View Config
