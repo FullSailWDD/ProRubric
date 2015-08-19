@@ -61,7 +61,7 @@ var rubricModel = mongoose.model('rubrics', rubricSchema);
 var sectionModel = mongoose.model('sections', sectionSchema);
 var lineItemModel = mongoose.model('lineItems', lineItemSchema);
 
-exports.insertDegrees = function(degName,degAck){
+exports.insertDegrees = function(degName,degAck,success){
 
     var degrees = new degreeModel({
 
@@ -73,7 +73,8 @@ exports.insertDegrees = function(degName,degAck){
     degrees.save(function(err,result){
 
         if (err) return console.log(err);
-        console.log(result);
+        //console.log(result);
+        success(result);
 
     });
 
