@@ -83,10 +83,9 @@ gulp.task('lint', function() {
 gulp.task('watch', function () {
   // gulp.watch(['./app/*.html'], ['html']);
   gulp.watch(['./assets/css/*.styl', './test/*'], ['stylus']);
-  gulp.watch(['app.js'], ['lint']);
 });
 
 gulp.task('build', ['css', 'js']);
 gulp.task('test', ['mongod', 'runTests']);
-  gulp.task('dev', ['build', 'mongod', 'development', 'watch']);
+gulp.task('dev', ['build', 'mongod', 'development', 'watch']);
 gulp.task('default',['build']);

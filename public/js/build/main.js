@@ -12,7 +12,7 @@ appModule.controller('mainController', function($scope) {
     $scope.addDegree = function(degreeName, degreeAcronym){
         console.log('Degree Name: ', degreeName);
         console.log('Degree Acronym: ', degreeAcronym);
-    }
+    };
 
 
 });
