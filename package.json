@@ -34,6 +34,7 @@
     "stylus": "^0.52.0"
   },
   "dependencies": {
+    "body-parser": "^1.13.3",
     "express": "^4.13.1",
     "express-handlebars": "^2.0.1",
     "jeet": "^6.1.2",
