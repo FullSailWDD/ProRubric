@@ -1,4 +1,5 @@
 // npm modules
+<<<<<<< HEAD
 var express = require('express');
 var app = express();
 var exphbs = require('express-handlebars');
@@ -7,11 +8,16 @@ var bodyParser = require('body-parser');
 
 //		env 						= require('node-env-file');
 
+=======
+var express 				= require('express'),
+    app 				    = express(),
+  	exphbs 					= require('express-handlebars');
+>>>>>>> 745b859cda830c51460ee2afd0e26ef57339e20f
 
 
 // View Config
 // =============================================================================
-var		port 						= process.env.PORT || 3000;
+var		port 					= process.env.PORT || 3000;
 
 
 // Databse Models

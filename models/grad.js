@@ -34,8 +34,7 @@ module.exports = function (){
                 success(newGrad);
             }
         });
-    }
-
+    };
 
     var _findByID = function (_id, success, fail){
         _model.findOne({'_id':_id}, function (err, doc){
@@ -45,7 +44,7 @@ module.exports = function (){
                 success(doc);
             }
         });
-    }
+    };
 
     // Return All
     var _all = function (success, fail){
@@ -56,7 +55,7 @@ module.exports = function (){
                 success(doc);
             }
         });
-    }
+    };
 
     // Remove 1 by ID
     var _removeByID = function (_id, success, fail){
@@ -66,12 +65,12 @@ module.exports = function (){
             } else if(!err && doc === null) {
                 // No technical error, just logistical
                 fail({error: "No Matching ID to Remove"});
-            } else if(!err && doc != null) {
+            } else if(!err && doc !== null) {
                 //success
                 success(doc);
             }
         });
-    }
+    };
 
     // Publicly Available
     return {
@@ -81,10 +80,14 @@ module.exports = function (){
         findAll :       _all,
         removeByID :    _removeByID,
         add:            _save
+<<<<<<< HEAD
     }
 
 
 
 
 
+=======
+    };
+>>>>>>> 745b859cda830c51460ee2afd0e26ef57339e20f
 }();
