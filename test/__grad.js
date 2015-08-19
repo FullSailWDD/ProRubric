@@ -18,7 +18,7 @@ describe('Grad', function() {
             testGrad = doc;
             doc.name.should.equal('test');
             done();
-        })
+        });
     });
 
     afterEach( function (done) {
