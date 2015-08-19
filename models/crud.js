@@ -58,12 +58,19 @@ var lineItemSchema = mongoose.Schema({
 
 });
 
+
+
+
 var degreeModel = mongoose.model('degrees', degSchema);
 var courseModel = mongoose.model('courses', courseSchema);
 var rubricModel = mongoose.model('rubrics', rubricSchema);
 var sectionModel = mongoose.model('sections', sectionSchema);
 var lineItemModel = mongoose.model('lineItems', lineItemSchema);
 
+
+
+//******INSERTS******
+//******INSERTS******
 exports.insertDegrees = function(degName,degAck){
 
     var degrees = new degreeModel({
@@ -154,6 +161,23 @@ exports.lineItemSection = function(liName,liContent){
         console.log(result);
 
     });
-
 };
 
+//******UPDATES******
+//******UPDATES******
+exports.updateDegree = function(degId){
+
+    var lineItem = new lineItemModel({
+
+        title : liName,
+        content : liContent
+
+    });
+
+    lineItem.save(function(err,result){
+
+        if (err) return console.log(err);
+        console.log(result);
+
+    });
+};
