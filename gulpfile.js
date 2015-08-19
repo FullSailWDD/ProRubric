@@ -32,7 +32,9 @@ gulp.task('development', function () {
   nodemon({ 
     script: 'app.js',
     ext: 'html js styl',
-    ignore: ['ignored.js'] })
+    ignore: ['ignored.js'],
+    env: {"NODE_ENV": "development"}
+  })
   .on('restart', function () {
     console.log('restarted!');
   });
