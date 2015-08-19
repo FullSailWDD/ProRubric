@@ -9,8 +9,10 @@ appModule.config(function($interpolateProvider) {
 
 appModule.controller('mainController', function($scope) {
 
-
-    $scope.goat = 'Text Mang';
+    $scope.addDegree = function(degreeName, degreeAcronym){
+        console.log('Degree Name: ', degreeName);
+        console.log('Degree Acronym: ', degreeAcronym);
+    }
 
 
 });

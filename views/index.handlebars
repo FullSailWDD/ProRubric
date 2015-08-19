@@ -1,5 +1,10 @@
 <h1>{{ h1 }}</h1>
-
-<input ng-model="name"> Hello {[{name}]}
-
-{[{goat}]}
+<hr>
+<h1>Add New Degree</h1>
+<form>
+    <label>Degree Name</label>
+    <input type="text" ng-model="degreeName">
+    <label>Acronym</label>
+    <input type="text" ng-model="degreeAcronym">
+    <button ng-click="addDegree(degreeName, degreeAcronym)">Submit</button>
+</form>
