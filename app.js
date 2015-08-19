@@ -32,4 +32,4 @@ app.use(express.static(__dirname +'/public'));
 // START THE SERVER
 // =============================================================================
 var server 					= app.listen(port);
-console.log('Starting Node Server on Port ' + port);
+outputs.debug(port, "Node Server Port Status", true);

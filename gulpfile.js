@@ -32,7 +32,9 @@ gulp.task('development', function () {
   nodemon({ 
     script: 'app.js',
     ext: 'html js styl',
-    ignore: ['ignored.js'] })
+    ignore: ['ignored.js'],
+    env: {"NODE_ENV": "development"}
+  })
   .on('restart', function () {
     console.log('restarted!');
   });
@@ -76,7 +78,7 @@ gulp.task('lint', function() {
 gulp.task('watch', function () {
   // gulp.watch(['./app/*.html'], ['html']);
   gulp.watch(['./assets/css/*.styl', './test/*'], ['stylus']);
-  gulp.watch(['app.js'], ['lint']);
+  // gulp.watch(['./**/*.js'], ['runTests']);
 });
 
 gulp.task('build', ['css']);
