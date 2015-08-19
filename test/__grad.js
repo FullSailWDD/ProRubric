@@ -34,6 +34,8 @@ describe('Grad', function() {
         });
     });
     it('Adds New', function (done) {
+
+
         grad.add({
             name:               "Second Test User",
             bio:                "Second Test User Bio",
@@ -41,9 +43,11 @@ describe('Grad', function() {
             project:            "SecondProject Info(s)"
         }, function (doc) {
             testGrad2 = doc;
-            doc.name.should.equal('Second Test User');
+            doc.name.should.equal('xxx Test User');
             done();
         });
+
+
     });
     it('Remove By ID', function (done) {
         grad.removeByID(testGrad2._id, function () {
