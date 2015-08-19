@@ -1,7 +1,10 @@
 // npm modules
-var express 				= require('express'),
-		app 						= express(),
-  	exphbs 					= require('express-handlebars');
+var express = require('express');
+var app = express();
+var exphbs = require('express-handlebars');
+var mods   = require('./config/db.js');
+var bodyParser = require('body-parser');
+
 //		env 						= require('node-env-file');
 
 
