@@ -80,14 +80,5 @@ module.exports = function (){
         findAll :       _all,
         removeByID :    _removeByID,
         add:            _save
-<<<<<<< HEAD
-    }
-
-
-
-
-
-=======
     };
->>>>>>> 745b859cda830c51460ee2afd0e26ef57339e20f
 }();

@@ -29,5 +29,22 @@ module.exports = function(app) {
         allModel.insertCourse(courName,courAck,courContent);
 
     });
+    
+    
+    
+    app.get('/degUpdate',function(req,res){
+
+
+        allModel.updateDegree(req.degreeId);
+
+    });
+    
+    
+    app.get('/degRemove',function(req,res){
+
+
+        allModel.removeDegree(req.degreeId);
+
+    });
 
 };
