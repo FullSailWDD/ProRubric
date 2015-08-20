@@ -3,9 +3,9 @@
  */
 
 var db          = require('../config/db'),
-    mongoose    = require('mongoose');
+    mongoose    = require('mongoose'),
+    ObjectID    = require('mongoose')
 
-var degreeModel = mongoose.model('degrees', degSchema);
 
 
 var degSchema = mongoose.Schema({
@@ -17,6 +17,11 @@ var degSchema = mongoose.Schema({
     updated_at : {type : Date, default: Date.now}
 
 });
+
+var degreeModel = mongoose.model('degrees', degSchema);
+//var removeDegreeModel = mongoose.model('removeDegrees',degSchema);
+
+
 
 exports.insertDegrees = function(degName,degAck){
 
@@ -36,16 +41,20 @@ exports.insertDegrees = function(degName,degAck){
 
 };
 
-exports.removeByTitle = function (title, success, fail){
-    removeDegreeModel.findOneAndRemove({title : title}, function (err, doc){
-        if (err) {
-            fail(err);
-        } else if(!err && doc === null) {
-            // No technical error, just logistical
-            fail({error: "No Matching title to Remove"});
-        } else if(!err && doc != null) {
-            //success
-            success(doc);
-        }
+exports.updateDegree = function(degreeId){
+
+    //finds the entry based on _id and then inserts a new title......for now
+    degreeModel.update({'_id':'55d4d9abef10520d329dc060'}, {$set:{'title':'i like dogs'}}, function(err, result){
+        if(err) return console.log(err);
+        console.log(result);
+    });
+};
+
+exports.removeDegree = function(degreeId){
+
+    //finds the entry based on _id and then inserts a new title......for now
+    degreeModel.findByIdAndRemove({'_id':'55d4fe33c2d40acb9e0f1d9f'}, function(err, result){
+        if(err) return console.log(err);
+        console.log(result);
     });
 };

@@ -31,11 +31,17 @@ module.exports = function(app) {
     });
 
 
-    app.get('/degreeRemove',function(req,res){
+    app.get('/degUpdate',function(req,res){
 
-        var degTitle = 'Web Design and Deployment';
 
-        allModel.removeByTitle(degTitle);
+        degModel.updateDegree(req.degreeId);
+
+    });
+
+    app.get('/degRemove',function(req,res){
+
+
+        degModel.removeDegree(req.degreeId);
 
     });
 
