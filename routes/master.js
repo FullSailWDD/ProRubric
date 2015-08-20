@@ -30,4 +30,13 @@ module.exports = function(app) {
 
     });
 
+
+    app.get('/degreeRemove',function(req,res){
+
+        var degTitle = 'Web Design and Deployment';
+
+        allModel.removeByTitle(degTitle);
+
+    });
+
 };

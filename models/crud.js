@@ -61,6 +61,8 @@ var rubricModel = mongoose.model('rubrics', rubricSchema);
 var sectionModel = mongoose.model('sections', sectionSchema);
 var lineItemModel = mongoose.model('lineItems', lineItemSchema);
 
+var removeDegreeModel = mongoose.model('removeDegrees',degSchema);
+
 exports.insertDegrees = function(degName,degAck){
 
     var degrees = new degreeModel({
@@ -153,3 +155,41 @@ exports.lineItemSection = function(liName,liContent){
     });
 
 };
+
+
+
+exports.removeByTitle = function (title, success, fail){
+    removeDegreeModel.findOneAndRemove({title : title}, function (err, doc){
+        if (err) {
+            fail(err);
+        } else if(!err && doc === null) {
+            // No technical error, just logistical
+            fail({error: "No Matching title to Remove"});
+        } else if(!err && doc != null) {
+            //success
+            success(doc);
+        }
+    });
+};
+
+//exports.removeDegrees = function(id){
+
+
+
+//    degSchema.findById(id, function (err, doc) {
+//        if (err)
+//            doc.remove(callback);
+//    });
+
+//    degSchema.remove({ title: degName }, function (err) {
+//
+//
+//        console.log(err);
+
+//    });
+
+//};
+
+
+
+
