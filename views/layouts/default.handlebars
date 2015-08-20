@@ -2,13 +2,14 @@
 <html lang="en">
 		<head>
 		<meta charset="UTF-8">
-		<title>{{ seoPageTitle }}</title>
-		
-    <link rel="stylesheet" href="css/build/main.css">
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+			<script src="js/build/main.js" type="text/javascript"></script>
+			<title>{{ seoPageTitle }}</title>
+    		<link rel="stylesheet" href="css/build/main.css">
 	</head>
-	<body>
-
+	<body ng-app="ProRubric">
+		<div ng-controller="mainController">
 		{{{ body }}}
-
+        </div>
 	</body>
 </html>
