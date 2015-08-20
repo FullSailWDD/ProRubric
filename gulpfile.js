@@ -1,5 +1,3 @@
-'use strict';
-
 var gulp            = require('gulp'),
     child_process   = require('child_process'),
     nodemon         = require('gulp-nodemon'),
@@ -8,12 +6,17 @@ var gulp            = require('gulp'),
     connect         = require('gulp-connect'),
     mocha           = require('gulp-mocha'),
     util            = require('gulp-util'),
-    jshint          = require('gulp-jshint');
-    
+    jshint          = require('gulp-jshint'),
+    exec            = require('child_process').exec;
 
 var config = {
   jshint : ['./*.js', './*/*.js']
 };
+
+gulp.task('clearStart', function(){
+    // Ensure mongod is not running
+    exec('killall mongod');
+});
 
 // startup required services to run the app server
 gulp.task('mongod', function() {
@@ -88,6 +91,6 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['css', 'js']);
-gulp.task('test', ['mongod', 'runTests']);
-gulp.task('dev', ['build', 'mongod', 'development', 'watch']);
+gulp.task('test', ['clearStart', 'mongod', 'runTests']);
+gulp.task('dev', ['clearStart', 'build', 'mongod', 'development', 'watch']);
 gulp.task('default',['build']);

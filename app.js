@@ -1,7 +1,8 @@
 // npm modules
 var express 				= require('express'),
-		app 				= express(),
+		app 						= express(),
   	exphbs 					= require('express-handlebars');
+  	outputs  				= require('./lib/outputs.js')();
 
 
 // View Config
