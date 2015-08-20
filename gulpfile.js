@@ -77,7 +77,7 @@ gulp.task('lint', function() {
 
 gulp.task('watch', function () {
   // gulp.watch(['./app/*.html'], ['html']);
-  gulp.watch(['./assets/css/*.styl', './test/*'], ['stylus']);
+  gulp.watch(['./assets/css/*.styl', './test/*'], ['css']);
   // gulp.watch(['./**/*.js'], ['runTests']);
 });
 

@@ -1,6 +1,154 @@
 * {
   background: rgba(0,0,0,0.05);
 }
+html {
+  background: #808080;
+}
+h1 {
+  text-align: left;
+  margin-left: 10%;
+  font-family: arial;
+}
+input {
+  margin-left: 10%;
+  width: 80%;
+  height: 30px;
+}
+label {
+  margin-left: 10%;
+}
+.createrubricbutton {
+  margin-left: 61%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background: #808080;
+  width: 30%;
+  height: 40px;
+}
+#topheader {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+#topheader:before,
+#topheader:after {
+  content: '';
+  display: table;
+}
+#topheader:after {
+  clear: both;
+}
+#topheader:last-child {
+  margin-right: 0%;
+}
+.logo {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 14.166666666666664%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+.logo:before,
+.logo:after {
+  content: '';
+  display: table;
+}
+.logo:after {
+  clear: both;
+}
+.logo:last-child {
+  margin-right: 0%;
+}
+.siteheader {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 31.33333333333333%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+.siteheader:before,
+.siteheader:after {
+  content: '';
+  display: table;
+}
+.siteheader:after {
+  clear: both;
+}
+.siteheader:last-child {
+  margin-right: 0%;
+}
+.searchbar {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 48.5%;
+  margin-left: 0%;
+  margin-right: 3%;
+  margin-top: 2%;
+}
+.searchbar:before,
+.searchbar:after {
+  content: '';
+  display: table;
+}
+.searchbar:after {
+  clear: both;
+}
+.searchbar:last-child {
+  margin-right: 0%;
+}
+#box {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+#box:before,
+#box:after {
+  content: '';
+  display: table;
+}
+#box:after {
+  clear: both;
+}
+#box:last-child {
+  margin-right: 0%;
+}
+.contentbox {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 48.5%;
+  margin-left: 0%;
+  margin-right: 3%;
+  background: #d3d3d3;
+  margin-top: 10%;
+  margin-left: 30%;
+}
+.contentbox:before,
+.contentbox:after {
+  content: '';
+  display: table;
+}
+.contentbox:after {
+  clear: both;
+}
+.contentbox:last-child {
+  margin-right: 0%;
+}
 header {
   *zoom: 1;
   width: auto;
