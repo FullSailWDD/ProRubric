@@ -81,6 +81,8 @@ exports.insertDegrees = function(degName,degAck,success){
 
     });
 
+    };
+
 };
 
 exports.insertCourse = function(courName,courAck,courContent){
@@ -180,8 +182,5 @@ exports.removeDegree = function(degreeId){
       console.log(result);
   });
 };
-
-
-
 
 
