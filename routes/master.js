@@ -1,7 +1,7 @@
 module.exports = function(app) {
 
     var degModel = require('../models/degree.js');
-
+    var courModel = require('../models/course.js');
 
     // route /
     app.get('/', function(req, res) {
@@ -26,10 +26,9 @@ module.exports = function(app) {
             courAck = 'DWP',
             courContent = 'This is a rubric for out class that we are currently in';
 
-        allModel.insertCourse(courName,courAck,courContent);
+        courModel.insertCourse(courName,courAck,courContent);
 
     });
-
 
     app.get('/degUpdate',function(req,res){
 

@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 var exphbs = require('express-handlebars');
 var mods   = require('./config/db.js');
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 
 //		env 						= require('node-env-file');
 
