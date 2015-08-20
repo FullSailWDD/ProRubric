@@ -68,6 +68,13 @@ gulp.task('css', function () {
     .pipe(connect.reload());
 });
 
+gulp.task('js', function () {
+    // Get JS files and Move
+    gulp.src('./assets/js/*.js')
+        .pipe(gulp.dest('./public/js/build'))
+        .pipe(connect.reload());
+});
+
 gulp.task('lint', function() {
   return gulp.src(config.jshint, { base: './'})
     .pipe(jshint())
@@ -78,10 +85,9 @@ gulp.task('lint', function() {
 gulp.task('watch', function () {
   // gulp.watch(['./app/*.html'], ['html']);
   gulp.watch(['./assets/css/*.styl', './test/*'], ['stylus']);
-  // gulp.watch(['./**/*.js'], ['runTests']);
 });
 
-gulp.task('build', ['css']);
-gulp.task('test', ['runTests']);
+gulp.task('build', ['css', 'js']);
+gulp.task('test', ['mongod', 'runTests']);
 gulp.task('dev', ['build', 'mongod', 'development', 'watch']);
 gulp.task('default',['build']);
