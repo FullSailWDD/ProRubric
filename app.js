@@ -1,12 +1,12 @@
 // npm modules
 var express 				= require('express'),
-		app 						= express(),
+		app 				= express(),
   	exphbs 					= require('express-handlebars');
 
 
 // View Config
 // =============================================================================
-var		port 						= process.env.PORT || 3000;
+var		port 					= process.env.PORT || 3000;
 
 
 // Databse Models
@@ -32,4 +32,4 @@ app.use(express.static(__dirname +'/public'));
 // START THE SERVER
 // =============================================================================
 var server 					= app.listen(port);
-console.log('Starting Node Server on Port ' + port);
+outputs.debug(port, "Node Server Port Status", true);
