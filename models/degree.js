@@ -5,6 +5,9 @@
 var db          = require('../config/db'),
     mongoose    = require('mongoose');
 
+var degreeModel = mongoose.model('degrees', degSchema);
+
+
 var degSchema = mongoose.Schema({
 
     title : String,

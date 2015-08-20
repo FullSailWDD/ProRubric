@@ -64,6 +64,7 @@ var lineItemModel = mongoose.model('lineItems', lineItemSchema);
 var removeDegreeModel = mongoose.model('removeDegrees',degSchema);
 
 exports.insertDegrees = function(degName,degAck){
+exports.insertDegrees = function(degName,degAck,success){
 
     var degrees = new degreeModel({
 
@@ -75,9 +76,12 @@ exports.insertDegrees = function(degName,degAck){
     degrees.save(function(err,result){
 
         if (err) return console.log(err);
-        console.log(result);
+        //console.log(result);
+        success(result);
 
     });
+
+    };
 
 };
 

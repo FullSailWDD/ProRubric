@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-    var allModel = require('../models/crud.js');//requiring the schemas to be ready to go into mongo
+    var degModel = require('../models/degree.js');
 
 
     // route /
@@ -16,7 +16,7 @@ module.exports = function(app) {
         var degName = 'Web Design and Deployment';//hard coded values for testing purposes
         var degAck = 'WDD';//hard coded values for testing purposes
 
-        allModel.insertDegrees(degName,degAck);
+        degModel.insertDegrees(degName,degAck);
 
     });
 
