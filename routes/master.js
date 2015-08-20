@@ -22,9 +22,9 @@ module.exports = function(app) {
 
     app.get('/courseProcess',function(req,res){
 
-        var courName = 'Deployment of Web Projects';
-        var courAck = 'DWP';
-        var courContent = 'This is a rubric for out class that we are currently in';
+        var courName = 'Deployment of Web Projects',
+            courAck = 'DWP',
+            courContent = 'This is a rubric for out class that we are currently in';
 
         allModel.insertCourse(courName,courAck,courContent);
 

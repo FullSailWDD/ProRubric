@@ -1,8 +1,6 @@
 /**
  * Created by patrickhalton on 8/18/15.
  */
-
-
     var db          = require('../config/db'),
         mongoose    = require('mongoose');
 
@@ -10,7 +8,7 @@ var degSchema = mongoose.Schema({
 
     title : String,
     acronym : String,
-    parent_id : {type : Number, default : 0},
+//    parent_id : {type : Number, default : 0},
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
@@ -21,10 +19,9 @@ var courseSchema = mongoose.Schema({
     title : String,
     content : String,
     acronym : String,
-    parent_id : {type : Number, default : 0},
+    degree_id : {type : Number, default : 0},
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
-
 
 });
 
@@ -32,7 +29,7 @@ var rubricSchema = mongoose.Schema({
 
     title : String,
     content : String,
-    parent_id : {type : Number, default : 0},
+    course_id : {type : Number, default : 0},
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
@@ -42,7 +39,7 @@ var sectionSchema = mongoose.Schema({
 
     title : String,
     content : String,
-    parent_id : {type : Number, default : 0},
+    rubric_id : {type : Number, default : 0},
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
@@ -52,7 +49,7 @@ var lineItemSchema = mongoose.Schema({
 
     title : String,
     content : String,
-    parent_id : {type : Number, default : 0},
+    section_id : {type : Number, default : 0},
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
@@ -71,7 +68,7 @@ var lineItemModel = mongoose.model('lineItems', lineItemSchema);
 
 //******INSERTS******
 //******INSERTS******
-exports.insertDegrees = function(degName,degAck){
+exports.insertDegrees = function(degName,degAck,success){
 
     var degrees = new degreeModel({
 
@@ -83,7 +80,8 @@ exports.insertDegrees = function(degName,degAck){
     degrees.save(function(err,result){
 
         if (err) return console.log(err);
-        console.log(result);
+        //console.log(result);
+        success(result);
 
     });
 
@@ -162,6 +160,7 @@ exports.lineItemSection = function(liName,liContent){
 
     });
 };
+
 
 //******UPDATES******
 //******UPDATES******
