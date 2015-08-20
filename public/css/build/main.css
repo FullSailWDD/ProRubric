@@ -29,6 +29,28 @@ nav ul li {
   margin-left: 1em;
   header: section;
 }
+h1 {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 48.5%;
+  margin-left: 0%;
+  margin-right: 3%;
+  color: #800080;
+  font-size: 3em;
+}
+h1:before,
+h1:after {
+  content: '';
+  display: table;
+}
+h1:after {
+  clear: both;
+}
+h1:last-child {
+  margin-right: 0%;
+}
 #test {
   clear: both;
 }
