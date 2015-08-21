@@ -11,7 +11,7 @@ angular.module('ProRubric', [])
 
     $scope.rubric = function(rubricName){
 
-        $http.get('/rubric'+rubricName, {msg: rubricName}).
+        $http.get('/degProcess'+rubricName, {msg: rubricName}).
             then(function(response) {
                 //Response is the data returned at call.
                 console.log(response);

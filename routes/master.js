@@ -14,21 +14,12 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/rubric:rubricName', function(req, res) {
-        var data = 'Yeah you got the data',
-            rubricName = req.params.rubricName;
+    app.get('/degProcess:degData',function(req,res){
 
-        courModel.insertCourse(rubricName,rubricName,rubricName);
+        var degName = req.params.degData;
 
-        res.send('added: '+ rubricName);
-    });
-    
-    app.get('/degProcess',function(req,res){//need to wait until form is completed to change route into post
-
-        var degName = 'Web Design and Deployment';//hard coded values for testing purposes
-        var degAck = 'WDD';//hard coded values for testing purposes
-
-        degModel.insertDegrees(degName,degAck);
+        degModel.add(degName);
+        res.send(degName);
 
     });
 
@@ -40,7 +31,7 @@ module.exports = function(app) {
             courAck = 'DWP',
             courContent = 'This is a rubric for out class that we are currently in';
 
-        courModel.insertCourse(courName,courAck,courContent);
+        degModel.insertCourse(courName,courAck,courContent);
 
     });
 
