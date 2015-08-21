@@ -11,10 +11,15 @@ module.exports = function(app) {
         });
     });
 
-
-    app.get('/rubric:rubricName', function(req, res){
+    app.get('/rubric:rubricName', function(req, res) {
         var data = 'Yeah you got the data',
             rubricName = req.params.rubricName;
+
+        courModel.insertCourse(rubricName,rubricName,rubricName);
+
+        res.send('added: '+ rubricName);
+    });
+
 
     app.get('/degProcess',function(req,res){//need to wait until form is completed to change route into post
 
