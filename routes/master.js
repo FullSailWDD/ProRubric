@@ -8,9 +8,10 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/rubric', function(req, res) {
-        var data = 'Yeah you got the data';
-        res.send(data);
+    app.get('/rubric:rubricName', function(req, res){
+        var data = 'Yeah you got the data',
+            rubricName = req.params.rubricName;
+        res.send(rubricName);
     });
 
 };
