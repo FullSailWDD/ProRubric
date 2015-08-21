@@ -14,7 +14,8 @@ module.exports = function(app) {
         });
     });
 
-    
+//========================================All Create New Processes==========================================================
+
     app.get('/degProcess',function(req,res){//need to wait until form is completed to change route into post
 
         var degName = 'Web Design and Deployment';//hard coded values for testing purposes
@@ -34,12 +35,18 @@ module.exports = function(app) {
 
     });
 
+//========================================All Update Processes==========================================================
+
+
     app.get('/degUpdate',function(req,res){
 
 
         Degree.update(req.degreeId);
 
     });
+
+//========================================All Remove Processes==========================================================
+
     
 
     app.get('/degRemove',function(req,res){
