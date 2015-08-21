@@ -9,6 +9,12 @@ angular.module('ProRubric', [])
 
 .controller('mainController', function($http,$scope) {
 
+    var socket = io.connect('');
+
+    socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+    });
     $scope.rubric = function(rubricName){
 
         $http.get('/degProcess'+rubricName, {msg: rubricName}).

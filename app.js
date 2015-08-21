@@ -1,8 +1,10 @@
 // npm modules
 var express 				= require('express'),
-		app 						= express(),
-  	exphbs 					= require('express-handlebars');
+		app 				= express(),
+  	exphbs 					= require('express-handlebars'),
+	io 						= require('socket.io'),
   	outputs  				= require('./lib/outputs.js')();
+
 
 
 
@@ -35,4 +37,11 @@ app.use(express.static(__dirname +'/public'));
 // =============================================================================
 
 var server 					= app.listen(port);
+var socket = io.listen(server);
+
+socket.on('connection', function (data) {
+	data.emit('rubric', {hello: 'world'});
+
+});
+
 outputs.debug(port, "Node Server Port Status", true);
