@@ -1,11 +1,10 @@
 module.exports = function(app) {
 
     var degModel = require('../models/degree.js'),
-        courseModel = require('../models/degree.js'),
-        rubricModel = require('../models/degree.js'),
+        courseModel = require('../models/course.js'),
+        rubricModel = require('../models/rubric.js'),
         sectionModel = require('../models/section.js'),
-        lineItemModel = require('../models/degree.js');
-
+        lineItemModel = require('../models/lineItem.js');
 
     // route /
     app.get('/', function(req, res) {
@@ -33,12 +32,10 @@ module.exports = function(app) {
             courAck = 'DWP',
             courContent = 'This is a rubric for out class that we are currently in';
 
-        allModel.insertCourse(courName,courAck,courContent);
+        courModel.insertCourse(courName,courAck,courContent);
 
     });
-    
-    
-    
+
     
     app.get('/degUpdate',function(req,res){
 

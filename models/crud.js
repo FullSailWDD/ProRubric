@@ -8,9 +8,8 @@ var degSchema = mongoose.Schema({
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
-});
-
-var courseSchema = mongoose.Schema({
+}),
+    courseSchema = mongoose.Schema({
 
     title : String,
     content : String,
@@ -19,9 +18,8 @@ var courseSchema = mongoose.Schema({
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
-});
-
-var rubricSchema = mongoose.Schema({
+}),
+    rubricSchema = mongoose.Schema({
 
     title : String,
     content : String,
@@ -29,9 +27,8 @@ var rubricSchema = mongoose.Schema({
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
-});
-
-var sectionSchema = mongoose.Schema({
+}),
+    sectionSchema = mongoose.Schema({
 
     title : String,
     content : String,
@@ -39,9 +36,8 @@ var sectionSchema = mongoose.Schema({
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
-});
-
-var lineItemSchema = mongoose.Schema({
+}),
+    lineItemSchema = mongoose.Schema({
 
     title : String,
     content : String,
@@ -53,53 +49,43 @@ var lineItemSchema = mongoose.Schema({
 
 
 
-
-var degreeModel = mongoose.model('degrees', degSchema);
-var courseModel = mongoose.model('courses', courseSchema);
-var rubricModel = mongoose.model('rubrics', rubricSchema);
-var sectionModel = mongoose.model('sections', sectionSchema);
-var lineItemModel = mongoose.model('lineItems', lineItemSchema);
-
-
-
 //******INSERTS******
 //******INSERTS******
-exports.insertDegrees = function(degName,degAck,success){
 
-    var degrees = new degreeModel({
+var degreeModel = mongoose.model('degrees', degSchema),
+    courseModel = mongoose.model('courses', courseSchema),
+    rubricModel = mongoose.model('rubrics', rubricSchema),
+    sectionModel = mongoose.model('sections', sectionSchema),
+    lineItemModel = mongoose.model('lineItems', lineItemSchema),
+    removeDegreeModel = mongoose.model('removeDegrees',degSchema);
 
-        title : degName,
-        acronym : degAck
+    
 
-    });
+    exports.insertDegrees = function(degName,degAck,success){
 
-    degrees.save(function(err,result){
+        var degrees = new degreeModel({
+            title : degName,
+            acronym : degAck
+        });
 
-        if (err) return console.log(err);
-        //console.log(result);
-        success(result);
-
-    });
+        degrees.save(function(err,result){
+            if (err) return console.log(err);
+            success(result);
+        });
 
     };
-
-};
 
 exports.insertCourse = function(courName,courAck,courContent){
 
     var course = new courseModel({
-
         title : courName,
         acronym : courAck,
         content : courContent
-
     });
 
     course.save(function(err,result){
-
         if (err) return console.log(err);
         console.log(result);
-
     });
 
 };
@@ -160,6 +146,7 @@ exports.lineItemSection = function(liName,liContent){
 };
 
 
+
 //******UPDATE******
 //******UPDATE******
 exports.updateDegree = function(degreeId){
@@ -182,5 +169,6 @@ exports.removeDegree = function(degreeId){
       console.log(result);
   });
 };
+
 
 
