@@ -1,49 +1,73 @@
-var db          = require('../config/db'),
-    mongoose    = require('mongoose'),
-    ObjectID    = require('mongoose');
+module.exports = function (){
 
+    var db          = require('../config/db'),
+        mongoose    = require('mongoose');
+    
+    
+    var degreeSchema = mongoose.Schema({
 
-
-var degSchema = mongoose.Schema({
-
-    title : String,
-    acronym : String,
-//    parent_id : {type : Number, default : 0},
-    created_at : {type : Date, default: Date.now},
-    updated_at : {type : Date, default: Date.now}
-
-}),
-    degreeModel = mongoose.model('degrees', degSchema);
-
-
-exports.insertDegrees = function(degName,degAck){
-
-    var degrees = new degreeModel({
-        title : degName,
-        acronym : degAck
+        title : String,
+        acronym : String,
+        created_at : {type : Date, default: Date.now},
+        updated_at : {type : Date, default: Date.now}
     });
+    
+    
+    var _model = mongoose.model('degrees', degreeSchema);
+    
 
-    degrees.save(function(err,result){
-        if (err) return console.log(err);
-        console.log(result);
-    });
+// CRUD Methods 
+// ==========================================================================
+    
+    // ADD 
+    var _save = function(degree, success, fail){
 
-};
+        var newDegree = new _model({
+            
+            title:        degree.title,
+            acronym:      degree.acronym
+        });
 
-exports.updateDegree = function(degreeId){
+        newDegree.save(function(err){
+            
+            if (err) {
+                fail (err);
+            } else {
+                success(newDegree);
+            }
+        });
+    };
+    
+    
+    // UPDATE 
+    var _update = function(degree){
 
-    //finds the entry based on _id and then inserts a new title......for now
-    degreeModel.update({'_id':'55d4d9abef10520d329dc060'}, {$set:{'title':'i like dogs'}}, function(err, result){
-        if(err) return console.log(err);
-        console.log(result);
-    });
-};
+        _model.update({'_id':degree._id}, {$set:{'title':degree.title}}, function(err, result){
+            
+            if(err) console.log(err);
+            console.log(result);
+        });
+    };
+    
+    
+    // REMOVE
+    var _remove = function(degree){
 
-exports.removeDegree = function(degreeId){
-
-    //finds the entry based on _id and then inserts a new title......for now
-    degreeModel.findByIdAndRemove({'_id':'55d4fe33c2d40acb9e0f1d9f'}, function(err, result){
-        if(err) return console.log(err);
-        console.log(result);
-    });
-};
+        _model.findByIdAndRemove({'_id':degree._id}, function(err, result){
+            
+            if(err) return console.log(err);
+            console.log(result);
+        });
+    };
+    
+    
+// Publicly Available
+// ==========================================================================
+    return {
+        schema :        degreeSchema,
+        model :         _model,
+        add :           _save,
+        update :        _update,
+        remove :        _remove
+    };
+}();

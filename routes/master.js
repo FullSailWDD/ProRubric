@@ -1,7 +1,10 @@
 module.exports = function(app) {
 
-    var degModel = require('../models/degree.js');
-    var courModel = require('../models/course.js');
+    var degModel = require('../models/degree.js'),
+        courseModel = require('../models/course.js'),
+        rubricModel = require('../models/rubric.js'),
+        sectionModel = require('../models/section.js'),
+        lineItemModel = require('../models/lineItem.js');
 
     // route /
     app.get('/', function(req, res) {
@@ -19,8 +22,7 @@ module.exports = function(app) {
 
         res.send('added: '+ rubricName);
     });
-
-
+    
     app.get('/degProcess',function(req,res){//need to wait until form is completed to change route into post
 
         var degName = 'Web Design and Deployment';//hard coded values for testing purposes
@@ -30,6 +32,8 @@ module.exports = function(app) {
 
     });
 
+    
+    
     app.get('/courseProcess',function(req,res){
 
         var courName = 'Deployment of Web Projects',
@@ -40,18 +44,22 @@ module.exports = function(app) {
 
     });
 
+    
     app.get('/degUpdate',function(req,res){
 
 
-        degModel.updateDegree(req.degreeId);
+        degModel.update(req.degreeId);
 
     });
-
+    
+    
+    
     app.get('/degRemove',function(req,res){
 
 
-        degModel.removeDegree(req.degreeId);
+        allModel.removeDegree(req.degreeId);
 
     });
+    
 
 };
