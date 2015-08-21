@@ -81,5 +81,6 @@ module.exports = function (){
         findAll :       _all,
         removeByID :    _removeByID,
         add:            _save
+
     };
 }();
