@@ -8,4 +8,9 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/rubric', function(req, res) {
+        var data = 'Yeah you got the data';
+        res.send(data);
+    });
+
 };
