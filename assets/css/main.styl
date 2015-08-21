@@ -49,17 +49,35 @@ label
 	margin-left 30%
 
 header
-		center(80%)
+	center(80%)	
 	
-nav
-	float right
+nav 
+	col(1/5)
+	span(1/5)
+	padding-bottom:100%
+	position:relative	
+	background: gray
 	
-nav ul li
-	float right
-	display inline-block
-	margin-left 1em
+#logo
+	center()
 	
-	header section
+#elBody
+	col(4/5)
+	background: url("http://i.imgur.com/EOc88zU.png") no-repeat
+	max-width:100%
+	padding-bottom:100%
+
+a
+	stack()
+	font-size: 2em
+	padding: 10px 0px
+	border-bottom:1px gray solid
+	
+		
+h1
+	col(1/2)
+	color:purple
+	font-size:3em
 
 #test
 	clear both

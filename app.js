@@ -1,7 +1,8 @@
 // npm modules
 var express 				= require('express'),
-		app 						= express(),
-  	exphbs 					= require('express-handlebars');
+	app 					= express(),
+  	exphbs 					= require('express-handlebars'),
+  	outputs  				= require('./lib/outputs.js')();
 
 
 // View Config
@@ -31,4 +32,9 @@ app.use(express.static(__dirname +'/public'));
 
 // START THE SERVER
 // =============================================================================
+<<<<<<< HEAD
 var server 					= app.listen(port);
+=======
+var server 					= app.listen(port);
+outputs.debug(port, "Node Server Port Status", true);
+>>>>>>> 7c83b6546949e5f7cfbb9ec7c5a580a80a490d10

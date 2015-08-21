@@ -169,13 +169,123 @@ header:after {
   clear: both;
 }
 nav {
-  float: right;
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 17.6%;
+  margin-left: 0%;
+  margin-right: 3%;
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 20%;
+  margin-left: 0%;
+  margin-right: 0%;
+  padding-bottom: 100%;
+  position: relative;
+  background: #808080;
 }
-nav ul li {
-  float: right;
-  display: inline-block;
-  margin-left: 1em;
-  header: section;
+nav:before,
+nav:after {
+  content: '';
+  display: table;
+}
+nav:after {
+  clear: both;
+}
+nav:last-child {
+  margin-right: 0%;
+}
+nav:before,
+nav:after {
+  content: '';
+  display: table;
+}
+nav:after {
+  clear: both;
+}
+#logo {
+  *zoom: 1;
+  width: auto;
+  max-width: 1440px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+#logo:before,
+#logo:after {
+  content: '';
+  display: table;
+}
+#logo:after {
+  clear: both;
+}
+#elBody {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 79.4%;
+  margin-left: 0%;
+  margin-right: 3%;
+  background: url("http://i.imgur.com/EOc88zU.png") no-repeat;
+  max-width: 100%;
+  padding-bottom: 100%;
+}
+#elBody:before,
+#elBody:after {
+  content: '';
+  display: table;
+}
+#elBody:after {
+  clear: both;
+}
+#elBody:last-child {
+  margin-right: 0%;
+}
+a {
+  display: block;
+  clear: both;
+  float: none;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2em;
+  padding: 10px 0px;
+  border-bottom: 1px #808080 solid;
+}
+a:first-child {
+  margin-left: auto;
+}
+a:last-child {
+  margin-right: auto;
+}
+h1 {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 48.5%;
+  margin-left: 0%;
+  margin-right: 3%;
+  color: #800080;
+  font-size: 3em;
+}
+h1:before,
+h1:after {
+  content: '';
+  display: table;
+}
+h1:after {
+  clear: both;
+}
+h1:last-child {
+  margin-right: 0%;
 }
 #test {
   clear: both;
