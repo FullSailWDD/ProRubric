@@ -3,7 +3,7 @@ module.exports = function(app) {
     var degModel = require('../models/degree.js'),
         courseModel = require('../models/degree.js'),
         rubricModel = require('../models/degree.js'),
-        sectionModel = require('../models/degree.js'),
+        sectionModel = require('../models/section.js'),
         lineItemModel = require('../models/degree.js');
 
 
@@ -25,6 +25,8 @@ module.exports = function(app) {
 
     });
 
+    
+    
     app.get('/courseProcess',function(req,res){
 
         var courName = 'Deployment of Web Projects',
@@ -37,12 +39,14 @@ module.exports = function(app) {
     
     
     
+    
     app.get('/degUpdate',function(req,res){
 
 
-        allModel.updateDegree(req.degreeId);
+        degModel.update(req.degreeId);
 
     });
+    
     
     
     app.get('/degRemove',function(req,res){
@@ -51,5 +55,6 @@ module.exports = function(app) {
         allModel.removeDegree(req.degreeId);
 
     });
+    
 
 };
