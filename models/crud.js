@@ -1,14 +1,10 @@
-/**
- * Created by patrickhalton on 8/18/15.
- */
-    var db          = require('../config/db'),
-        mongoose    = require('mongoose');
+var db          = require('../config/db'),
+    mongoose    = require('mongoose');
 
 var degSchema = mongoose.Schema({
 
     title : String,
     acronym : String,
-//    parent_id : {type : Number, default : 0},
     created_at : {type : Date, default: Date.now},
     updated_at : {type : Date, default: Date.now}
 
@@ -51,6 +47,11 @@ var degSchema = mongoose.Schema({
 
 });
 
+
+
+//******INSERTS******
+//******INSERTS******
+
 var degreeModel = mongoose.model('degrees', degSchema),
     courseModel = mongoose.model('courses', courseSchema),
     rubricModel = mongoose.model('rubrics', rubricSchema),
@@ -58,7 +59,7 @@ var degreeModel = mongoose.model('degrees', degSchema),
     lineItemModel = mongoose.model('lineItems', lineItemSchema),
     removeDegreeModel = mongoose.model('removeDegrees',degSchema);
 
-
+    
 
     exports.insertDegrees = function(degName,degAck,success){
 
@@ -142,9 +143,32 @@ exports.lineItemSection = function(liName,liContent){
         console.log(result);
 
     });
-
 };
 
+
+
+//******UPDATE******
+//******UPDATE******
+exports.updateDegree = function(degreeId){
+    
+  //finds the entry based on _id and then inserts a new title......for now
+  degreeModel.update({'_id':'55d4d9abef10520d329dc060'}, {$set:{'title':'i like dogs'}}, function(err, result){
+      if(err) return console.log(err);
+      console.log(result);
+  });
+};
+
+
+//******REMOVE******
+//******REMOVE******
+exports.removeDegree = function(degreeId){
+    
+  //finds the entry based on _id and then inserts a new title......for now
+  degreeModel.findByIdAndRemove({'_id':'55d4da23ef10520d329dc062'}, function(err, result){
+      if(err) return console.log(err);
+      console.log(result);
+  });
+};
 
 
 
