@@ -1,13 +1,13 @@
 //Global App name is ProRubric
-var appModule = angular.module('ProRubric', []);
+angular.module('ProRubric', [])
 
 //Required to remove the conviction between Handlebars and Angular.
-appModule.config(function($interpolateProvider) {
+.config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
 });
 
-appModule.controller('mainController', function($scope) {
+.controller('mainController', function($scope) {
 
     $scope.addDegree = function(degreeName, degreeAcronym){
         console.log('Degree Name: ', degreeName);
