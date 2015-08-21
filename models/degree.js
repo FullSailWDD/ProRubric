@@ -2,6 +2,7 @@ module.exports = function (){
 
     var db          = require('../config/db'),
         mongoose    = require('mongoose');
+        data        = require('../lib/sanitize.js');
     
     
     var degreeSchema = mongoose.Schema({
@@ -11,8 +12,7 @@ module.exports = function (){
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
     });
-    
-    
+
     var _model = mongoose.model('degrees', degreeSchema);
     
 
@@ -38,25 +38,44 @@ module.exports = function (){
         });
     };
     
-    
     // UPDATE 
-    var _update = function(degree){
+    var _update = function(degree,success,fail){
 
-        _model.update({'_id':degree._id}, {$set:{'title':degree.title}}, function(err, result){
-            
-            if(err) console.log(err);
-            console.log(result);
-        });
+
+        var cleanData = data.sanitize(degree);
+        
+        if(cleanData){
+
+            _model.update({'_id':degree._id}, {$set:cleanData}, function(err,doc){
+
+//            if(err) console.log(err);
+//            console.log(result);
+
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+        }
+
+
     };
     
     
     // REMOVE
-    var _remove = function(degree){
+    var _remove = function(degree,success,fail){
 
-        _model.findByIdAndRemove({'_id':degree._id}, function(err, result){
+        _model.findByIdAndRemove({'_id':degree._id}, function(err,doc){
+
+            if (err) {
+                fail(err);
+            }else{
+                success(doc);
+            }
             
-            if(err) return console.log(err);
-            console.log(result);
+//            if(err) return console.log(err);
+//            console.log(result);
         });
     };
     

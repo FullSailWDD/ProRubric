@@ -2,6 +2,7 @@ module.exports = function() {
  
     var db          = require('../config/db'),
         mongoose    = require('mongoose');
+        data        = require('../lib/sanitize.js');
 
 
     var rubricSchema = mongoose.Schema({
@@ -41,26 +42,45 @@ module.exports = function() {
             }
         });
     };
-    
-    
-    // UPDATE 
-    var _update = function(rubric){
 
-        _model.update({'_id':rubric._id}, {$set:{'title':rubric.title}}, function(err, result){
-            
-            if(err) console.log(err);
-            console.log(result);
-        });
+    // UPDATE 
+    var _update = function(rubric,success,fail){
+
+        var cleanData = data.sanitize(rubric);
+
+        if (cleanData){
+
+            _model.update({'_id':rubric._id}, {$set:cleanData}, function(err,doc){
+
+//            if(err) console.log(err);
+//            console.log(result);
+
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+        }
+
+
     };
     
     
     // REMOVE
-    var _remove = function(rubric){
+    var _remove = function(rubric,success,fail){
 
-        _model.findByIdAndRemove({'_id':rubric._id}, function(err, result){
+        _model.findByIdAndRemove({'_id':rubric._id}, function(err,doc){
+
+
+            if (err) {
+                fail(err);
+            }else{
+                success(doc);
+            }
             
-            if(err) return console.log(err);
-            console.log(result);
+//            if(err) return console.log(err);
+//            console.log(result);
         });
     };
     
