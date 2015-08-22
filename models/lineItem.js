@@ -15,10 +15,6 @@ module.exports = function() {
     
     _model = mongoose.model('lineItems', lineItemSchema);
 
-    
-// CRUD Methods 
-// ==========================================================================
-    // ADD
     var _save = function(lineItem, success, fail){
 
         var newLineItem = new _model({

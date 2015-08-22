@@ -6,24 +6,17 @@ module.exports = function() {
     
     
     var courseSchema = mongoose.Schema({
-
         title : String,
         acronym : String,
         description : String,
         degree_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
-    });
+    }),
     
     
-    var _model = mongoose.model('courses', courseSchema);
-    
-    
-    
-    
-// CRUD Methods 
-// ==========================================================================
-    
+     _model = mongoose.model('courses', courseSchema);
+
     // ADD 
     var _save = function(course, success, fail){
 
@@ -43,11 +36,11 @@ module.exports = function() {
                 success(newCourse);
             }
         });
-    };
+        },
     
     
-    // UPDATE 
-    var _update = function(course,success,fail){
+    // UPDATE
+    _update = function(course,success,fail){
 
         var cleanData = data.sanitize(course);
 
@@ -65,11 +58,11 @@ module.exports = function() {
         }
 
 
-    };
+        },
     
     
     // REMOVE
-    var _remove = function(course,success,fail){
+    _remove = function(course,success,fail){
 
         _model.findByIdAndRemove({'_id':course._id}, function(err, doc){
             if (err) {
