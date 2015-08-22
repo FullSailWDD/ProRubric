@@ -12,9 +12,16 @@ module.exports = function(app, socket) {
     });
 
     socket.on('connection', function (data) {
-        data.on('add rubric', function (callback) {
+
+        data.on('add degree', function (callback) {
             Degree.add(callback);
         });
+
+        data.on('remove degree', function (callback) {
+            Degree.remove(callback);
+        });
+
+
     });
 
 

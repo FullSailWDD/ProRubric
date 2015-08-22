@@ -8,14 +8,24 @@ angular.module('ProRubric', [])
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
 })
+.service('Degree', function degree(){
 
-.controller('mainController', function($scope) {
+    this.save = function(degreeSave){
+        socket.emit('add degree', degreeSave);
+    };
+    this.remove = function(){
 
-        $scope.rubric = function(){
-            socket.emit('add rubric', { title: $scope.rubricTitle, acronym: $scope.degreeAcronym });
-            socket.on('rubric', function (data) {
-                console.log(data.title, data.acronym);
-            });
+    };
+
+})
+.controller('mainController', function($scope, Degree) {
+    $scope.degreeAdd = function(){
+        var degreeSave = {
+            title: $scope.degreeTitle,
+            acronym: $scope.degreeAcronym
         };
+        Degree.save(degreeSave);
+    };
 
 });
+
