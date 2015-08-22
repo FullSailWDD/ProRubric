@@ -12,9 +12,8 @@ module.exports = function(app, socket) {
     });
 
     socket.on('connection', function (data) {
-        data.on('my other event', function (callback) {
-            console.log(callback);
-            data.emit('rubric', {data: callback});
+        data.on('add rubric', function (callback) {
+            Degree.add(callback);
         });
     });
 

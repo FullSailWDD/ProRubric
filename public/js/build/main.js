@@ -11,12 +11,11 @@ angular.module('ProRubric', [])
 
 .controller('mainController', function($scope) {
 
-    $scope.rubric = function(rubricName){
-        socket.emit('my other event', { my: rubricName });
-        socket.on('rubric', function (data) {
-            console.log(data.data);
-        });
-    };
-
+        $scope.rubric = function(){
+            socket.emit('add rubric', { title: $scope.rubricTitle, acronym: $scope.degreeAcronym });
+            socket.on('rubric', function (data) {
+                console.log(data.title, data.acronym);
+            });
+        };
 
 });

@@ -6,7 +6,6 @@ module.exports = function (){
     
     
     var degreeSchema = mongoose.Schema({
-
         title : String,
         acronym : String,
         created_at : {type : Date, default: Date.now},
@@ -19,7 +18,6 @@ module.exports = function (){
     _save = function(degree, success, fail){
 
         var newDegree = new _model({
-            
             title:        degree.title,
             acronym:      degree.acronym
         });
