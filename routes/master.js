@@ -14,12 +14,14 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/degProcess:degData',function(req,res){
+    app.get('/degProcess:degData',function(req,res) {
 
         var degName = req.params.degData;
 
-        degModel.add(degName);
+        Degree.add(degName);
         res.send(degName);
+
+    });
 
 //========================================All Create New Processes==========================================================
 
