@@ -1,6 +1,5 @@
 var socket = io.connect('');
 
-
 //Global App name is ProRubric
 angular.module('ProRubric', [])
 
