@@ -3,11 +3,11 @@ angular.module('ProRubric', [])
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
 })
-.controller('mainController', function($http,$scope) {
+.controller('mainController', function($http) {
 
-    $scope.rubric = function(rubricName){
+    var rubricName = function(rubricName){
 
-        $http.get('/degProcess', {msg: rubricName}).
+        $http.get('/degProcess'+rubricName, {msg: rubricName}).
             then(function(response) {
             }, function(response) {
             });
