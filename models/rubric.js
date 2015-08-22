@@ -1,7 +1,7 @@
 module.exports = function() {
  
     var db          = require('../config/db'),
-        mongoose    = require('mongoose');
+        mongoose    = require('mongoose'),
         data        = require('../lib/sanitize.js');
 
 
@@ -12,10 +12,10 @@ module.exports = function() {
         course_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
-    });
+    }),
 
     
-    var _model = mongoose.model('rubrics', rubricSchema);
+    _model = mongoose.model('rubrics', rubricSchema);
     
     
     
@@ -33,28 +33,23 @@ module.exports = function() {
             course_id:    rubric.course_id
         });
 
-        newCourse.save(function(err){
-            
-            if (err) {
-                fail (err);
-            } else {
-                success(newRubric);
-            }
-        });
-    };
+            newCourse.save(function(err){
+
+                if (err) {
+                    fail (err);
+                } else {
+                    success(newRubric);
+                }
+            });
+        },
 
     // UPDATE 
-    var _update = function(rubric,success,fail){
+    _update = function(rubric,success,fail){
 
         var cleanData = data.sanitize(rubric);
 
         if (cleanData){
-
             _model.update({'_id':rubric._id}, {$set:cleanData}, function(err,doc){
-
-//            if(err) console.log(err);
-//            console.log(result);
-
                 if (err) {
                     fail(err);
                 }else{
@@ -62,13 +57,11 @@ module.exports = function() {
                 }
             });
         }
-
-
-    };
+    },
     
     
     // REMOVE
-    var _remove = function(rubric,success,fail){
+    _remove = function(rubric,success,fail){
 
         _model.findByIdAndRemove({'_id':rubric._id}, function(err,doc){
 

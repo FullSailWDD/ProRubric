@@ -11,16 +11,16 @@ module.exports = function (){
         acronym : String,
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
-    });
+    }),
 
-    var _model = mongoose.model('degrees', degreeSchema);
+    _model = mongoose.model('degrees', degreeSchema),
     
 
 // CRUD Methods 
 // ==========================================================================
     
-    // ADD 
-    var _save = function(degree, success, fail){
+    // ADD
+    _save = function(degree, success, fail){
 
         var newDegree = new _model({
             
@@ -29,17 +29,16 @@ module.exports = function (){
         });
 
         newDegree.save(function(err){
-            
-            if (err) {
-                fail (err);
-            } else {
-                success(newDegree);
-            }
-        });
-    };
+                if (err) {
+                    fail (err);
+                } else {
+                    success(newDegree);
+                }
+            });
+        },
     
     // UPDATE 
-    var _update = function(degree,success,fail){
+    _update = function(degree,success,fail){
 
 
         var cleanData = data.sanitize(degree);
@@ -60,11 +59,11 @@ module.exports = function (){
         }
 
 
-    };
+    },
     
     
     // REMOVE
-    var _remove = function(degree,success,fail){
+    _remove = function(degree,success,fail){
 
         _model.findByIdAndRemove({'_id':degree._id}, function(err,doc){
 

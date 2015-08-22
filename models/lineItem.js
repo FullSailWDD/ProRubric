@@ -1,20 +1,19 @@
 module.exports = function() {
     var db          = require('../config/db'),
-        mongoose    = require('mongoose');
+        mongoose    = require('mongoose'),
         data        = require('../lib/sanitize.js');
     
     
     var lineItemSchema = mongoose.Schema({
-        
         title : String,
         content : String,
         section_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
-    });
+    }),
     
     
-    var _model = mongoose.model('lineItems', lineItemSchema);
+    _model = mongoose.model('lineItems', lineItemSchema);
 
     
 // CRUD Methods 
@@ -31,17 +30,16 @@ module.exports = function() {
 
 
         newLineItem.save(function(err){
-
-            if (err) {
-                fail(err);   
-            }else{
-                success(newLineItem);   
-            }
-        });
-    };
+                if (err) {
+                    fail(err);
+                }else{
+                    success(newLineItem);
+                }
+            });
+        },
     
     // UPDATE 
-    var _update = function(lineItem, success, fail){
+    _update = function(lineItem, success, fail){
 
        var cleanData = data.sanitize(lineItem);
 
@@ -61,11 +59,11 @@ module.exports = function() {
 
             }
 
-    };
+        },
     
     
     // REMOVE
-    var _remove = function(lineItem,success,fail){
+    _remove = function(lineItem,success,fail){
 
         _model.findByIdAndRemove({'_id':lineItem._id}, function(err,doc){
 

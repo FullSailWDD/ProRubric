@@ -15,9 +15,7 @@ module.exports = function(app) {
     });
 
     app.get('/degProcess:degData',function(req,res) {
-
         var degName = req.params.degData;
-
         Degree.add(degName);
         res.send(degName);
 
@@ -28,18 +26,11 @@ module.exports = function(app) {
     app.get('/degProcess',function(req,res){//need to wait until form is completed to change route into post
 
         var degreeObj = 'Web Design and Deployment';//hard coded values for testing purposes
-
-
         Degree.update(degreeObj);
-
-
     });
 
     app.get('/courseProcess',function(req,res){
-
         var courseObj = 'Deployment of Web Projects';
-
-
     });
 
 
@@ -48,10 +39,7 @@ module.exports = function(app) {
 
 
     app.get('/degUpdate',function(req,res){
-
-
         Degree.update(req.degreeId);
-
     });
 
 //========================================All Remove Processes==========================================================
@@ -59,10 +47,7 @@ module.exports = function(app) {
     
 
     app.get('/degRemove',function(req,res){
-
-
         Degree.remove(req.degreeId);
-
     });
 
 };

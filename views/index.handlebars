@@ -1,36 +1,3 @@
-<div id="topheader">
-	<h1 class="siteheader"> Pro Rubrics </h1>
-	<input class="searchbar" type="search">
-</div>
-
-<hr>
-
-<div id="box">
-	<div class="contentbox">
 		<h1> Create Your Rubric </h1>
 		<input type="text" ng-model="rubricName" placeholder="Type the title of your rubric here"/>
-		<button class="createrubricbutton" ng-click="rubric(rubricName)"> Create Rubric </button>
-	</div>
-</div>
-
-<br> 
-
-
-<div id="box">
-	<div class="contentbox">
-		<h1> Search a Rubric </h1>
-		<input type="text" placeholder="Type the title of your rubric here"/>
-		<button class="createrubricbutton"> Search Rubric </button>
-	</div>
-</div>
-
-<div id="box">
-	<div class="contentbox">
-		<h1> Add a Rubric </h1>
-		<label> Course Title </label><input type="text" placeholder="Type the title of your course here"/>
-
-		<label>Course Code</label><input type="text" placeholder="Type the course code of your rubric here"/>
-
-		<button class="createrubricbutton"> Add </button>
-	</div>
-</div>
+		<button ng-click="rubric(rubricName)"> Create Rubric </button>
