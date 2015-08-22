@@ -1,71 +1,51 @@
 * {
   background: rgba(0,0,0,0.05);
 }
-html {
-  background: #808080;
-}
-h1 {
-  text-align: left;
-  margin-left: 10%;
-  font-family: arial;
-}
-input {
-  margin-left: 10%;
-  width: 80%;
-  height: 30px;
-}
-label {
-  margin-left: 10%;
-}
-.createrubricbutton {
-  margin-left: 61%;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  background: #808080;
-  width: 30%;
-  height: 40px;
-}
-#topheader {
+#sideNav {
   *zoom: 1;
   float: left;
   clear: none;
   text-align: inherit;
-  width: 100%;
+  width: 11.714285714285714%;
   margin-left: 0%;
   margin-right: 3%;
-}
-#topheader:before,
-#topheader:after {
-  content: '';
-  display: table;
-}
-#topheader:after {
-  clear: both;
-}
-#topheader:last-child {
-  margin-right: 0%;
-}
-.logo {
   *zoom: 1;
   float: left;
   clear: none;
   text-align: inherit;
-  width: 14.166666666666664%;
+  width: 14.285714285714285%;
   margin-left: 0%;
-  margin-right: 3%;
+  margin-right: 0%;
+  background: #808080;
+  text-align: center;
+  height: 700px;
 }
-.logo:before,
-.logo:after {
+#sideNav:before,
+#sideNav:after {
   content: '';
   display: table;
 }
-.logo:after {
+#sideNav:after {
   clear: both;
 }
-.logo:last-child {
+#sideNav:last-child {
   margin-right: 0%;
 }
-.siteheader {
+#sideNav:before,
+#sideNav:after {
+  content: '';
+  display: table;
+}
+#sideNav:after {
+  clear: both;
+}
+ul {
+  padding-left: 0;
+}
+li {
+  list-style-type: none;
+}
+ul li a {
   *zoom: 1;
   float: left;
   clear: none;
@@ -73,220 +53,127 @@ label {
   width: 31.33333333333333%;
   margin-left: 0%;
   margin-right: 3%;
-}
-.siteheader:before,
-.siteheader:after {
-  content: '';
-  display: table;
-}
-.siteheader:after {
+  display: block;
   clear: both;
-}
-.siteheader:last-child {
-  margin-right: 0%;
-}
-.searchbar {
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
-  width: 48.5%;
-  margin-left: 0%;
-  margin-right: 3%;
-  margin-top: 2%;
-}
-.searchbar:before,
-.searchbar:after {
-  content: '';
-  display: table;
-}
-.searchbar:after {
-  clear: both;
-}
-.searchbar:last-child {
-  margin-right: 0%;
-}
-#box {
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
+  float: none;
   width: 100%;
-  margin-left: 0%;
-  margin-right: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5% 0;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.4em;
+  font-family: arial;
 }
-#box:before,
-#box:after {
+ul li a:before,
+ul li a:after {
   content: '';
   display: table;
 }
-#box:after {
+ul li a:after {
   clear: both;
 }
-#box:last-child {
+ul li a:last-child {
   margin-right: 0%;
 }
-.contentbox {
+ul li a:first-child {
+  margin-left: auto;
+}
+ul li a:last-child {
+  margin-right: auto;
+}
+ul li a:hover {
+  background: #424242;
+}
+#mainDefaultBody {
   *zoom: 1;
   float: left;
   clear: none;
   text-align: inherit;
-  width: 48.5%;
+  width: 85.28571428571428%;
   margin-left: 0%;
   margin-right: 3%;
-  background: #d3d3d3;
-  margin-top: 10%;
-  margin-left: 30%;
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 85.71428571428571%;
+  margin-left: 0%;
+  margin-right: 0%;
 }
-.contentbox:before,
-.contentbox:after {
+#mainDefaultBody:before,
+#mainDefaultBody:after {
   content: '';
   display: table;
 }
-.contentbox:after {
+#mainDefaultBody:after {
   clear: both;
 }
-.contentbox:last-child {
+#mainDefaultBody:last-child {
   margin-right: 0%;
 }
-header {
+#mainDefaultBody:before,
+#mainDefaultBody:after {
+  content: '';
+  display: table;
+}
+#mainDefaultBody:after {
+  clear: both;
+}
+#rubricSearch {
   *zoom: 1;
   width: auto;
-  max-width: 80%;
+  max-width: 500px;
   float: none;
   display: block;
   margin-right: auto;
   margin-left: auto;
   padding-left: 0;
   padding-right: 0;
+  padding: 2%;
 }
-header:before,
-header:after {
+#rubricSearch:before,
+#rubricSearch:after {
   content: '';
   display: table;
 }
-header:after {
+#rubricSearch:after {
   clear: both;
 }
-nav {
+div input {
+  width: 95%;
+  font-size: 1.5em;
+  padding: 2%;
+  background-color: #fff;
+}
+#rubricSearch button {
   *zoom: 1;
   float: left;
   clear: none;
   text-align: inherit;
-  width: 17.6%;
+  width: 48.5%;
   margin-left: 0%;
   margin-right: 3%;
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
-  width: 20%;
-  margin-left: 0%;
-  margin-right: 0%;
-  padding-bottom: 100%;
   position: relative;
-  background: #808080;
+  left: 51.5%;
+  margin-top: 5%;
+  background-color: #808080;
+  font-size: 1.5em;
+  border: none;
+  text-align: center;
+  padding: 10px 0;
 }
-nav:before,
-nav:after {
+#rubricSearch button:before,
+#rubricSearch button:after {
   content: '';
   display: table;
 }
-nav:after {
+#rubricSearch button:after {
   clear: both;
 }
-nav:last-child {
+#rubricSearch button:last-child {
   margin-right: 0%;
 }
-nav:before,
-nav:after {
-  content: '';
-  display: table;
-}
-nav:after {
-  clear: both;
-}
-#logo {
-  *zoom: 1;
-  width: auto;
-  max-width: 1440px;
-  float: none;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 0;
-  padding-right: 0;
-}
-#logo:before,
-#logo:after {
-  content: '';
-  display: table;
-}
-#logo:after {
-  clear: both;
-}
-#elBody {
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
-  width: 79.4%;
-  margin-left: 0%;
-  margin-right: 3%;
-  background: url("http://i.imgur.com/EOc88zU.png") no-repeat;
-  max-width: 100%;
-  padding-bottom: 100%;
-}
-#elBody:before,
-#elBody:after {
-  content: '';
-  display: table;
-}
-#elBody:after {
-  clear: both;
-}
-#elBody:last-child {
-  margin-right: 0%;
-}
-a {
-  display: block;
-  clear: both;
-  float: none;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 2em;
-  padding: 10px 0px;
-  border-bottom: 1px #808080 solid;
-}
-a:first-child {
-  margin-left: auto;
-}
-a:last-child {
-  margin-right: auto;
-}
-h1 {
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
-  width: 48.5%;
-  margin-left: 0%;
-  margin-right: 3%;
-  color: #800080;
-  font-size: 3em;
-}
-h1:before,
-h1:after {
-  content: '';
-  display: table;
-}
-h1:after {
-  clear: both;
-}
-h1:last-child {
-  margin-right: 0%;
-}
-#test {
-  clear: both;
+#rubricSearch button:hover {
+  background: #424242;
 }
