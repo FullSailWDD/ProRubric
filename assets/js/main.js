@@ -1,4 +1,4 @@
-var socket = io.connect('');
+var socket = io.connect();
 
 //Global App name is ProRubric
 angular.module('ProRubric', [])
@@ -9,14 +9,12 @@ angular.module('ProRubric', [])
     $interpolateProvider.endSymbol('}]}');
 })
 
-.controller('mainController', function($http,$scope) {
+.controller('mainController', function($scope) {
 
     $scope.rubric = function(rubricName){
-
-        console.log(rubricName);
-
+        console.log('lsdjfdslfjj WTF');
         socket.on('rubric', function (data) {
-            console.log(data);
+            console.log('this is the data', data);
             socket.emit('my other event', { my: rubricName });
         });
 

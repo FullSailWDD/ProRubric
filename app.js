@@ -29,13 +29,13 @@ app.use(express.static(__dirname +'/public'));
 // START THE SERVER
 // =============================================================================
 
-var server 					= app.listen(port);
+var server = app.listen(port);
 var socket = io.listen(server);
 
 socket.on('connection', function (data) {
-	data.on('my other event', function (data) {
-		console.log(data);
-		data.emit('rubric', {hello: data});
+	data.on('my other event', function (callback) {
+		console.log(callback);
+		data.emit('rubric', {data: callback});
 	});
 });
 
