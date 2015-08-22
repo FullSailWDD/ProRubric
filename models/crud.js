@@ -61,19 +61,19 @@ var degreeModel = mongoose.model('degrees', degSchema),
 
     
 
-    exports.insertDegrees = function(degName,degAck,success){
-
-        var degrees = new degreeModel({
-            title : degName,
-            acronym : degAck
-        });
-
-        degrees.save(function(err,result){
-            if (err) return console.log(err);
-            success(result);
-        });
-
-    };
+//    exports.insertDegrees = function(degName,degAck,success){
+//
+//        var degrees = new degreeModel({
+//            title : degName,
+//            acronym : degAck
+//        });
+//
+//        degrees.save(function(err,result){
+//            if (err) return console.log(err);
+//            success(result);
+//        });
+//
+//    };
 
 exports.insertCourse = function(courName,courAck,courContent){
 

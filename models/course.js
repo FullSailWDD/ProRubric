@@ -2,6 +2,7 @@ module.exports = function() {
     
     var db          = require('../config/db'),
         mongoose    = require('mongoose');
+        data        = require('../lib/sanitize.js');
     
     
     var courseSchema = mongoose.Schema({
@@ -46,23 +47,43 @@ module.exports = function() {
     
     
     // UPDATE 
-    var _update = function(course){
+    var _update = function(course,success,fail){
 
-        _model.update({'_id':course._id}, {$set:{'title':course.title}}, function(err, result){
-            
-            if(err) console.log(err);
-            console.log(result);
-        });
+        var cleanData = data.sanitize(course);
+
+
+        if(cleanData){
+
+            _model.update({'_id':course._id}, {$set:cleanData}, function(err,doc){
+
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+
+//            if(err) console.log(err);
+//            console.log(result);
+            });
+        }
+
+
     };
     
     
     // REMOVE
-    var _remove = function(course){
+    var _remove = function(course,success,fail){
 
-        _model.findByIdAndRemove({'_id':course._id}, function(err, result){
+        _model.findByIdAndRemove({'_id':course._id}, function(err, doc){
             
-            if(err) return console.log(err);
-            console.log(result);
+//            if(err) return console.log(err);
+//            console.log(result);
+
+            if (err) {
+                fail(err);
+            }else{
+                success(doc);
+            }
         });
     };
     

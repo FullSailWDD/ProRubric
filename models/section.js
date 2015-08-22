@@ -2,6 +2,7 @@ module.exports = function() {
     
     var db          = require('../config/db'),
         mongoose    = require('mongoose');
+        data        = require('../lib/sanitize.js');
 
 
     var sectionSchema = mongoose.Schema({
@@ -27,12 +28,12 @@ module.exports = function() {
         var newSection = new _model({
 
             title:        title,
-            gradeWeight:  gradeWeight,
+            gradeWeight:  gradeWeight
 //            rubric_id:    section.rubric_id
         });
 
 
-        newLineItem.save(function(err){
+        _model.save(function(err){
 
             if (err) {
                 fail(err);   
@@ -43,23 +44,44 @@ module.exports = function() {
     };
     
     // UPDATE 
-    var _update = function(section){
+    var _update = function(section,fail,success){
 
-        _model.update({'_id':section._id}, {$set:{'title':section.title}}, function(err, result){
-            
-            if(err) console.log(err);
-            console.log(result);
-        });
+        var cleanData = data.sanitize(section);
+
+            if(cleanData){
+
+
+                _model.update({'_id':section._id}, {$set:cleanData}, function(err,doc){
+
+                    if (err) {
+                        fail(err);
+                    }else{
+                        success(doc);
+                    }
+
+//            if(err) console.log(err);
+//            console.log(result);
+                });
+            }
+
+
     };
     
     
     // REMOVE
-    var _remove = function(section){
+    var _remove = function(section, fail, success){
 
-        _model.findByIdAndRemove({'_id':section._id}, function(err, result){
-            
-            if(err) return console.log(err);
-            console.log(result);
+        _model.findByIdAndRemove({'_id':section._id}, function(err,doc){
+
+
+            if (err) {
+                fail(err);
+            }else{
+                success(doc);
+            }
+
+//            if(err) return console.log(err);
+//            console.log(result);
         });
     };
     
