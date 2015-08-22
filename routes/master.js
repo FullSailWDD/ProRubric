@@ -29,5 +29,9 @@ module.exports = function(app) {
     app.get('/degRemove',function(req,res){
         Degree.remove(req.degreeId);
     });
+    
+    app.get('/findDegrees',function(req,res){
+        Degree.findAll();
+    });
 
 };

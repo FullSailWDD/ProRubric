@@ -14,6 +14,21 @@ module.exports = function (){
     }),
 
     _model = mongoose.model('degrees', degreeSchema),
+        
+        
+    // FIND
+    _findAll = function (degree, success, fail) {
+        
+        _model.find(function(err, doc){
+            if(err) {
+                fail (err);   
+            } else {
+                console.log(_model);   
+            }
+        });
+    },
+    
+    
 
     // ADD
     _save = function(degree, success, fail){
@@ -73,6 +88,7 @@ module.exports = function (){
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        findAll :       _findAll
     };
 }();

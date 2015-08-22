@@ -15,7 +15,19 @@ module.exports = function() {
     }),
     
     
-     _model = mongoose.model('courses', courseSchema);
+     _model = mongoose.model('courses', courseSchema),
+    
+    // FIND
+    _findAll = function (course, success, fail) {
+        
+        _model.find(function(err, doc){
+            if(err) {
+                fail (err);   
+            } else {
+                console.log(_model);   
+            }
+        });
+    };
 
     // ADD 
     var _save = function(course, success, fail){

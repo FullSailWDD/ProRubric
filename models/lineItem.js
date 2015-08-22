@@ -13,7 +13,19 @@ module.exports = function() {
     }),
     
     
-    _model = mongoose.model('lineItems', lineItemSchema);
+    _model = mongoose.model('lineItems', lineItemSchema),
+    
+    // FIND
+    _findAll = function (degree, success, fail) {
+        
+        _model.find(function(err, doc){
+            if(err) {
+                fail (err);   
+            } else {
+                console.log(_model);   
+            }
+        });
+    };
 
     var _save = function(lineItem, success, fail){
 

@@ -14,13 +14,25 @@ module.exports = function() {
     }),
 
     
-    _model = mongoose.model('rubrics', rubricSchema);
+    _model = mongoose.model('rubrics', rubricSchema),
     
     
     
 
 // CRUD Methods 
 // ==========================================================================
+    
+    // FIND
+    _findAll = function (degree, success, fail) {
+        
+        _model.find(function(err, doc){
+            if(err) {
+                fail (err);   
+            } else {
+                console.log(_model);   
+            }
+        });
+    };
     
     // ADD 
     var _save = function(rubric, success, fail){
