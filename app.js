@@ -40,8 +40,10 @@ var server 					= app.listen(port);
 var socket = io.listen(server);
 
 socket.on('connection', function (data) {
-	data.emit('rubric', {hello: 'world'});
-
+	data.on('my other event', function (data) {
+		console.log(data);
+		data.emit('rubric', {hello: data});
+	});
 });
 
 outputs.debug(port, "Node Server Port Status", true);

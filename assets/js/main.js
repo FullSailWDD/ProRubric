@@ -14,6 +14,8 @@ angular.module('ProRubric', [])
 
     $scope.rubric = function(rubricName){
 
+        console.log(rubricName);
+
         socket.on('rubric', function (data) {
             console.log(data);
             socket.emit('my other event', { my: rubricName });
