@@ -44,12 +44,7 @@ module.exports = function (){
         var cleanData = data.sanitize(degree);
 
         if(cleanData){
-
             _model.update({'_id':degree._id}, {$set:cleanData}, function(err,doc){
-
-//            if(err) console.log(err);
-//            console.log(result);
-
                 if (err) {
                     fail(err);
                 }else{
@@ -66,15 +61,11 @@ module.exports = function (){
     _remove = function(degree,success,fail){
 
         _model.findByIdAndRemove({'_id':degree._id}, function(err,doc){
-
             if (err) {
                 fail(err);
             }else{
                 success(doc);
             }
-            
-//            if(err) return console.log(err);
-//            console.log(result);
         });
     };
     

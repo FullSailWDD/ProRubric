@@ -1,6 +1,6 @@
 // npm modules
 var express 				= require('express'),
-		app 						= express(),
+		app 				= express(),
   	exphbs 					= require('express-handlebars'),
   	outputs  				= require('./lib/outputs.js')();
 
@@ -9,10 +9,6 @@ var express 				= require('express'),
 // =============================================================================
 var		port 					= process.env.PORT || 3000;
 
-
-// Databse Models
-// =============================================================================
-// var Grad            = require('./models/grad.js');
 
 
 // View Engine
