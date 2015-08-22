@@ -8,14 +8,10 @@ module.exports = function(app) {
 
     // route /
     app.get('/', function(req, res) {
-        res.render('index', {
-        		seoPageTitle: 'ProRubrics - A Full Sail University Production',
-            h1: 'Dashboard'
-        });
+        res.render('index');
     });
     app.get('/degProcess:degData',function(req,res) {
         var degName = req.params.degData;
-        Degree.add(degName);
         res.send(degName);
     });
 
@@ -24,9 +20,7 @@ module.exports = function(app) {
         Degree.update(degreeObj);
     });
 
-    app.get('/courseProcess',function(req,res){
-        var courseObj = 'Deployment of Web Projects';
-    });
+    app.get('/courseProcess',function(req,res){});
 
     app.get('/degUpdate',function(req,res){
         Degree.update(req.degreeId);
