@@ -12,14 +12,13 @@ angular.module('ProRubric', [])
 
     this.save = function(degreeSave){
         socket.emit('add degree', degreeSave);
-    }
+    };
     this.remove = function(){
 
-    }
+    };
+
 })
-
 .controller('mainController', function($scope, Degree) {
-
     $scope.degreeAdd = function(){
         var degreeSave = {
             title: $scope.degreeTitle,
