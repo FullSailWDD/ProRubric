@@ -12,18 +12,10 @@ angular.module('ProRubric', [])
 .controller('mainController', function($scope) {
 
     $scope.rubric = function(rubricName){
-
-
         socket.emit('my other event', { my: rubricName });
-
-
         socket.on('rubric', function (data) {
-
-            console.log('this is the data', data);
-
+            console.log(data.data);
         });
-
-
     };
 
 
