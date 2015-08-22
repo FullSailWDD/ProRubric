@@ -87,10 +87,11 @@ gulp.task('lint', function() {
 
 gulp.task('watch', function () {
   // gulp.watch(['./app/*.html'], ['html']);
-  gulp.watch(['./assets/css/*.styl', './test/*'], ['stylus']);
+  gulp.watch(['./assets/css/*.styl', './test/*'], ['css']);
+  // gulp.watch(['./**/*.js'], ['runTests']);
 });
 
 gulp.task('build', ['css', 'js']);
 gulp.task('test', ['clearStart', 'mongod', 'runTests']);
-gulp.task('dev', ['clearStart', 'build', 'mongod', 'development', 'watch']);
+gulp.task('dev', ['clearStart', 'build', 'mongod', 'watch', 'development']);
 gulp.task('default',['build']);

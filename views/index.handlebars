@@ -1,10 +1,3 @@
-<h1>{{ h1 }}</h1>
-<hr>
-<h1>Add New Degree</h1>
-<form>
-    <label>Degree Name</label>
-    <input type="text" ng-model="degreeName">
-    <label>Acronym</label>
-    <input type="text" ng-model="degreeAcronym">
-    <button ng-click="addDegree(degreeName, degreeAcronym)">Submit</button>
-</form>
+		<h1> Create Your Rubric </h1>
+		<input type="text" ng-model="rubricName" placeholder="Type the title of your rubric here"/>
+		<button ng-click="rubric(rubricName)"> Create Rubric </button>
