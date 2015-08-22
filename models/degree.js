@@ -14,11 +14,7 @@ module.exports = function (){
     }),
 
     _model = mongoose.model('degrees', degreeSchema),
-    
 
-// CRUD Methods 
-// ==========================================================================
-    
     // ADD
     _save = function(degree, success, fail){
 

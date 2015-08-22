@@ -16,10 +16,6 @@ module.exports = function() {
 
     _model = mongoose.model('sections', sectionSchema),
 
-    
-// CRUD Methods 
-// ==========================================================================
-    
     // ADD
     _save = function(section, success, fail){
         var newSection = new _model({

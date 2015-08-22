@@ -6,7 +6,6 @@ module.exports = function() {
 
 
     var rubricSchema = mongoose.Schema({
-
         title : String,
         content : String,
         course_id : {type : Number, default : 0},

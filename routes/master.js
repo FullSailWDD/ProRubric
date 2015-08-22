@@ -19,8 +19,6 @@ module.exports = function(app) {
         res.send(degName);
     });
 
-//========================================All Create New Processes==========================================================
-
     app.get('/degProcess',function(req,res){
         var degreeObj = 'Web Design and Deployment';
         Degree.update(degreeObj);
@@ -30,15 +28,9 @@ module.exports = function(app) {
         var courseObj = 'Deployment of Web Projects';
     });
 
-
-
-//========================================All Update Processes==========================================================
-
     app.get('/degUpdate',function(req,res){
         Degree.update(req.degreeId);
     });
-
-//========================================All Remove Processes==========================================================
 
     app.get('/degRemove',function(req,res){
         Degree.remove(req.degreeId);
