@@ -18,22 +18,22 @@ module.exports = function(app) {
 
     app.get('/degProcess',function(req,res){//need to wait until form is completed to change route into post
 
-        var degName = 'Web Design and Deployment';//hard coded values for testing purposes
-        var degAck = 'WDD';//hard coded values for testing purposes
+        var degreeObj = 'Web Design and Deployment';//hard coded values for testing purposes
 
-        Degree.update(degName,degAck);
+
+        Degree.update(degreeObj);
 
     });
 
     app.get('/courseProcess',function(req,res){
 
-        var courName = 'Deployment of Web Projects',
-            courAck = 'DWP',
-            courContent = 'This is a rubric for out class that we are currently in';
+        var courseObj = 'Deployment of Web Projects';
 
-        Course.add(courName,courAck,courContent);
+        Course.add(courseObj);
 
     });
+
+
 
 //========================================All Update Processes==========================================================
 

@@ -43,7 +43,7 @@ module.exports = function (){
 
 
         var cleanData = data.sanitize(degree);
-        
+
         if(cleanData){
 
             _model.update({'_id':degree._id}, {$set:cleanData}, function(err,doc){
