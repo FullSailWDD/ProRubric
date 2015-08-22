@@ -61,9 +61,6 @@ module.exports = function() {
                 }else{
                     success(doc);
                 }
-
-//            if(err) console.log(err);
-//            console.log(result);
             });
         }
 
@@ -75,10 +72,6 @@ module.exports = function() {
     var _remove = function(course,success,fail){
 
         _model.findByIdAndRemove({'_id':course._id}, function(err, doc){
-            
-//            if(err) return console.log(err);
-//            console.log(result);
-
             if (err) {
                 fail(err);
             }else{

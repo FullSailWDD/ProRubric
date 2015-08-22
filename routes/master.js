@@ -13,19 +13,16 @@ module.exports = function(app) {
             h1: 'Dashboard'
         });
     });
-
     app.get('/degProcess:degData',function(req,res) {
         var degName = req.params.degData;
         Degree.add(degName);
         res.send(degName);
-
     });
 
 //========================================All Create New Processes==========================================================
 
-    app.get('/degProcess',function(req,res){//need to wait until form is completed to change route into post
-
-        var degreeObj = 'Web Design and Deployment';//hard coded values for testing purposes
+    app.get('/degProcess',function(req,res){
+        var degreeObj = 'Web Design and Deployment';
         Degree.update(degreeObj);
     });
 
@@ -37,14 +34,11 @@ module.exports = function(app) {
 
 //========================================All Update Processes==========================================================
 
-
     app.get('/degUpdate',function(req,res){
         Degree.update(req.degreeId);
     });
 
 //========================================All Remove Processes==========================================================
-
-    
 
     app.get('/degRemove',function(req,res){
         Degree.remove(req.degreeId);

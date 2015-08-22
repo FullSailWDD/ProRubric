@@ -22,7 +22,6 @@ module.exports = function() {
     var _save = function(lineItem, success, fail){
 
         var newLineItem = new _model({
-
             title:      lineItem.title,
             content:    lineItem.content,
             section_id: lineItem.section_id
@@ -46,9 +45,6 @@ module.exports = function() {
             if(cleanData){
 
                 _model.update({'_id':lineItem._id}, {$set:cleanData}, function(err,doc){
-
-//            if(err) console.log(err);
-//            console.log(result);
                     if (err) {
                         fail(err);
                     }else{
@@ -58,9 +54,7 @@ module.exports = function() {
                 });
 
             }
-
-        },
-    
+    },
     
     // REMOVE
     _remove = function(lineItem,success,fail){
@@ -72,10 +66,6 @@ module.exports = function() {
             }else{
                 success(doc);
             }
-
-//            if(err) return console.log(err);
-//            console.log(result);
-
         });
     };
     
