@@ -1,20 +1,20 @@
 module.exports = function() {
  
     var db          = require('../config/db'),
-        mongoose    = require('mongoose');
+        mongoose    = require('mongoose'),
+        data        = require('../lib/sanitize.js');
 
 
     var rubricSchema = mongoose.Schema({
-
         title : String,
         content : String,
         course_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
-    });
+    }),
 
     
-    var _model = mongoose.model('rubrics', rubricSchema);
+    _model = mongoose.model('rubrics', rubricSchema);
     
     
     
@@ -26,41 +26,45 @@ module.exports = function() {
     var _save = function(rubric, success, fail){
 
         var newRubric = new _model({
-            
             title:        rubric.title,
             content:      rubric.content,
             course_id:    rubric.course_id
         });
 
-        newCourse.save(function(err){
-            
-            if (err) {
-                fail (err);
-            } else {
-                success(newRubric);
-            }
-        });
-    };
-    
-    
-    // UPDATE 
-    var _update = function(rubric){
+            newCourse.save(function(err){
+                if (err) {
+                    fail (err);
+                } else {
+                    success(newRubric);
+                }
+            });
+        },
 
-        _model.update({'_id':rubric._id}, {$set:{'title':rubric.title}}, function(err, result){
-            
-            if(err) console.log(err);
-            console.log(result);
-        });
-    };
-    
+    // UPDATE 
+    _update = function(rubric,success,fail){
+
+        var cleanData = data.sanitize(rubric);
+
+        if (cleanData){
+            _model.update({'_id':rubric._id}, {$set:cleanData}, function(err,doc){
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+        }
+    },
     
     // REMOVE
-    var _remove = function(rubric){
+    _remove = function(rubric,success,fail){
 
-        _model.findByIdAndRemove({'_id':rubric._id}, function(err, result){
-            
-            if(err) return console.log(err);
-            console.log(result);
+        _model.findByIdAndRemove({'_id':rubric._id}, function(err,doc){
+            if (err) {
+                fail(err);
+            }else{
+                success(doc);
+            }
         });
     };
     

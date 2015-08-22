@@ -2,6 +2,7 @@ module.exports = function (){
 
     var db          = require('../config/db'),
         mongoose    = require('mongoose');
+        data        = require('../lib/sanitize.js');
     
     
     var degreeSchema = mongoose.Schema({
@@ -10,17 +11,12 @@ module.exports = function (){
         acronym : String,
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
-    });
-    
-    
-    var _model = mongoose.model('degrees', degreeSchema);
-    
+    }),
 
-// CRUD Methods 
-// ==========================================================================
-    
-    // ADD 
-    var _save = function(degree, success, fail){
+    _model = mongoose.model('degrees', degreeSchema),
+
+    // ADD
+    _save = function(degree, success, fail){
 
         var newDegree = new _model({
             
@@ -29,34 +25,43 @@ module.exports = function (){
         });
 
         newDegree.save(function(err){
-            
-            if (err) {
-                fail (err);
-            } else {
-                success(newDegree);
-            }
-        });
-    };
-    
+                if (err) {
+                    fail (err);
+                } else {
+                    success(newDegree);
+                }
+            });
+        },
     
     // UPDATE 
-    var _update = function(degree){
+    _update = function(degree,success,fail){
 
-        _model.update({'_id':degree._id}, {$set:{'title':degree.title}}, function(err, result){
-            
-            if(err) console.log(err);
-            console.log(result);
-        });
-    };
+
+        var cleanData = data.sanitize(degree);
+
+        if(cleanData){
+            _model.update({'_id':degree._id}, {$set:cleanData}, function(err,doc){
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+        }
+
+
+    },
     
     
     // REMOVE
-    var _remove = function(degree){
+    _remove = function(degree,success,fail){
 
-        _model.findByIdAndRemove({'_id':degree._id}, function(err, result){
-            
-            if(err) return console.log(err);
-            console.log(result);
+        _model.findByIdAndRemove({'_id':degree._id}, function(err,doc){
+            if (err) {
+                fail(err);
+            }else{
+                success(doc);
+            }
         });
     };
     

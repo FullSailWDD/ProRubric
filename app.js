@@ -5,17 +5,10 @@ var express 				= require('express'),
 	io 						= require('socket.io'),
   	outputs  				= require('./lib/outputs.js')();
 
-
-
-
 // View Config
 // =============================================================================
 var		port 					= process.env.PORT || 3000;
 
-
-// Databse Models
-// =============================================================================
-// var Grad            = require('./models/grad.js');
 
 
 // View Engine
