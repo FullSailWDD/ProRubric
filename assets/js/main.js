@@ -28,7 +28,6 @@ angular.module('ProRubric', [])
         });
 
 
-
         $scope.degreeAdd = function(){
             var degreeSave = {
                 title: $scope.degreeTitle,

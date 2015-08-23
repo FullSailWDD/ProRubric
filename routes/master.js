@@ -16,12 +16,10 @@ module.exports = function(app, socket) {
                         fail(err);
                     } else {
                         var array = new Array();
-
                         for(i=0; i<doc.length;i++){
                             array.push(doc[i]);
                             console.log(doc[i]);
                         }
-
                         socket.emit('find degrees',{data: array});
                     }
                 });
