@@ -23,6 +23,7 @@ angular.module('ProRubric', [])
 
 
         socket.on('find degrees', function(allDegrees){
+            console.log(allDegrees);
             $scope.degreeData = allDegrees;
         });
 
@@ -36,14 +37,6 @@ angular.module('ProRubric', [])
             Degree.save(degreeSave);
         };
 
-        $scope.degreeRemove = function(){
-
-            var degreeDelete = {
-                title: $scope.degreeTitle,
-                acronym: $scope.degreeAcronym
-            };
-            Degree.remove(degreeDelete);
-        };
 
 
     });

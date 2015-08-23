@@ -15,7 +15,14 @@ module.exports = function(app, socket) {
                     if (err) {
                         fail(err);
                     } else {
-                        socket.emit('find degrees', doc);
+                        var array = new Array();
+
+                        for(i=0; i<doc.length;i++){
+                            array.push(doc[i]);
+                            console.log(doc[i]);
+                        }
+
+                        socket.emit('find degrees',{data: array});
                     }
                 });
             data.on('add degree', function (callback) {
