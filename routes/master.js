@@ -8,17 +8,15 @@ module.exports = function(app, socket) {
 
     // route /
     app.get('/', function(req, res) {
+            var findAll = Degree.find();
+            console.log(findAll);
+            socket.emit('find degrees', {findDegrees: findAll});
         res.render('index');
     });
 
     socket.on('connection', function (data) {
-
         data.on('add degree', function (callback) {
             Degree.add(callback);
-        });
-
-        data.on('remove degree', function (callback) {
-            Degree.remove(callback);
         });
 
 

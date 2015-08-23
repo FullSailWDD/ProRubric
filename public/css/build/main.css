@@ -85,42 +85,7 @@ ul li a:last-child {
 ul li a:hover {
   background: #424242;
 }
-#mainDefaultBody {
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
-  width: 85.28571428571428%;
-  margin-left: 0%;
-  margin-right: 3%;
-  *zoom: 1;
-  float: left;
-  clear: none;
-  text-align: inherit;
-  width: 85.71428571428571%;
-  margin-left: 0%;
-  margin-right: 0%;
-}
-#mainDefaultBody:before,
-#mainDefaultBody:after {
-  content: '';
-  display: table;
-}
-#mainDefaultBody:after {
-  clear: both;
-}
-#mainDefaultBody:last-child {
-  margin-right: 0%;
-}
-#mainDefaultBody:before,
-#mainDefaultBody:after {
-  content: '';
-  display: table;
-}
-#mainDefaultBody:after {
-  clear: both;
-}
-#rubricSearch {
+.degree {
   *zoom: 1;
   width: auto;
   max-width: 500px;
@@ -132,12 +97,12 @@ ul li a:hover {
   padding-right: 0;
   padding: 2%;
 }
-#rubricSearch:before,
-#rubricSearch:after {
+.degree:before,
+.degree:after {
   content: '';
   display: table;
 }
-#rubricSearch:after {
+.degree:after {
   clear: both;
 }
 div input {
@@ -146,7 +111,11 @@ div input {
   padding: 2%;
   background-color: #fff;
 }
-#rubricSearch button {
+.degree label,
+font-family arial {
+  font-weight: bold;
+}
+.degree button {
   *zoom: 1;
   float: left;
   clear: none;
@@ -163,17 +132,17 @@ div input {
   text-align: center;
   padding: 10px 0;
 }
-#rubricSearch button:before,
-#rubricSearch button:after {
+.degree button:before,
+.degree button:after {
   content: '';
   display: table;
 }
-#rubricSearch button:after {
+.degree button:after {
   clear: both;
 }
-#rubricSearch button:last-child {
+.degree button:last-child {
   margin-right: 0%;
 }
-#rubricSearch button:hover {
+.degree button:hover {
   background: #424242;
 }

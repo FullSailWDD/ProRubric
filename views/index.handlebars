@@ -1,8 +1,12 @@
-	<div id="rubricSearch">
-		<h1> Create Your Degree</h1>
+	<div class="degree">
+		<h1> Create Degree</h1>
 		<label>Degree Name Here:</label>
 		<input type="text" ng-model="degreeTitle" placeholder=""/>
 		<label>Degree Acronym</label>
         <input type="text" ng-model="degreeAcronym" placeholder=""/>
         <button ng-click="degreeAdd()"> Create Rubric </button>
 	</div>
+
+    <div ng-repeat="(key, value) in degreeData">
+        {[{key + ' ' + value}]}
+    </div>
