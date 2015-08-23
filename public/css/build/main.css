@@ -85,7 +85,42 @@ ul li a:last-child {
 ul li a:hover {
   background: #424242;
 }
-.degree {
+#mainDefaultBody {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 85.28571428571428%;
+  margin-left: 0%;
+  margin-right: 3%;
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 85.71428571428571%;
+  margin-left: 0%;
+  margin-right: 0%;
+}
+#mainDefaultBody:before,
+#mainDefaultBody:after {
+  content: '';
+  display: table;
+}
+#mainDefaultBody:after {
+  clear: both;
+}
+#mainDefaultBody:last-child {
+  margin-right: 0%;
+}
+#mainDefaultBody:before,
+#mainDefaultBody:after {
+  content: '';
+  display: table;
+}
+#mainDefaultBody:after {
+  clear: both;
+}
+#rubricSearch {
   *zoom: 1;
   width: auto;
   max-width: 500px;
@@ -97,12 +132,12 @@ ul li a:hover {
   padding-right: 0;
   padding: 2%;
 }
-.degree:before,
-.degree:after {
+#rubricSearch:before,
+#rubricSearch:after {
   content: '';
   display: table;
 }
-.degree:after {
+#rubricSearch:after {
   clear: both;
 }
 div input {
@@ -145,4 +180,64 @@ font-family arial {
 }
 .degree button:hover {
   background: #424242;
+}
+#wrapper {
+  width: 90%;
+  max-width: 1100px;
+  min-width: 800px;
+  margin: 50px auto;
+}
+#columns {
+  -webkit-column-count: 3;
+  -webkit-column-gap: 10px;
+  -webkit-column-fill: auto;
+  -moz-column-count: 3;
+  -moz-column-gap: 10px;
+  -moz-column-fill: auto;
+  column-count: 3;
+  column-gap: 15px;
+  column-fill: auto;
+}
+.pin {
+  display: inline-block;
+  background: #fefefe;
+  border: 2px solid #fafafa;
+  box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+  margin: 0 2px 15px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+  padding: 15px;
+  padding-bottom: 5px;
+  background: -webkit-linear-gradient(45deg, #fff, #f9f9f9);
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.pin img {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 5px;
+}
+.pin p {
+  font: 12px/18px Arial, sans-serif;
+  color: #333;
+  margin: 0;
+}
+@media (min-width: 960px) {
+  #columns {
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+  }
+}
+@media (min-width: 1100px) {
+  #columns {
+    -webkit-column-count: 5;
+    -moz-column-count: 5;
+    column-count: 5;
+  }
 }

@@ -21,14 +21,10 @@ angular.module('ProRubric', [])
 
     .controller('mainController', function($scope, Degree) {
 
-
         socket.on('find degrees', function(allDegrees){
-            console.log(allDegrees);
-            $scope.degreeData = allDegrees;
+            $scope.degreeData = allDegrees.data;
+            console.log($scope.degreeData);
         });
-
-
-
         $scope.degreeAdd = function(){
             var degreeSave = {
                 title: $scope.degreeTitle,
@@ -36,8 +32,5 @@ angular.module('ProRubric', [])
             };
             Degree.save(degreeSave);
         };
-
-
-
     });
 
