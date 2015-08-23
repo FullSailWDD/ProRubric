@@ -15,7 +15,7 @@ module.exports = function(app, socket) {
                     if (err) {
                         fail(err);
                     } else {
-                        var array = new Array();
+                        var array=[];
                         for(i=0; i<doc.length;i++){
                             array.push(doc[i]);
                             console.log(doc[i]);
