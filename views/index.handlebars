@@ -1,4 +1,12 @@
 	<div class="degree">
+        {[{degreeData}]}
+        <ul>
+            <li ng-repeat="value in degreeData">{[{value.title}]}</li>
+        </ul>
+
+        <ul><li>dsfsdf</li></ul>
+
+        {[{degreeData}]}
 		<h1> Create Degree</h1>
 		<label>Degree Name Here:</label>
 		<input type="text" ng-model="degreeTitle" placeholder=""/>
@@ -7,6 +15,5 @@
         <button ng-click="degreeAdd()"> Create Rubric </button>
 	</div>
 
-    <div ng-repeat="value in degreeData">
-        {[{value}]}
-    </div>
+
+

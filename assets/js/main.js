@@ -11,17 +11,10 @@ angular.module('ProRubric', [])
 
     .service('Degree', function(){
 
-        this.find = function(){
-            socket.on('find degrees', function(allDegrees){
-                console.log(allDegrees);
-                socket.emit('view degree', allDegrees);
-            })
-        };
         this.save = function(degreeSave){
             socket.emit('add degree', degreeSave);
         };
         this.remove = function(){
-            socket.emit('remove degree', degreeRemove);
         };
 
     })
@@ -29,13 +22,10 @@ angular.module('ProRubric', [])
     .controller('mainController', function($scope, Degree) {
 
 
-        Degree.find();
-
-        socket.on('view degree', function(allDegrees) {
-            console.log(allDegrees);
-
+        socket.on('find degrees', function(allDegrees){
             $scope.degreeData = allDegrees;
         });
+
 
 
         $scope.degreeAdd = function(){

@@ -1,4 +1,4 @@
-module.exports = function (){
+module.exports = function(app, socket){
 
     var db          = require('../config/db'),
         mongoose    = require('mongoose');
@@ -49,19 +49,6 @@ module.exports = function (){
 
         },
 
-    // FIND
-    _findAll = function () {
-        var callback = function(){
-            return function(err, data){
-                if (err){
-                    console.log('error occured');
-                    return;
-                }
-            }
-        };
-        _model.find({}, callback());
-        return callback()
-    },
 
     // REMOVE
         _remove = function(degree,success,fail){
@@ -83,7 +70,6 @@ module.exports = function (){
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove,
-        find:           _findAll
+        remove :        _remove
     };
 }();
