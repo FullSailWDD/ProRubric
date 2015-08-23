@@ -51,15 +51,16 @@ module.exports = function (){
 
     // FIND
     _findAll = function () {
-            _model.find({})
-                .exec(function (err, data){
-                    var array = [];
-                    for(i=0; i<data.length; i++){
-                       array.push(data[i]);
-                    }
-                    console.log(array);
-                    return {array:array}
-                });
+        var callback = function(){
+            return function(err, data){
+                if (err){
+                    console.log('error occured');
+                    return;
+                }
+            }
+        };
+        _model.find({}, callback());
+        return callback()
     },
 
     // REMOVE

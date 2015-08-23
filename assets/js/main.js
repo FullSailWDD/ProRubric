@@ -38,7 +38,7 @@ angular.module('ProRubric', [])
         });
 
 
-            $scope.degreeAdd = function(){
+        $scope.degreeAdd = function(){
             var degreeSave = {
                 title: $scope.degreeTitle,
                 acronym: $scope.degreeAcronym
@@ -49,7 +49,6 @@ angular.module('ProRubric', [])
         $scope.degreeRemove = function(){
 
             var degreeDelete = {
-                _id : $scope._id,
                 title: $scope.degreeTitle,
                 acronym: $scope.degreeAcronym
             };

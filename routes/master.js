@@ -9,8 +9,8 @@ module.exports = function(app, socket) {
     // route /
     app.get('/', function(req, res) {
             var findAll = Degree.find();
-            console.log(findAll);
-            socket.emit('find degrees', {findDegrees: findAll});
+        console.log(findAll);
+            //socket.emit('find degrees', {findDegrees: findAll});
         res.render('index');
     });
 
