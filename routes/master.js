@@ -22,6 +22,7 @@ module.exports = function(app, socket) {
                         socket.emit('find degrees',array);
                     }
                 });
+
             data.on('add degree', function (callback) {
                 Degree.add(callback);
             });

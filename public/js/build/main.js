@@ -4,29 +4,32 @@ var socket = io.connect();
 angular.module('ProRubric', [])
 
 //Required to remove the conviction between Handlebars and Angular.
-    .config(function($interpolateProvider) {
+    .config(function ($interpolateProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
     })
-    .service('Degree', function(){
+    .service('Degree', function () {
 
-        this.save = function(degreeSave){
+        this.save = function (degreeSave) {
             socket.emit('add degree', degreeSave);
         };
-        this.remove = function(){
+        this.remove = function () {
         };
 
     })
-    .controller('mainController', function($scope, Degree) {
+    .controller('mainController', function ($scope, Degree) {
 
         socket.once('find degrees', function (data) {
-            angular.forEach(data, function(key, value){
-                $('.columns').append('<div class="pin"><p>'+ key._id +'</p></div>');
+            angular.forEach(data, function (key) {
+                $('.columns').append(
+                    '<div class="pin"><p>' +
+                    key._id
+                    + '</p></div>');
             })
 
         });
 
-        $scope.degreeAdd = function(){
+        $scope.degreeAdd = function () {
             var degreeSave = {
                 title: $scope.degreeTitle,
                 acronym: $scope.degreeAcronym

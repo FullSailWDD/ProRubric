@@ -1,20 +1,15 @@
 <div id="rubricSearch">
-		<ul >
-			<li ng-repeat="x in stuff">{[{x._id}]}</li>
-		</ul>
-		{{{arrayData}}}
-        <h1> Create Degree {[{log}]} </h1>
-        <label>Degree Name Here:</label>
-        <input type="text" ng-model="degreeTitle" placeholder=""/>
-        <label>Degree Acronym</label>
-        <input type="text" ng-model="degreeAcronym" placeholder=""/>
-        <button ng-click="degreeAdd()"> Create Rubric </button>
-	</div>
+    <h1> Create Degree</h1>
+    <label>Degree Name Here:</label>
+    <input type="text" ng-model="degreeTitle" placeholder=""/>
+    <label>Degree Acronym</label>
+    <input type="text" ng-model="degreeAcronym" placeholder=""/>
+    <button ng-click="degreeAdd()"> Create Rubric</button>
+</div>
 
 <!--******************** Pintrest like coloumns ********************-->
-	<div id="wrapper">
-	<div class="columns">
-	</div>
+<div id="wrapper">
+    <div class="columns"></div>
 </div>
 
 <!--******************** Pintrest like coloumns END ********************-->
