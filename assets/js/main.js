@@ -8,7 +8,6 @@ angular.module('ProRubric', [])
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
     })
-
     .service('Degree', function(){
 
         this.save = function(degreeSave){
@@ -18,13 +17,15 @@ angular.module('ProRubric', [])
         };
 
     })
-
     .controller('mainController', function($scope, Degree) {
 
-        socket.on('find degrees', function(allDegrees){
-            $scope.degreeData = allDegrees.data;
-            console.log($scope.degreeData);
+        socket.once('find degrees', function (data) {
+            angular.forEach(data, function(key, value){
+                $('.columns').append('<div class="pin"><p>'+ key._id +'</p></div>');
+            })
+
         });
+
         $scope.degreeAdd = function(){
             var degreeSave = {
                 title: $scope.degreeTitle,
