@@ -1,14 +1,18 @@
 @import 'jeet'
 
+hover = background #424242
+
 edit()
 
-	
 #sideNav
 	col(1/7)
 	span(1/7)
 	background gray
 	text-align center
 	height 700px
+	
+.logo
+	margin-bottom 6%
 	
 ul
 	padding-left 0
@@ -28,7 +32,7 @@ ul li a
 ul li a:hover
 	background #424242
 
-#mainDefaultBody
+.mainDefaultBody
 	col(6/7)
 	span(6/7)
 	//Putting CSS Gradients on this breaks the Jeet apparently.
@@ -36,12 +40,122 @@ ul li a:hover
 #rubricSearch
 	center(500px)
 	padding 2%
-	
-div input
-	width 95%
-	font-size 1.5em
+
+.addRubric
+	div
+		background-color gray
+		h2
+			font-size 1.3em
+
+	form
+		center(500px)
+		padding 2%
+		
+	h3
+		text-align left
+		font-size 2em
+		
+		label
+			font-size 1.3em
+
+	input
+		width 95%
+		padding 2%
+		font-size 1.3em
+		margin-bottom 5%
+		background-color white	
+		
+	input[type*="submit"]
+		col(1/7)
+		background-color gray
+		border none
+		
+	input[type*="submit"]:hover	
+		background #424242
+		
+
+.addCourse
+	form
+		center(500px)
+		padding 2%
+		
+		h3
+			text-align left
+			font-size 2em
+		
+		label
+			font-size 1.3em
+
+	input
+		width 95%
+		padding 2%
+		font-size 1.3em
+		margin-bottom 5%
+		background-color white	
+		
+	input[type*="submit"]
+		col(1/7)
+		background-color gray
+		border none
+		
+	input[type*="submit"]:hover	
+		background #424242
+		
+.info
+	center(500px)
 	padding 2%
-	background-color white
+	div
+		background-color gray
+		h2
+			font-size 1.3em
+			
+		h3
+			text-align left
+			font-size 1.5em
+	button
+		background-color gray
+		border none
+		font-size 1.2em
+		padding 2%
+		
+	button:hover
+		background #424242
+		cursor pointer
+		
+.addInfo
+	form
+		center(500px)
+		padding 2%
+	h3
+			text-align left
+			font-size 2em
+		
+		label
+			col(1/1)
+			font-size 1.3em
+
+	input
+		width 95%
+		padding 2%
+		font-size 1.3em
+		margin-bottom 5%
+		background-color white
+		
+	textarea
+		width 95.5%
+		padding 2%
+		font-size 1.3em
+		margin-bottom 5%
+		background-color white	
+	
+	input[type*="submit"]
+		col(1/7)
+		background-color gray
+		border none
+		
+	input[type*="submit"]:hover	
+		background #424242	
+
 
 .degree label
   	font-family arial
@@ -80,6 +194,9 @@ div input
 	column-count 3
 	column-gap 15px
 	column-fill auto
+	
+h3
+	text-align center
 
 
 .pin 
@@ -95,7 +212,6 @@ div input
 	padding-bottom 5px
 	background -webkit-linear-gradient(45deg, #FFF, #F9F9F9)
 	opacity 1
-	
 	-webkit-transition all .2s ease
 	-moz-transition all .2s ease
 	-o-transition all .2s ease
@@ -125,9 +241,5 @@ div input
 		-webkit-column-count 5
 		-moz-column-count 5
 		column-count 5
-	
-
-
 //<!--******************** Pintrest like coloumns END ********************-->
-	
 	

@@ -78,7 +78,7 @@ gulp.task('jsCompress', function () {
         .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest('./public/js/build'))
-        .on('error', gutil.log)
+        .on('error', gutil.log);
 });
 
 gulp.task('lint', function() {

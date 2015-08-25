@@ -1,27 +1,29 @@
 var socket = io.connect();
 
 angular.module('ProRubric', ['ngRoute']);
-
-
     angular.module('ProRubric').config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
-        $routeProvider.
-            when('/', {
+        $routeProvider
+            .when('/', {
                 templateUrl: 'views/home.html',
-                controller: 'mainController'
+                controller: 'secondController'
+            })
+            .when('/mikewazhere', {
+                templateUrl: 'views/addInfo.html',
+                controller: 'secondController'
             })
             .when('/se', {
                 templateUrl: 'views/text.html',
                 controller: 'secondController'
-            })
+            });
     });
 
     angular.module('ProRubric').service('Degree', function () {
         this.view = function () {
             socket.once('find degrees', function (data) {
                 angular.forEach(data, function (key) {
-                    $('.columns').append('<div class="pin"><p>' + key._id + ' ' + key.title + ' ' + key.acronym + '</p></div>');
+                    $('.columns').append('<div class="pin"><img src="http://placehold.it/140x100"> <h2 class="classname">' + key.title + '</h2> <a href="#">Delete Degree</a></div>');
                 });
             });
         };
@@ -45,10 +47,8 @@ angular.module('ProRubric', ['ngRoute']);
             };
             Degree.save(degreeNew);
         };
-
-
     });
     angular.module('ProRubric').controller('secondController', function () {
 
+    })
 
-    });
