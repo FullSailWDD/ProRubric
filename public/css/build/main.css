@@ -85,7 +85,7 @@ ul li a:last-child {
 ul li a:hover {
   background: #424242;
 }
-#mainDefaultBody {
+.mainDefaultBody {
   *zoom: 1;
   float: left;
   clear: none;
@@ -101,23 +101,23 @@ ul li a:hover {
   margin-left: 0%;
   margin-right: 0%;
 }
-#mainDefaultBody:before,
-#mainDefaultBody:after {
+.mainDefaultBody:before,
+.mainDefaultBody:after {
   content: '';
   display: table;
 }
-#mainDefaultBody:after {
+.mainDefaultBody:after {
   clear: both;
 }
-#mainDefaultBody:last-child {
+.mainDefaultBody:last-child {
   margin-right: 0%;
 }
-#mainDefaultBody:before,
-#mainDefaultBody:after {
+.mainDefaultBody:before,
+.mainDefaultBody:after {
   content: '';
   display: table;
 }
-#mainDefaultBody:after {
+.mainDefaultBody:after {
   clear: both;
 }
 #rubricSearch {
