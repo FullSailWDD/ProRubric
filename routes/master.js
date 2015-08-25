@@ -10,19 +10,17 @@ module.exports = function(app, socket) {
     // route /
     app.get('/', function(req, res) {
         socket.on('connection', function (data) {
-                Degree.model.find({}, function (err, doc) {
-                    if (err) {fail(err)}else{
-                        var array=[];
-                        for(i=0; i<doc.length;i++){
-                            array.push(doc[i]);
-                        }
-                        socket.emit('find degrees',array);
-                    }
+                Degree.all(function(doc){
+                    socket.emit('find degrees',doc);
+                }, function(err){
+                    outputs.debug(err, 'Return all Degrees', false);
                 });
+
             data.on('add degree', function (callback) {
                 Degree.add(callback);
             });
         });
+
         res.render('index');
     });
 };

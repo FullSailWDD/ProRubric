@@ -4,10 +4,25 @@ var socket = io.connect();
 angular.module('ProRubric', [])
 
 //Required to remove the conviction between Handlebars and Angular.
-    .config(function ($interpolateProvider) {
+    .config(['$routeProvider'], function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
+        $routeProvider.
+            when('/phones', {
+                templateUrl: 'partials/phone-list.html',
+                controller: 'PhoneListCtrl'
+            }).
+            when('/phones/:phoneId', {
+                templateUrl: 'partials/phone-detail.html',
+                controller: 'PhoneDetailCtrl'
+            }).
+            otherwise({
+                redirectTo: '/phones'
+            });
+
     })
+
+
     .service('Degree', function () {
         this.view = function(){
             socket.once('find degrees', function (data) {
@@ -16,24 +31,26 @@ angular.module('ProRubric', [])
                 });
             });
         };
-        this.save = function (degreeSave) {
-            socket.emit('add degree', degreeSave);
+        this.save = function (degreeNew) {
+            socket.emit('add degree', degreeNew);
         };
         this.remove = function () {
         };
-
     })
-    .controller('mainController', function ($scope, Degree) {
+
+
+
+    .controller('mainController', ['$scope', Degree], function ($scope, Degree) {
         //Main Route Loading Point Start
         Degree.view();
         //Main Route Loading Point End
 
         $scope.degreeAdd = function () {
-            var degreeSave = {
+            var degreeNew = {
                 title: $scope.degreeTitle,
                 acronym: $scope.degreeAcronym
             };
-            Degree.save(degreeSave);
+            Degree.save(degreeNew);
         };
 
 

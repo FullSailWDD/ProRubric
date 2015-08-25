@@ -30,6 +30,16 @@ module.exports = function(app, socket){
                 }
             });
         },
+        // Find
+        _findAll = function(success,fail){
+                _model.find({}, function(err,doc){
+                    if (err) {
+                        fail(err);
+                    }else{
+                        success(doc);
+                    }
+                });
+        },
 
     // UPDATE 
         _update = function(degree,success,fail){
@@ -48,7 +58,6 @@ module.exports = function(app, socket){
 
 
         },
-
 
     // REMOVE
         _remove = function(degree,success,fail){
@@ -70,6 +79,7 @@ module.exports = function(app, socket){
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        all:            _findAll
     };
 }();
