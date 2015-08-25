@@ -70,10 +70,13 @@ gulp.task('css', function () {
     .pipe(connect.reload());
 });
 
-gulp.task('js', function () {
+//compiling js files and uglifying them
+gulp.task('jsCompress', function () {
     gulp.src('./assets/js/*.js')
+        .pipe(concat('main.js'))
+        .pipe(uglify())
         .pipe(gulp.dest('./public/js/build'))
-        .pipe(connect.reload());
+        .on('error', gutil.log)
 });
 
 gulp.task('lint', function() {
@@ -89,7 +92,7 @@ gulp.task('watch', function () {
 
 });
 
-gulp.task('build', ['css', 'js']);
+gulp.task('build', ['css', 'jsCompress']);
 gulp.task('test', ['clearStart', 'mongod', 'runTests']);
 gulp.task('dev', ['clearStart', 'build', 'mongod', 'watch', 'development']);
 gulp.task('default',['build']);
