@@ -1,7 +1,7 @@
 module.exports = function() {
     
     var db          = require('../config/db'),
-        mongoose    = require('mongoose');
+        mongoose    = require('mongoose'),
         data        = require('../lib/sanitize.js');
 
 
@@ -18,24 +18,32 @@ module.exports = function() {
 
     // ADD
     _save = function(section, success, fail){
-        var newSection = new _model({
-            title:        title,
-            gradeWeight:  gradeWeight
-        });
-        _model.save(function(err){
-            if (err) {
-                fail(err);   
-            }else{
-                success(newSection);   
-            }
-        });
+
+        var cleanData = data.sanitize(section);
+
+        if (cleanData){
+            var newSection = new _model({
+                title:      cleanData.title,
+                gradeWeight:  cleanData.gradeWeight
+            });
+            _model.save(function(err){
+                if (err) {
+                    fail(err);
+                }else{
+                    success(newSection);
+                }
+            });
+        }
+
+
     },
     
     // UPDATE 
     _update = function(section,fail,success){
+
         var cleanData = data.sanitize(section);
             if(cleanData){
-                _model.update({'_id':section._id}, {$set:cleanData}, function(err,doc){
+                _model.update({'_id':cleanData._id}, {$set:cleanData}, function(err,doc){
                     if (err) {
                         fail(err);
                     }else{
@@ -46,13 +54,37 @@ module.exports = function() {
     },
     // REMOVE
     _remove = function(section, fail, success){
-        _model.findByIdAndRemove({'_id':section._id}, function(err,doc){
+
+        var cleanData = data.sanitize(section);
+
+        if(cleanData){
+
+            _model.findByIdAndRemove({'_id':cleanData._id}, function(err,doc){
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+
+        }
+
+
+    };
+
+    _all = function(success,fail){
+
+        _model.find({}, function(err,doc){
+
             if (err) {
                 fail(err);
             }else{
                 success(doc);
             }
         });
+        // }
+
+
     };
     
     
@@ -63,6 +95,7 @@ module.exports = function() {
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        all :        _all
     };
 }();

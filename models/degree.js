@@ -1,7 +1,7 @@
 module.exports = function(app, socket){
 
     var db          = require('../config/db'),
-        mongoose    = require('mongoose');
+        mongoose    = require('mongoose'),
         data        = require('../lib/sanitize.js');
 
 
@@ -17,18 +17,26 @@ module.exports = function(app, socket){
     // ADD
         _save = function(degree, success, fail){
 
-            var newDegree = new _model({
-                title:        degree.title,
-                acronym:      degree.acronym
-            });
+            var cleanData = data.sanitize(degree);
 
-            newDegree.save(function(err){
-                if (err) {
-                    fail (err);
-                } else {
-                    success(newDegree);
-                }
-            });
+            if(cleanData){
+
+                var newDegree = new _model({
+                    title:        cleanData.title,
+                    acronym:      cleanData.acronym
+                });
+
+                newDegree.save(function(err){
+                    if (err) {
+                        fail (err);
+                    } else {
+                        success(newDegree);
+                    }
+                });
+
+            }
+
+
         },
 
     // UPDATE 
@@ -53,14 +61,37 @@ module.exports = function(app, socket){
     // REMOVE
         _remove = function(degree,success,fail){
 
-            _model.findByIdAndRemove({'_id':degree._id}, function(err,doc){
-                if (err) {
-                    fail(err);
-                }else{
-                    success(doc);
-                }
-            });
+            var cleanData = data.sanitize(degree);
+
+            if (cleanData){
+
+                _model.findByIdAndRemove({'_id':cleanData._id} , function(err,doc){
+                    if (err) {
+                        fail(err);
+                    }else{
+                        success(doc);
+                    }
+                });
+
+            }
+
+
         };
+
+    _all = function(success,fail){
+
+        _model.find({}, function(err,doc){
+
+            if (err) {
+                fail(err);
+            }else{
+                success(doc);
+            }
+        });
+        // }
+
+
+    };
 
 
 // Publicly Available
@@ -70,6 +101,7 @@ module.exports = function(app, socket){
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        all :           _all
     };
 }();

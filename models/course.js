@@ -1,7 +1,7 @@
 module.exports = function() {
     
     var db          = require('../config/db'),
-        mongoose    = require('mongoose');
+        mongoose    = require('mongoose'),
         data        = require('../lib/sanitize.js');
     
     
@@ -17,25 +17,32 @@ module.exports = function() {
     
      _model = mongoose.model('courses', courseSchema);
 
+
     // ADD 
     var _save = function(course, success, fail){
 
-        var newCourse = new _model({
-            
-            title:        course.title,
-            acronym:      course.acronym,
-            description:  course.description,
-            degree_id:    course.degree_id
-        });
+        var cleanData = data.sanitize(course);
 
-        newCourse.save(function(err){
-            
-            if (err) {
-                fail (err);
-            } else {
-                success(newCourse);
-            }
-        });
+        if (cleanData){
+            var newCourse = new _model({
+
+                title:        cleanData.title,
+                acronym:      cleanData.acronym,
+                description:  cleanData.description,
+                degree_id:    cleanData.degree_id
+            });
+
+            newCourse.save(function(err){
+
+                if (err) {
+                    fail (err);
+                } else {
+                    success(newCourse);
+                }
+            });
+        }
+
+
         },
     
     
@@ -64,15 +71,38 @@ module.exports = function() {
     // REMOVE
     _remove = function(course,success,fail){
 
-        _model.findByIdAndRemove({'_id':course._id}, function(err, doc){
+        var cleanData = data.sanitize(course);
+
+        if(cleanData){
+
+            _model.findByIdAndRemove({'_id':cleanData._id}, function(err, doc){
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+
+        }
+
+
+    };
+
+    // SEARCH
+    _all = function(success,fail){
+
+        _model.find({}, function(err,doc){
+
             if (err) {
                 fail(err);
             }else{
                 success(doc);
             }
         });
+        // }
+
+
     };
-    
     
     
     
@@ -83,7 +113,8 @@ module.exports = function() {
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        all :        _all
     };
 }();
 

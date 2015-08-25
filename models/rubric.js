@@ -25,11 +25,14 @@ module.exports = function() {
     // ADD 
     var _save = function(rubric, success, fail){
 
-        var newRubric = new _model({
-            title:        rubric.title,
-            content:      rubric.content,
-            course_id:    rubric.course_id
-        });
+        var cleanData = data.sanitize(rubric);
+
+        if(cleanData){
+            var newRubric = new _model({
+                title:        cleanData.title,
+                content:      cleanData.content,
+                course_id:    cleanData.course_id
+            });
 
             newCourse.save(function(err){
                 if (err) {
@@ -38,6 +41,9 @@ module.exports = function() {
                     success(newRubric);
                 }
             });
+        }
+
+
         },
 
     // UPDATE 
@@ -59,14 +65,37 @@ module.exports = function() {
     // REMOVE
     _remove = function(rubric,success,fail){
 
-        _model.findByIdAndRemove({'_id':rubric._id}, function(err,doc){
+        var cleanData = data.sanitize(rubric);
+
+        if(cleanData){
+            _model.findByIdAndRemove({'_id':cleanData._id}, function(err,doc){
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+        }
+
+
+    };
+
+    _all = function(success,fail){
+
+        _model.find({}, function(err,doc){
+
             if (err) {
                 fail(err);
             }else{
                 success(doc);
             }
         });
+        // }
+
+
     };
+
+
     
     
     
@@ -78,6 +107,7 @@ module.exports = function() {
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        all :        _all
     };
 }();    

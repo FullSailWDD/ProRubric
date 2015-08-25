@@ -17,20 +17,28 @@ module.exports = function() {
 
     var _save = function(lineItem, success, fail){
 
-        var newLineItem = new _model({
-            title:      lineItem.title,
-            content:    lineItem.content,
-            section_id: lineItem.section_id
-        });
+        var cleanData = data.sanitize(lineItem);
+
+        if (cleanData){
+
+            var newLineItem = new _model({
+                title:      cleanData.title,
+                content:    cleanData.content,
+                section_id: cleanData.section_id
+            });
 
 
-        newLineItem.save(function(err){
+            newLineItem.save(function(err){
                 if (err) {
                     fail(err);
                 }else{
                     success(newLineItem);
                 }
             });
+
+        }
+
+
         },
     
     // UPDATE 
@@ -55,7 +63,27 @@ module.exports = function() {
     // REMOVE
     _remove = function(lineItem,success,fail){
 
-        _model.findByIdAndRemove({'_id':lineItem._id}, function(err,doc){
+        var cleanData = data.sanitize(lineItem);
+
+        if(cleanData){
+
+            _model.findByIdAndRemove({'_id':cleanData._id}, function(err,doc){
+
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+
+        }
+
+
+    };
+
+    _all = function(success,fail){
+
+        _model.find({}, function(err,doc){
 
             if (err) {
                 fail(err);
@@ -63,6 +91,9 @@ module.exports = function() {
                 success(doc);
             }
         });
+        // }
+
+
     };
     
     
@@ -74,7 +105,9 @@ module.exports = function() {
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        all :           _all
     };
+
 }();
 
