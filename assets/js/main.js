@@ -7,14 +7,17 @@ angular.module('ProRubric', ['ngRoute']);
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider.
-            when('/se', {
+            when('/', {
                 templateUrl: 'views/home.html',
                 controller: 'mainController'
             })
+            .when('/se', {
+                templateUrl: 'views/text.html',
+                controller: 'secondController'
+            })
     });
-    
-    angular.module('ProRubric')
-    .service('Degree', function () {
+
+    angular.module('ProRubric').service('Degree', function () {
         this.view = function () {
             socket.once('find degrees', function (data) {
                 angular.forEach(data, function (key) {
@@ -45,8 +48,7 @@ angular.module('ProRubric', ['ngRoute']);
 
 
     });
-    
-    angular.module('ProRubric').controller('secondController', ['$scope'], function () {
+    angular.module('ProRubric').controller('secondController', function () {
 
 
     });
