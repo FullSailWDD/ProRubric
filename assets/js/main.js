@@ -5,9 +5,13 @@ angular.module('ProRubric', ['ngRoute'])
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider.
-            when('/se', {
+            when('/', {
                 templateUrl: 'views/home.html',
                 controller: 'mainController'
+            })
+            .when('/se', {
+                templateUrl: 'views/text.html',
+                controller: 'secondController'
             })
     })
     .service('Degree', function () {
@@ -41,7 +45,7 @@ angular.module('ProRubric', ['ngRoute'])
 
 
     })
-    .controller('secondController', ['$scope'], function () {
+    .controller('secondController', function () {
 
 
     });
