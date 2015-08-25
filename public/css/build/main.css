@@ -1,22 +1,6 @@
 * {
   background: rgba(0,0,0,0.05);
 }
-.rubricbuttons {
-  color: #000;
-  font-size: 21px;
-  padding: 10px 20px 10px 20px;
-  margin: 2% 0 2% 0;
-  font-size: 0.7em;
-  text-align: left;
-  width: 100%;
-}
-.classname {
-  font-size: 1.3em;
-  text-align: center;
-}
-.rubrics {
-  text-align: center;
-}
 #sideNav {
   *zoom: 1;
   float: left;

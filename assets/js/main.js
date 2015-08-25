@@ -5,7 +5,7 @@ angular.module('ProRubric', ['ngRoute']);
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider
-            .when('/mike', {
+            .when('/', {
                 templateUrl: 'views/home.html',
                 controller: 'secondController'
             })
@@ -23,7 +23,7 @@ angular.module('ProRubric', ['ngRoute']);
         this.view = function () {
             socket.once('find degrees', function (data) {
                 angular.forEach(data, function (key) {
-                    $('.columns').append('<div class="pin"><p>' + key._id + ' ' + key.title + ' ' + key.acronym + '</p></div>');
+                    $('.columns').append('<div class="pin"><img src="http://placehold.it/140x100"> <h2 class="classname">' + key.title + '</h2> <a href="#">Delete Degree</a></div>');
                 });
             });
         };
