@@ -10,7 +10,8 @@ var gulp            = require('gulp'),
     exec            = require('child_process').exec,
     uglify          = require('gulp-uglify'),
     gutil           = require('gulp-util'),
-    concat          = require('gulp-concat');;
+    concat          = require('gulp-concat'),
+    ngAnnotate      = require('gulp-ng-annotate');
 
 var config = {
   jshint : ['./*.js', './*/*.js']
@@ -74,6 +75,7 @@ gulp.task('css', function () {
 gulp.task('jsCompress', function () {
     gulp.src('./assets/js/*.js')
         .pipe(concat('main.js'))
+        .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest('./public/js/build'))
         .on('error', gutil.log)

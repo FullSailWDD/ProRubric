@@ -1,33 +1,24 @@
 var socket = io.connect();
 
-//Global App name is ProRubric
-angular.module('ProRubric', [])
+angular.module('ProRubric', ['ngRoute']);
 
-//Required to remove the conviction between Handlebars and Angular.
-    .config(['$routeProvider'], function ($interpolateProvider, $routeProvider) {
+
+    angular.module('ProRubric').config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider.
-            when('/phones', {
-                templateUrl: 'partials/phone-list.html',
-                controller: 'PhoneListCtrl'
-            }).
-            when('/phones/:phoneId', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
-            }).
-            otherwise({
-                redirectTo: '/phones'
-            });
-
-    })
-
-
+            when('/se', {
+                templateUrl: 'views/home.html',
+                controller: 'mainController'
+            })
+    });
+    
+    angular.module('ProRubric')
     .service('Degree', function () {
-        this.view = function(){
+        this.view = function () {
             socket.once('find degrees', function (data) {
                 angular.forEach(data, function (key) {
-                    $('.columns').append('<div class="pin"><p>'+key._id+' '+key.title+' '+ key.acronym +'</p></div>');
+                    $('.columns').append('<div class="pin"><p>' + key._id + ' ' + key.title + ' ' + key.acronym + '</p></div>');
                 });
             });
         };
@@ -36,11 +27,10 @@ angular.module('ProRubric', [])
         };
         this.remove = function () {
         };
-    })
+    });
 
 
-
-    .controller('mainController', ['$scope', Degree], function ($scope, Degree) {
+    angular.module('ProRubric').controller('mainController', function ($scope, Degree) {
         //Main Route Loading Point Start
         Degree.view();
         //Main Route Loading Point End
@@ -54,6 +44,9 @@ angular.module('ProRubric', [])
         };
 
 
+    });
+    
+    angular.module('ProRubric').controller('secondController', ['$scope'], function () {
+
 
     });
-
