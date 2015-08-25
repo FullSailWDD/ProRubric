@@ -7,7 +7,10 @@ var gulp            = require('gulp'),
     mocha           = require('gulp-mocha'),
     util            = require('gulp-util'),
     jshint          = require('gulp-jshint'),
-    exec            = require('child_process').exec;
+    exec            = require('child_process').exec,
+    uglify          = require('gulp-uglify'),
+    gutil           = require('gulp-util'),
+    concat          = require('gulp-concat');;
 
 var config = {
   jshint : ['./*.js', './*/*.js']
