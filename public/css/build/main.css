@@ -39,6 +39,9 @@
 #sideNav:after {
   clear: both;
 }
+.logo {
+  margin-bottom: 6%;
+}
 ul {
   padding-left: 0;
 }
@@ -193,6 +196,9 @@ div input {
   column-count: 3;
   column-gap: 15px;
   column-fill: auto;
+}
+h3 {
+  text-align: center;
 }
 .pin {
   display: inline-block;
