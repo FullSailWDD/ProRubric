@@ -1,26 +1,51 @@
-//Global App name is ProRubric
-angular.module('ProRubric', [])
+var socket = io.connect();
 
-//Required to remove the conviction between Handlebars and Angular.
-.config(function($interpolateProvider) {
-    $interpolateProvider.startSymbol('{[{');
-    $interpolateProvider.endSymbol('}]}');
-})
-
-.controller('mainController', function($http,$scope) {
-
-    $scope.rubric = function(rubricName){
-
-        $http.get('/degProcess'+rubricName, {msg: rubricName}).
-            then(function(response) {
-                //Response is the data returned at call.
-                console.log(response);
-            }, function(response) {
-                //This is the Error if it breaks
-                console.log(response);
+angular.module('ProRubric', ['ngRoute'])
+    .config(function ($interpolateProvider, $routeProvider) {
+        $interpolateProvider.startSymbol('{[{');
+        $interpolateProvider.endSymbol('}]}');
+        $routeProvider
+            .when('/mike', {
+                templateUrl: 'views/addInfo.html',
+                controller: 'secondController'
+            })
+            .when('/mikewazhere', {
+                templateUrl: 'views/addInfo.html',
+                controller: 'secondController'
+            })
+    })
+    .service('Degree', function () {
+        this.view = function () {
+            socket.once('find degrees', function (data) {
+                angular.forEach(data, function (key) {
+                    $('.columns').append('<div class="pin"><p>' + key._id + ' ' + key.title + ' ' + key.acronym + '</p></div>');
+                });
             });
+        };
+        this.save = function (degreeNew) {
+            socket.emit('add degree', degreeNew);
+        };
+        this.remove = function () {
+        };
+    })
 
-    };
+
+    .controller('mainController', function ($scope, Degree) {
+        //Main Route Loading Point Start
+        Degree.view();
+        //Main Route Loading Point End
+
+        $scope.degreeAdd = function () {
+            var degreeNew = {
+                title: $scope.degreeTitle,
+                acronym: $scope.degreeAcronym
+            };
+            Degree.save(degreeNew);
+        };
 
 
-});
+    })
+    .controller('secondController', function () {
+
+
+    });

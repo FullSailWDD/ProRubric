@@ -88,7 +88,7 @@ ul li a:last-child {
 ul li a:hover {
   background: #424242;
 }
-#mainDefaultBody {
+.mainDefaultBody {
   *zoom: 1;
   float: left;
   clear: none;
@@ -104,23 +104,23 @@ ul li a:hover {
   margin-left: 0%;
   margin-right: 0%;
 }
-#mainDefaultBody:before,
-#mainDefaultBody:after {
+.mainDefaultBody:before,
+.mainDefaultBody:after {
   content: '';
   display: table;
 }
-#mainDefaultBody:after {
+.mainDefaultBody:after {
   clear: both;
 }
-#mainDefaultBody:last-child {
+.mainDefaultBody:last-child {
   margin-right: 0%;
 }
-#mainDefaultBody:before,
-#mainDefaultBody:after {
+.mainDefaultBody:before,
+.mainDefaultBody:after {
   content: '';
   display: table;
 }
-#mainDefaultBody:after {
+.mainDefaultBody:after {
   clear: both;
 }
 #rubricSearch {
@@ -143,13 +143,259 @@ ul li a:hover {
 #rubricSearch:after {
   clear: both;
 }
-div input {
-  width: 95%;
-  font-size: 1.5em;
+.addRubric div {
+  background-color: #808080;
+}
+.addRubric div h2 {
+  font-size: 1.3em;
+}
+.addRubric form {
+  *zoom: 1;
+  width: auto;
+  max-width: 500px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
   padding: 2%;
+}
+.addRubric form:before,
+.addRubric form:after {
+  content: '';
+  display: table;
+}
+.addRubric form:after {
+  clear: both;
+}
+.addRubric h3 {
+  text-align: left;
+  font-size: 2em;
+}
+.addRubric h3 label {
+  font-size: 1.3em;
+}
+.addRubric input {
+  width: 95%;
+  padding: 2%;
+  font-size: 1.3em;
+  margin-bottom: 5%;
   background-color: #fff;
 }
-#rubricSearch button {
+.addRubric input[type*="submit"] {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 11.714285714285714%;
+  margin-left: 0%;
+  margin-right: 3%;
+  background-color: #808080;
+  border: none;
+}
+.addRubric input[type*="submit"]:before,
+.addRubric input[type*="submit"]:after {
+  content: '';
+  display: table;
+}
+.addRubric input[type*="submit"]:after {
+  clear: both;
+}
+.addRubric input[type*="submit"]:last-child {
+  margin-right: 0%;
+}
+.addRubric input[type*="submit"]:hover {
+  background: #424242;
+}
+.addCourse form {
+  *zoom: 1;
+  width: auto;
+  max-width: 500px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  padding: 2%;
+}
+.addCourse form:before,
+.addCourse form:after {
+  content: '';
+  display: table;
+}
+.addCourse form:after {
+  clear: both;
+}
+.addCourse form h3 {
+  text-align: left;
+  font-size: 2em;
+}
+.addCourse form label {
+  font-size: 1.3em;
+}
+.addCourse input {
+  width: 95%;
+  padding: 2%;
+  font-size: 1.3em;
+  margin-bottom: 5%;
+  background-color: #fff;
+}
+.addCourse input[type*="submit"] {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 11.714285714285714%;
+  margin-left: 0%;
+  margin-right: 3%;
+  background-color: #808080;
+  border: none;
+}
+.addCourse input[type*="submit"]:before,
+.addCourse input[type*="submit"]:after {
+  content: '';
+  display: table;
+}
+.addCourse input[type*="submit"]:after {
+  clear: both;
+}
+.addCourse input[type*="submit"]:last-child {
+  margin-right: 0%;
+}
+.addCourse input[type*="submit"]:hover {
+  background: #424242;
+}
+.info {
+  *zoom: 1;
+  width: auto;
+  max-width: 500px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  padding: 2%;
+}
+.info:before,
+.info:after {
+  content: '';
+  display: table;
+}
+.info:after {
+  clear: both;
+}
+.info div {
+  background-color: #808080;
+}
+.info div h2 {
+  font-size: 1.3em;
+}
+.info div h3 {
+  text-align: left;
+  font-size: 1.5em;
+}
+.info button {
+  background-color: #808080;
+  border: none;
+  font-size: 1.2em;
+  padding: 2%;
+}
+.info button:hover {
+  background: #424242;
+  cursor: pointer;
+}
+.addInfo form {
+  *zoom: 1;
+  width: auto;
+  max-width: 500px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  padding: 2%;
+}
+.addInfo form:before,
+.addInfo form:after {
+  content: '';
+  display: table;
+}
+.addInfo form:after {
+  clear: both;
+}
+.addInfo h3 {
+  text-align: left;
+  font-size: 2em;
+}
+.addInfo label {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 3%;
+  font-size: 1.3em;
+}
+.addInfo label:before,
+.addInfo label:after {
+  content: '';
+  display: table;
+}
+.addInfo label:after {
+  clear: both;
+}
+.addInfo label:last-child {
+  margin-right: 0%;
+}
+.addInfo input {
+  width: 95%;
+  padding: 2%;
+  font-size: 1.3em;
+  margin-bottom: 5%;
+  background-color: #fff;
+}
+.addInfo textarea {
+  width: 95.5%;
+  padding: 2%;
+  font-size: 1.3em;
+  margin-bottom: 5%;
+  background-color: #fff;
+}
+.addInfo input[type*="submit"] {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 11.714285714285714%;
+  margin-left: 0%;
+  margin-right: 3%;
+  background-color: #808080;
+  border: none;
+}
+.addInfo input[type*="submit"]:before,
+.addInfo input[type*="submit"]:after {
+  content: '';
+  display: table;
+}
+.addInfo input[type*="submit"]:after {
+  clear: both;
+}
+.addInfo input[type*="submit"]:last-child {
+  margin-right: 0%;
+}
+.addInfo input[type*="submit"]:hover {
+  background: #424242;
+}
+.degree label,
+font-family arial {
+  font-weight: bold;
+}
+.degree button {
   *zoom: 1;
   float: left;
   clear: none;
@@ -166,27 +412,27 @@ div input {
   text-align: center;
   padding: 10px 0;
 }
-#rubricSearch button:before,
-#rubricSearch button:after {
+.degree button:before,
+.degree button:after {
   content: '';
   display: table;
 }
-#rubricSearch button:after {
+.degree button:after {
   clear: both;
 }
-#rubricSearch button:last-child {
+.degree button:last-child {
   margin-right: 0%;
 }
-#rubricSearch button:hover {
+.degree button:hover {
   background: #424242;
 }
-#wrapper {
+.wrapper {
   width: 90%;
   max-width: 1100px;
   min-width: 800px;
   margin: 50px auto;
 }
-#columns {
+.columns {
   -webkit-column-count: 3;
   -webkit-column-gap: 10px;
   -webkit-column-fill: auto;

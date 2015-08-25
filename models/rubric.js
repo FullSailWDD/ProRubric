@@ -6,7 +6,6 @@ module.exports = function() {
 
 
     var rubricSchema = mongoose.Schema({
-
         title : String,
         content : String,
         course_id : {type : Number, default : 0},
@@ -27,14 +26,12 @@ module.exports = function() {
     var _save = function(rubric, success, fail){
 
         var newRubric = new _model({
-            
             title:        rubric.title,
             content:      rubric.content,
             course_id:    rubric.course_id
         });
 
             newCourse.save(function(err){
-
                 if (err) {
                     fail (err);
                 } else {
@@ -59,21 +56,15 @@ module.exports = function() {
         }
     },
     
-    
     // REMOVE
     _remove = function(rubric,success,fail){
 
         _model.findByIdAndRemove({'_id':rubric._id}, function(err,doc){
-
-
             if (err) {
                 fail(err);
             }else{
                 success(doc);
             }
-            
-//            if(err) return console.log(err);
-//            console.log(result);
         });
     };
     

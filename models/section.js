@@ -6,7 +6,6 @@ module.exports = function() {
 
 
     var sectionSchema = mongoose.Schema({
-
         title : String,
         gradeWeight : Number,
         rubric_id : {type : Number, default : 0},
@@ -16,21 +15,13 @@ module.exports = function() {
 
 
     _model = mongoose.model('sections', sectionSchema),
-    
-    
-    
-// CRUD Methods 
-// ==========================================================================
-    
+
     // ADD
     _save = function(section, success, fail){
-
         var newSection = new _model({
             title:        title,
             gradeWeight:  gradeWeight
         });
-
-
         _model.save(function(err){
             if (err) {
                 fail(err);   
@@ -42,9 +33,7 @@ module.exports = function() {
     
     // UPDATE 
     _update = function(section,fail,success){
-
         var cleanData = data.sanitize(section);
-
             if(cleanData){
                 _model.update({'_id':section._id}, {$set:cleanData}, function(err,doc){
                     if (err) {
@@ -54,11 +43,7 @@ module.exports = function() {
                     }
                 });
             }
-
-
     },
-    
-    
     // REMOVE
     _remove = function(section, fail, success){
         _model.findByIdAndRemove({'_id':section._id}, function(err,doc){

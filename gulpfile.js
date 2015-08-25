@@ -47,10 +47,7 @@ gulp.task('runTests', function () {
     return gulp.src(['test/*.js'], { read: false })
         .pipe(mocha({ 
             reporter: 'spec',
-            timeout:2000,
-            // globals: {
-            //     should: require('should')
-            // }
+            timeout:2000
           }))
         .on('error', util.log) 
 
@@ -62,7 +59,6 @@ gulp.task('runTests', function () {
 
 
 gulp.task('css', function () {
-  // Get one .styl file and render 
   gulp.src('./assets/css/**/*.styl')
     .pipe(stylus(
       {use: [jeet()]}
@@ -72,7 +68,6 @@ gulp.task('css', function () {
 });
 
 gulp.task('js', function () {
-    // Get JS files and Move
     gulp.src('./assets/js/*.js')
         .pipe(gulp.dest('./public/js/build'))
         .pipe(connect.reload());
@@ -86,9 +81,9 @@ gulp.task('lint', function() {
 });
 
 gulp.task('watch', function () {
-  // gulp.watch(['./app/*.html'], ['html']);
   gulp.watch(['./assets/css/*.styl', './test/*'], ['css']);
-  // gulp.watch(['./**/*.js'], ['runTests']);
+  gulp.watch(['./assets/js/*.js', './test/*'], ['js']);
+
 });
 
 gulp.task('build', ['css', 'js']);
