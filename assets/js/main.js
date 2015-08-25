@@ -14,7 +14,7 @@ angular.module('ProRubric', ['ngRoute']);
             .when('/se', {
                 templateUrl: 'views/text.html',
                 controller: 'secondController'
-            })
+            });
     });
 
     angular.module('ProRubric').service('Degree', function () {
