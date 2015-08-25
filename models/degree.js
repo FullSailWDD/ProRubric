@@ -90,9 +90,7 @@ module.exports = function(app, socket){
         });
         // }
 
-
     };
-
 
 // Publicly Available
 // ==========================================================================

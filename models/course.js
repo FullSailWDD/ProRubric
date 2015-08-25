@@ -114,7 +114,7 @@ module.exports = function() {
         add :           _save,
         update :        _update,
         remove :        _remove,
-        all :        _all
+        all :           _all
     };
 }();
 
