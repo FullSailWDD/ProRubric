@@ -1,15 +1,17 @@
 var socket = io.connect();
 
 angular.module('ProRubric', ['ngRoute']);
-
-
     angular.module('ProRubric').config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
-        $routeProvider.
-            when('/', {
+        $routeProvider
+            .when('/mike', {
                 templateUrl: 'views/home.html',
-                controller: 'mainController'
+                controller: 'secondController'
+            })
+            .when('/mikewazhere', {
+                templateUrl: 'views/addInfo.html',
+                controller: 'secondController'
             })
             .when('/se', {
                 templateUrl: 'views/text.html',
@@ -45,10 +47,8 @@ angular.module('ProRubric', ['ngRoute']);
             };
             Degree.save(degreeNew);
         };
-
-
     });
     angular.module('ProRubric').controller('secondController', function () {
 
+    })
 
-    });
