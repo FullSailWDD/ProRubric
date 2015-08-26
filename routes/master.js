@@ -23,6 +23,14 @@ module.exports = function(app, socket) {
             data.on('add section', function (callback) {
                 Section.add(callback);
             });
+            
+            data.on('add rubric', function (callback) {
+                Rubric.add(callback);
+            });
+            
+            data.on('add lineItem', function (callback) {
+                LineItem.add(callback);
+            });
         });
 
         res.render('index');
