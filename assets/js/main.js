@@ -1,16 +1,16 @@
 var socket = io.connect();
 
-angular.module('ProRubric', ['ngRoute']);
+angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
     angular.module('ProRubric').config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider
             .when('/', {
-                templateUrl: 'views/home.html',
+                templateUrl: 'views/addDegree.html',
                 controller: 'degreeController'
             })
             .when('/course', {
-                templateUrl: 'views/addForm.html',
+                templateUrl: 'views/addCourse.html',
                 controller: 'courseController'
             })
             .otherwise({
@@ -34,6 +34,7 @@ angular.module('ProRubric', ['ngRoute']);
                 acronym: $scope.degreeAcronym
             };
             socket.emit('add degree', degreeNew);
+
         };
 
         $scope.deleteDegree = function(){
@@ -59,4 +60,6 @@ angular.module('ProRubric', ['ngRoute']);
         };
 
     })
+
+
 
