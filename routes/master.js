@@ -7,30 +7,31 @@ module.exports = function(app, socket) {
         LineItem = require('../models/lineItem.js');
 
 
-    app.get('/', function(req, res) {
+    socket.on('connection', function (data) {
 
-        socket.on('connection', function (data) {
-
-            Degree.all(function (doc) {
-                socket.emit('find degrees', doc);
-            }, function (err) {
-                outputs.debug(err, 'Return all Degrees', false);
-            });
-
-            data.on('add degree', function (callback) {
-                Degree.add(callback);
-            });
-
-            Course.all(function (doc) {
-                socket.emit('find course', doc);
-            }, function (err) {
-                outputs.debug(err, 'Return all Courses', false);
-            });
-
-            data.on('add course', function (callback) {
-                Course.add(callback);
-            });
+        Degree.all(function (doc) {
+            socket.emit('find degrees', doc);
+        }, function (err) {
+            outputs.debug(err, 'Return all Degrees', false);
         });
+
+        data.on('add degree', function (callback) {
+            Degree.add(callback);
+        });
+
+        Course.all(function (doc) {
+            socket.emit('find course', doc);
+        }, function (err) {
+            outputs.debug(err, 'Return all Courses', false);
+        });
+
+        data.on('add course', function (callback) {
+            Course.add(callback);
+        });
+    });
+
+
+    app.get('/', function(req, res) {
         // route /
         res.render('index');
     });

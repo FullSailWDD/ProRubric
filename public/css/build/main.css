@@ -123,32 +123,21 @@ ul li a:hover {
 .mainDefaultBody:after {
   clear: both;
 }
-#rubricSearch {
-  *zoom: 1;
-  width: auto;
-  max-width: 500px;
-  float: none;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 0;
-  padding-right: 0;
-  padding: 2%;
-}
-#rubricSearch:before,
-#rubricSearch:after {
-  content: '';
-  display: table;
-}
-#rubricSearch:after {
-  clear: both;
-}
+#rubricSearch div,
+col(3/3) div,
+span(3/3) div,
 .addRubric div {
   background-color: #808080;
 }
+#rubricSearch div h2,
+col(3/3) div h2,
+span(3/3) div h2,
 .addRubric div h2 {
   font-size: 1.3em;
 }
+#rubricSearch form,
+col(3/3) form,
+span(3/3) form,
 .addRubric form {
   *zoom: 1;
   width: auto;
@@ -161,21 +150,39 @@ ul li a:hover {
   padding-right: 0;
   padding: 2%;
 }
+#rubricSearch form:before,
+col(3/3) form:before,
+span(3/3) form:before,
 .addRubric form:before,
+#rubricSearch form:after,
+col(3/3) form:after,
+span(3/3) form:after,
 .addRubric form:after {
   content: '';
   display: table;
 }
+#rubricSearch form:after,
+col(3/3) form:after,
+span(3/3) form:after,
 .addRubric form:after {
   clear: both;
 }
+#rubricSearch h3,
+col(3/3) h3,
+span(3/3) h3,
 .addRubric h3 {
   text-align: left;
   font-size: 2em;
 }
+#rubricSearch h3 label,
+col(3/3) h3 label,
+span(3/3) h3 label,
 .addRubric h3 label {
   font-size: 1.3em;
 }
+#rubricSearch input,
+col(3/3) input,
+span(3/3) input,
 .addRubric input {
   width: 95%;
   padding: 2%;
@@ -183,6 +190,9 @@ ul li a:hover {
   margin-bottom: 5%;
   background-color: #fff;
 }
+#rubricSearch input[type*="submit"],
+col(3/3) input[type*="submit"],
+span(3/3) input[type*="submit"],
 .addRubric input[type*="submit"] {
   *zoom: 1;
   float: left;
@@ -194,17 +204,32 @@ ul li a:hover {
   background-color: #808080;
   border: none;
 }
+#rubricSearch input[type*="submit"]:before,
+col(3/3) input[type*="submit"]:before,
+span(3/3) input[type*="submit"]:before,
 .addRubric input[type*="submit"]:before,
+#rubricSearch input[type*="submit"]:after,
+col(3/3) input[type*="submit"]:after,
+span(3/3) input[type*="submit"]:after,
 .addRubric input[type*="submit"]:after {
   content: '';
   display: table;
 }
+#rubricSearch input[type*="submit"]:after,
+col(3/3) input[type*="submit"]:after,
+span(3/3) input[type*="submit"]:after,
 .addRubric input[type*="submit"]:after {
   clear: both;
 }
+#rubricSearch input[type*="submit"]:last-child,
+col(3/3) input[type*="submit"]:last-child,
+span(3/3) input[type*="submit"]:last-child,
 .addRubric input[type*="submit"]:last-child {
   margin-right: 0%;
 }
+#rubricSearch input[type*="submit"]:hover,
+col(3/3) input[type*="submit"]:hover,
+span(3/3) input[type*="submit"]:hover,
 .addRubric input[type*="submit"]:hover {
   background: #424242;
 }

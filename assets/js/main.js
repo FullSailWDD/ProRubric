@@ -22,12 +22,13 @@ angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
 
     angular.module('ProRubric').controller('degreeController', function ($scope) {
 
-
-        socket.once('find degrees', function (data) {
-            angular.forEach(data, function (key) {
-                $('.columns').append('<div class="pin"><img src="/img/noimage.gif"><h2 class="classname">' + key.title + '</h2></div>');
+        $scope.$on('$viewContentLoaded', function (event) {
+            socket.on('find degrees', function (data) {
+                angular.forEach(data, function (key) {
+                    $('.columns').append('<div class="pin"><img src="/img/noimage.gif"><h2 class="classname">' + key.title + '</h2></div>');
+                });
             });
-        });
+        })
         $scope.degreeAdd = function () {
             var degreeNew = {
                 title: $scope.degreeTitle,
@@ -38,6 +39,13 @@ angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
         };
 
         $scope.deleteDegree = function(){
+            socket.on('find degrees', function (data) {
+                angular.forEach(data, function (key) {
+                    $('.columns').append('<div class="pin"><img src="/img/noimage.gif"><h2 class="classname">' + key.title + '</h2></div>');
+                });
+            });
+
+
         }
 
 
@@ -45,7 +53,8 @@ angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
 
     angular.module('ProRubric').controller('courseController', function ($scope) {
 
-        socket.once('find course', function (data) {
+        socket.on('find course', function (data) {
+            console.log(data);
             angular.forEach(data, function (key) {
                 $('.columns').append('<div class="pin"><img src="/img/noimage.gif"><h2 class="classname">' + key.title + '</h2></div>');
             });
@@ -57,6 +66,8 @@ angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
                 description : $scope.courseDescription
             };
             socket.emit('add course', courseNew);
+
+            window.location = '#/course';
         };
 
     })
