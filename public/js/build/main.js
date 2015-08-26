@@ -72,20 +72,22 @@ angular.module('ProRubric', ['ngRoute'])
     })
 
     .service('Audit', [function() {
+        // TODO Static Data currently. Feed this from the DB and create this data structure.
         this.data = {
+                auditMatrix:[],     // Not from the Database
+                totalLineItems: 8,  // Not from the Database
+                auditProgress: 0,   // Not from the Database
+                auditGrade: 0,      // Not from the Database
                 _id:        '1324567896543',
                 title:      'Deployment Day II',
                 content:    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed libero sem, volutpat eget massa et, mattis accumsan velit. Praesent fermentum a est vel pulvinar. Maecenas vestibulum rutrum erat, sit amet venenatis mi scelerisque non. Integer elementum laoreet velit eu convallis. ',
-                gradeTiers: [100,75,40,0],
-                auditMatrix:[],
-                totalLineItems: 8,
-                auditProgress: 0,
+                gradeTiers: [1,0.75,0.40,0],
                 course:     { _id : '9876345345', title: 'Deployment of Web Projects', acronym : 'DWP'},
                 sections:   [
                                 { 
                                     _id:            '44343433',
                                     title:          'Design',
-                                    gradeWeight:    50,
+                                    gradeWeight:    0.5,
                                     lineItems:      [
                                                         { _id : '22233232323', title : 'Branding', content: 'Project utilizes consistent and pleasing color palette and font choices. Accents and contrast are used to highlight important elements. All visual elements complement the selected branding and design aesthetic.' },
                                                         { _id : '22233232324', title : 'User Flow', content: 'Users should be able to intuitively navigate through the project. All areas are accessible and user actions are prompted with appropriate feedback.' },
@@ -96,7 +98,7 @@ angular.module('ProRubric', ['ngRoute'])
                                 { 
                                     _id:            '44343434',
                                     title:          'Code',
-                                    gradeWeight:    50,
+                                    gradeWeight:    0.5,
                                     lineItems:      [
                                                         { _id : '22233232327', title : 'Semantics', content: 'The study of meaning. In this situation we’re interested in the meaning of your code. Variables, functions, classes, objects, CSS Classes, HTML tags, etc. should all be named clearly, cleanly and semantically to represent the content they contain.' },
                                                         { _id : '22233232328', title : 'Comprehension', content: 'The ability for a 3rd party developer or peer reviewer to transverse your code easily. Unnecessarily complex code structures, code not in use or heavily commented out code are considered bad practices and will be penalized accordingly.' },
@@ -111,35 +113,75 @@ angular.module('ProRubric', ['ngRoute'])
 
     .controller('AuditController', ['$scope', 'Audit', function( $scope, Audit ){
         
-        $scope.rubric       = Audit.data;
-        $scope.calculateAuditProgress = function(lineItemID, grade){
-            $scope.rubric.auditMatrix[lineItemID] = grade;
+        // Setup base var to run audits against.
+        $scope.rubric          = Audit.data;
+
+        // Update the Audit Grade
+        $scope.calculateGrade   = function(){
+
+            // temp Array
+            var aryGrades = [];
+
+            // Loop through the matrix and break out the values into a clean array
+            for(var key in $scope.rubric.auditMatrix){
+                aryGrades.push($scope.rubric.auditMatrix[key]);
+            }
+            
+            // Calculate the sum of an array
+            $scope.rubric.auditGrade = aryGrades.reduce(function(previousValue, currentValue, index, array) {
+              return previousValue + currentValue;
+            });
+        };
+
+        // Determine % completed
+        $scope.calculateAuditProgress = function(lineItemID, grade, sectionWeight, totalSectionItems){
+
+            // Add / Update Line Item's grade in the Audit Matix
+            $scope.rubric.auditMatrix[lineItemID] = grade * (sectionWeight / totalSectionItems);
+
+
+            // How many Line Items have been Audited
             var currentAudited = Object.keys($scope.rubric.auditMatrix).length;
+            
+
+                // Calculate Grade after change 
+                $scope.calculateGrade();                
+
+            
+            // Create % of total Line Items Audited
             $scope.rubric.auditProgress = ((currentAudited / $scope.rubric.totalLineItems)*100);
+
             return $scope.rubric.auditProgress;
         };
+
+        // User Clicks on a grade weight of a Line Item
         $scope.actionGrade  = function (lineItemID, grade) {
-            
+
             // Error handling for loop not finding supplied ID
             var matchedLineItem = false;
 
             // TODO clean up this double loop to find the target lineItem based on ID
             angular.forEach($scope.rubric.sections, function (section, sectionKey) {
                 angular.forEach(section.lineItems, function (lineItem, lineItemKey) {
+
+                    // Match the ID Supplied against the section's loop's line item loop
                     if(lineItem._id === lineItemID){
                         lineItem.grade = grade;
                         matchedLineItem = lineItem;
+                        // console.log(section.lineItems.length);
+                        // Calculate Grade's Affect on Overall Audit
+                        $scope.calculateAuditProgress(lineItemID, grade, section.gradeWeight, section.lineItems.length);
                     }
                 });
             });
+
+            // Error Handling
             if(!matchedLineItem){
                 console.log('Error: No Item ID Matched for this Rubric');
-            } else {
-             //   console.log('Graded: ', matchedLineItem)
-               $scope.calculateAuditProgress(lineItemID, grade);
             }
         };
 
+        // TODO Enhance Output displayed to user.
         $scope.actionOutput = function(){
             console.log($scope.rubric);
         };
