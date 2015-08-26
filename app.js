@@ -1,6 +1,6 @@
 // npm modules
 var express 				= require('express'),
-		app 				= express(),
+		app 						= express(),
   	exphbs 					= require('express-handlebars'),
 	io 						= require('socket.io'),
   	outputs  				= require('./lib/outputs.js')();
