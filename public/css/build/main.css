@@ -446,7 +446,8 @@ font-family arial {
 h3 {
   text-align: center;
 }
-.pin {
+.pin,
+width 100% {
   display: inline-block;
   background: #fefefe;
   border: 2px solid #fafafa;

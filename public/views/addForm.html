@@ -1,12 +1,15 @@
-<div ng-controller="secondController" class="addCourse">
-	<form action="#">
-		<h3>Add Form</h3>
-		<label for="courseTile">Course Title</label>
-		<input type="text" name="title" id="courseTitle" value="title">
-
-		<label for="courseCode">Course Code</label>
-		<input type="text" name="code" id="courseCode" value="code">
-
-		<input type="submit" value="Add">
-	</form>
+<div ng-controller="courseController" class="mainDefaultBody">
+	<div id="rubricSearch">
+		<label>Course Title:</label>
+		<input type="text" ng-model="courseTitle" />
+		<label>Course Acronym</label>
+		<input type="text" ng-model="courseAcronym" />
+		<label>Course Description</label>
+		<input type="text" ng-model="courseDescription" />
+		<button ng-click="courseAdd()"> Create Rubric</button>
+	</div>
+	<div id="wrapper">
+		<div class="columns">
+		</div>
+	</div>
 </div>
