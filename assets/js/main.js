@@ -13,9 +13,9 @@ angular.module('ProRubric', ['ngRoute']);
                 templateUrl: 'views/addRubric.html',
                 controller: 'secondController'
             })
-            .when('/se', {
-                templateUrl: 'views/text.html',
-                controller: 'secondController'
+            .when('/addLineItem', {
+                templateUrl: 'views/addLineItem.html',
+                controller: 'lineItemController'
             });
     });
 
@@ -60,6 +60,7 @@ angular.module('ProRubric', ['ngRoute']);
             });
     });
 
+
     angular.module('ProRubric').controller('secondController', function ($scope) {
         
         
@@ -72,4 +73,27 @@ angular.module('ProRubric', ['ngRoute']);
             socket.emit('add rubric', rubricNew);
         };    
     });
+
+
+    angular.module('ProRubric').controller('lineItemController', function ($scope) {
+        
+        
+        $scope.lineItemAdd = function () {
+            var lineItemNew = {
+                title: $scope.itemTitle,
+                content: $scope.itemContent
+            };
+            
+            socket.emit('add lineItem', lineItemNew);
+        };    
+    });
+
+
+
+
+
+
+
+
+
 
