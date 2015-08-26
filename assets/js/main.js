@@ -28,30 +28,6 @@ angular.module('ProRubric', ['ngRoute']);
             });
     });
 
-//    angular.module('ProRubric').service('Degree', function () {
-//        this.view = function () {
-//            
-//        };
-//        this.save = function (degreeNew) {
-//            
-//        };
-//        this.remove = function () {
-//        };
-//    });
-
-//    angular.module('ProRubric').service('Rubric', function () {
-//        this.view = function () {
-//            
-//        };
-//        this.save = function (rubricNew) {
-//            
-//        };
-//        this.remove = function () {
-//        };
-//    });
-
-
-
     angular.module('ProRubric').controller('mainController', function ($scope) {
         $scope.degreeAdd = function () {
             
@@ -82,8 +58,7 @@ angular.module('ProRubric', ['ngRoute']);
 
     });
 
-
-    angular.module('ProRubric').controller('secondController', function ($scope) {
+    angular.module('ProRubric').controller('rubricController', function ($scope) {
         
         
         $scope.rubricAdd = function () {
@@ -93,13 +68,21 @@ angular.module('ProRubric', ['ngRoute']);
             };
             
             socket.emit('add rubric', rubricNew);
-        };    
+        }
+
+        $scope.editRubric = function (rubricId){
+           socket.emit('rubric id', rubricId);
+            socket.on('edit rubric',function (data){
+
+                console.log(data);
+
+            })
+
+        };
     });
 
-
     angular.module('ProRubric').controller('lineItemController', function ($scope) {
-        
-        
+
         $scope.lineItemAdd = function () {
             var lineItemNew = {
                 title: $scope.itemTitle,
@@ -109,13 +92,3 @@ angular.module('ProRubric', ['ngRoute']);
             socket.emit('add lineItem', lineItemNew);
         };    
     });
-
-
-
-
-
-
-
-
-
-

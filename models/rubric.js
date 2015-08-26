@@ -15,9 +15,7 @@ module.exports = function() {
 
     
     _model = mongoose.model('rubrics', rubricSchema);
-    
-    
-    
+
 
 // CRUD Methods 
 // ==========================================================================

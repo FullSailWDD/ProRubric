@@ -31,6 +31,16 @@ module.exports = function(app, socket) {
             data.on('add lineItem', function (callback) {
                 LineItem.add(callback);
             });
+
+            data.on('rubric id', function(callback){
+                Rubric.all(function(doc){
+                    socket.emit('find rubric',doc);
+                }, function(err){
+                    outputs.debug(err, 'Return all Rubrics', false);
+                });
+
+            });
+
         });
 
         res.render('index');
