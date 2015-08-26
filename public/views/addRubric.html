@@ -5,15 +5,18 @@
 			<h2>Full title here</h2>
 		</div>
 		
-		<label for="courseTile">RubricTitle</label>
+		<label for="courseTitle">RubricTitle</label>
 		<input type="text" name="title" id="courseTitle" placeholder="title">
 
 		<label for="courseCode">Section Titles</label>
 		<input type="text" name="code" id="courseCode" placeholder="Section Title">
 
-		<label for="courseCode">Grade Options</label>
+        <label for="lineItemCode">Enter Section Info</label>
+        <input type="text" name="lineItem" id="lineItemCode" placeholder="Enter Section Info">
+
+        <label for="courseCode">Grade Options</label>
 		<input type="text" name="code" id="courseCode" placeholder="Grade Options(100, 75, 50, 25, 0)">
 
-		<input type="submit" value="Add">
+		<input ng-click="fetchAll()" type="submit" value="Add">
 	</form>
 </div>

@@ -16,7 +16,12 @@ angular.module('ProRubric', ['ngRoute']);
             .when('/se', {
                 templateUrl: 'views/text.html',
                 controller: 'secondController'
-            });
+            })
+
+            .when('/addSection',{
+            templateUrl: 'views/addSection.html',
+            controller: 'secondController'
+        });
     });
 
     angular.module('ProRubric').service('Degree', function () {
@@ -35,6 +40,7 @@ angular.module('ProRubric', ['ngRoute']);
     });
 
 
+
     angular.module('ProRubric').controller('mainController', function ($scope, Degree) {
         //Main Route Loading Point Start
         Degree.view();
@@ -48,7 +54,16 @@ angular.module('ProRubric', ['ngRoute']);
             Degree.save(degreeNew);
         };
     });
-    angular.module('ProRubric').controller('secondController', function () {
 
-    })
+    angular.module('ProRubric').controller('secondController', function ($scope) {
+
+        $scope.addSection = function () {
+            var sectionNew = {
+                title: $scope.sectionTitle,
+                gradeWeight: $scope.gradeWeights
+            };
+            socket.emit('add section',sectionNew);
+        };
+
+    });
 

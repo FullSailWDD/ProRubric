@@ -19,6 +19,10 @@ module.exports = function(app, socket) {
             data.on('add degree', function (callback) {
                 Degree.add(callback);
             });
+
+            data.on('add section', function (callback) {
+                Section.add(callback);
+            });
         });
 
         res.render('index');

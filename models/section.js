@@ -19,10 +19,10 @@ module.exports = function() {
     // ADD
     _save = function(section, success, fail){
         var newSection = new _model({
-            title:        title,
-            gradeWeight:  gradeWeight
+            title:        section.title,
+            gradeWeight:  section.gradeWeight
         });
-        _model.save(function(err){
+        newSection.save(function(err){
             if (err) {
                 fail(err);   
             }else{
