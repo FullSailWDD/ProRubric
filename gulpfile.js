@@ -11,7 +11,8 @@ var gulp            = require('gulp'),
     uglify          = require('gulp-uglify'),
     gutil           = require('gulp-util'),
     concat          = require('gulp-concat'),
-    ngAnnotate      = require('gulp-ng-annotate');
+    ngAnnotate      = require('gulp-ng-annotate'),
+    htmlmin = require('gulp-html-minifier');
 
 var config = {
   jshint : ['./*.js', './*/*.js']
@@ -61,6 +62,11 @@ gulp.task('runTests', function () {
         });
 });
 
+gulp.task('viewCompress', function() {
+    gulp.src('./assets/views/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('./public/views'))
+});
 
 gulp.task('css', function () {
   gulp.src('./assets/css/**/*.styl')
@@ -94,7 +100,7 @@ gulp.task('watch', function () {
 
 });
 
-gulp.task('build', ['css', 'jsCompress']);
+gulp.task('build', ['viewCompress', 'css', 'jsCompress']);
 gulp.task('test', ['clearStart', 'mongod', 'runTests']);
 gulp.task('dev', ['clearStart', 'build', 'mongod', 'watch', 'development']);
 gulp.task('default',['build']);
