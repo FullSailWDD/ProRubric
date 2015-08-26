@@ -31,7 +31,7 @@ module.exports = function() {
             course_id:    rubric.course_id
         });
 
-            newCourse.save(function(err){
+            newRubric.save(function(err){
                 if (err) {
                     fail (err);
                 } else {
