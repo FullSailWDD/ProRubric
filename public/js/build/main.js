@@ -117,7 +117,7 @@ angular.module('ProRubric', ['ngRoute'])
             var currentAudited = Object.keys($scope.rubric.auditMatrix).length;
             $scope.rubric.auditProgress = ((currentAudited / $scope.rubric.totalLineItems)*100);
             return $scope.rubric.auditProgress;
-        }       
+        };
         $scope.actionGrade  = function (lineItemID, grade) {
             
             // Error handling for loop not finding supplied ID
