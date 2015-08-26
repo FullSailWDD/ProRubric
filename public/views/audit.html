@@ -1,0 +1,24 @@
+<div class="audit">
+	<h1>{[{ rubric.title }]}</h1>
+	<p>TEST BUTTON: <button ng-click="actionOutput()">
+			 			Output Audit
+			 		</button></p>
+	<p>{[{ rubric.auditProgress }]}% ({[{ rubric.totalLineItems }]} Total Items)</p>
+	<section data-ng-repeat="section in rubric.sections">
+		<header> {[{ section.title }]} </header>
+		<dl data-ng-repeat="lineItem in section.lineItems">
+			<aside>
+			 	<ol>
+			 		<li data-ng-repeat="tier in rubric.gradeTiers">
+			 		<button ng-click="actionGrade(lineItem._id, tier)">
+			 			{[{ tier }]}
+			 		</button>
+			 		</li>
+			 	</ol>
+			 </aside>
+			<dt>{[{ lineItem.title }]}</dt>
+			<dd>{[{ lineItem.content }]}</dd>
+		</dl>
+	</section>
+	
+</div>
