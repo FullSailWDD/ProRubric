@@ -5,8 +5,8 @@ angular.module('ProRubric', ['ngRoute'])
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider
-            .when('/mike', {
-                templateUrl: 'views/addInfo.html',
+            .when('/', {
+                templateUrl: 'views/searchBar.html',
                 controller: 'secondController'
             })
             .when('/mikewazhere', {

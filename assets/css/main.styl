@@ -1,10 +1,15 @@
 @import 'jeet'
 
 hover = background #424242
+mainColor = #38495D
+secondaryColor = #377992
+darkColor = #192128
+lightColor = #FBF7E4
+primaryFont = 'futura'
+secondaryFont = 'baskerville Old Face'
 
 edit()
 
-<<<<<<< HEAD
 .rubricbuttons
   	color #000000
   	font-size 21px
@@ -20,18 +25,19 @@ edit()
 
 .rubrics
 	text-align center
-	
-=======
->>>>>>> 30cf1615de244acea0e044eac9797f6bc7a2f36a
+
 #sideNav
 	col(1/7)
 	span(1/7)
-	background gray
+	background #38495D
 	text-align center
 	height 700px
 	
 .logo
 	margin-bottom 6%
+	font-family 'futura'
+	font-size 3em
+	font-weight 900
 	
 ul
 	padding-left 0
@@ -42,23 +48,61 @@ li
 ul li a
 	col(1/3)
 	stack()
-	padding 5% 0
+	padding 8% 0
 	text-decoration none
 	color white
 	font-size 1.4em
-	font-family arial
+	font-family primaryFont
 	
 ul li a:hover
-	background #424242
+	background #192128
 
 .mainDefaultBody
 	col(6/7)
 	span(6/7)
+	background #FBF7E4
 	//Putting CSS Gradients on this breaks the Jeet apparently.
 
-#rubricSearch
+.rubricSearch
 	center(500px)
 	padding 2%
+	background #E7E8D1
+	border 1px #D3CEAA solid
+	border-radius 5px
+	
+	h1
+		col(1/1)
+		font-family 'futura'
+		color mainColor
+		font-weight 100
+		font-size 2em
+		
+	label
+		col(1/1)
+		
+	input
+		width 96%
+		padding 3% 2%
+		background white
+		border none
+		font-family 'baskerville Old Face'
+		font-size 1.2em
+		margin-bottom 5%
+	
+	button
+		col(1/2)
+		shift(1/2)
+		font-size 2em
+		font-family 'futura'
+		background secondaryColor
+		text-align center
+		color lightColor
+		border none
+		border-bottom 3px darkColor solid
+		border-radius 5px
+		
+	button:hover
+		background darkColor
 
 .addRubric
 	div

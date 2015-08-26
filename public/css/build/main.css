@@ -32,7 +32,7 @@
   width: 14.285714285714285%;
   margin-left: 0%;
   margin-right: 0%;
-  background: #808080;
+  background: #38495d;
   text-align: center;
   height: 700px;
 }
@@ -57,6 +57,9 @@
 }
 .logo {
   margin-bottom: 6%;
+  font-family: 'futura';
+  font-size: 3em;
+  font-weight: 900;
 }
 ul {
   padding-left: 0;
@@ -78,11 +81,11 @@ ul li a {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: 5% 0;
+  padding: 8% 0;
   text-decoration: none;
   color: #fff;
   font-size: 1.4em;
-  font-family: arial;
+  font-family: 'futura';
 }
 ul li a:before,
 ul li a:after {
@@ -102,7 +105,7 @@ ul li a:last-child {
   margin-right: auto;
 }
 ul li a:hover {
-  background: #424242;
+  background: #192128;
 }
 .mainDefaultBody {
   *zoom: 1;
@@ -119,6 +122,7 @@ ul li a:hover {
   width: 85.71428571428571%;
   margin-left: 0%;
   margin-right: 0%;
+  background: #fbf7e4;
 }
 .mainDefaultBody:before,
 .mainDefaultBody:after {
@@ -139,7 +143,7 @@ ul li a:hover {
 .mainDefaultBody:after {
   clear: both;
 }
-#rubricSearch {
+.rubricSearch {
   *zoom: 1;
   width: auto;
   max-width: 500px;
@@ -150,14 +154,103 @@ ul li a:hover {
   padding-left: 0;
   padding-right: 0;
   padding: 2%;
+  background: #e7e8d1;
+  border: 1px #d3ceaa solid;
+  border-radius: 5px;
 }
-#rubricSearch:before,
-#rubricSearch:after {
+.rubricSearch:before,
+.rubricSearch:after {
   content: '';
   display: table;
 }
-#rubricSearch:after {
+.rubricSearch:after {
   clear: both;
+}
+.rubricSearch h1 {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 3%;
+  font-family: 'futura';
+  color: #38495d;
+  font-weight: 100;
+  font-size: 2em;
+}
+.rubricSearch h1:before,
+.rubricSearch h1:after {
+  content: '';
+  display: table;
+}
+.rubricSearch h1:after {
+  clear: both;
+}
+.rubricSearch h1:last-child {
+  margin-right: 0%;
+}
+.rubricSearch label {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+.rubricSearch label:before,
+.rubricSearch label:after {
+  content: '';
+  display: table;
+}
+.rubricSearch label:after {
+  clear: both;
+}
+.rubricSearch label:last-child {
+  margin-right: 0%;
+}
+.rubricSearch input {
+  width: 96%;
+  padding: 3% 2%;
+  background: #fff;
+  border: none;
+  font-family: 'baskerville Old Face';
+  font-size: 1.2em;
+  margin-bottom: 5%;
+}
+.rubricSearch button {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 48.5%;
+  margin-left: 0%;
+  margin-right: 3%;
+  position: relative;
+  left: 51.5%;
+  font-size: 2em;
+  font-family: 'futura';
+  background: #377992;
+  text-align: center;
+  color: #fbf7e4;
+  border: none;
+  border-bottom: 3px #192128 solid;
+  border-radius: 5px;
+}
+.rubricSearch button:before,
+.rubricSearch button:after {
+  content: '';
+  display: table;
+}
+.rubricSearch button:after {
+  clear: both;
+}
+.rubricSearch button:last-child {
+  margin-right: 0%;
+}
+.rubricSearch button:hover {
+  background: #192128;
 }
 .addRubric div {
   background-color: #808080;
@@ -407,10 +500,10 @@ ul li a:hover {
 .addInfo input[type*="submit"]:hover {
   background: #424242;
 }
-.degree label,
-font-family arial {
-  font-weight: bold;
+.degree label {
+  font-family: arial;
 }
+font-weight bold,
 .degree button {
   *zoom: 1;
   float: left;
@@ -428,14 +521,18 @@ font-family arial {
   text-align: center;
   padding: 10px 0;
 }
+font-weight bold:before,
 .degree button:before,
+font-weight bold:after,
 .degree button:after {
   content: '';
   display: table;
 }
+font-weight bold:after,
 .degree button:after {
   clear: both;
 }
+font-weight bold:last-child,
 .degree button:last-child {
   margin-right: 0%;
 }
