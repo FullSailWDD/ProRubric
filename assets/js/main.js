@@ -7,11 +7,11 @@ angular.module('ProRubric', ['ngRoute']);
         $routeProvider
             .when('/', {
                 templateUrl: 'views/home.html',
-                controller: 'secondController'
+                controller: 'mainController'
             })
             .when('/addRubric', {
                 templateUrl: 'views/addRubric.html',
-                controller: 'secondController'
+                controller: 'rubricController'
             })
             .when('/addLineItem', {
                 templateUrl: 'views/addLineItem.html',
@@ -61,13 +61,18 @@ angular.module('ProRubric', ['ngRoute']);
     });
 
 
-    angular.module('ProRubric').controller('secondController', function ($scope) {
+    angular.module('ProRubric').controller('rubricController', function ($scope) {
+        
         
         
         $scope.rubricAdd = function () {
+            
+            var array = [100,75,40,0];
+            
             var rubricNew = {
                 title: $scope.rubricTitle,
-                content: $scope.rubricContent
+                content: $scope.rubricContent,
+                gradeTiers: array    
             };
             
             socket.emit('add rubric', rubricNew);

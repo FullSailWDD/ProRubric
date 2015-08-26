@@ -8,6 +8,7 @@ module.exports = function() {
     var rubricSchema = mongoose.Schema({
         title : String,
         content : String,
+        gradeTiers : [Number],
         course_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
@@ -28,7 +29,8 @@ module.exports = function() {
         var newRubric = new _model({
             title:        rubric.title,
             content:      rubric.content,
-            course_id:    rubric.course_id
+            course_id:    rubric.course_id,
+            gradeTiers:   rubric.gradeTiers
         });
 
             newRubric.save(function(err){

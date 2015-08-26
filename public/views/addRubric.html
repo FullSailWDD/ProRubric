@@ -1,4 +1,4 @@
-<div ng-controller="secondController" class="addRubric">
+<div ng-controller="rubricController" class="addRubric">
    
     <div id="rubricSearch">
         <h1> Create Rubric</h1>
@@ -8,6 +8,9 @@
         
         <label>Content:</label>
         <input type="text" ng-model="rubricContent" placeholder="" />
+        
+                <label>Grade Tiers:</label>
+        <input type="text" ng-model="rubricTiers" placeholder="" />
         
         <button ng-click="rubricAdd()"> Create </button>
         
