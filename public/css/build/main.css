@@ -1,15 +1,17 @@
 * {
   background: rgba(0,0,0,0.05);
 }
-.rubricbuttons {
-  color: #000;
-  font-size: 21px;
-  padding: 10px 20px 10px 20px;
-  margin: 2% 0 2% 0;
-  font-size: 0.7em;
-  text-align: left;
-  width: 100%;
+body {
+  background: #fbf7e4;
 }
+.rubricbuttons,
+color #000000,
+font-size 21px,
+padding 10px 20px 10px 20px,
+margin 2% 0 2% 0,
+font-size .7em,
+text-align left,
+width 100%,
 .classname {
   font-size: 1.3em;
   text-align: center;
@@ -22,7 +24,7 @@
   float: left;
   background: #38495d;
   text-align: center;
-  min-height: 700px;
+  height: 100%;
   position: fixed;
 }
 .logo {
@@ -60,10 +62,11 @@ ul li a {
   float: left;
   clear: none;
   text-align: inherit;
-  width: 79.4%;
+  width: 65.66666666666666%;
   margin-left: 0%;
   margin-right: 3%;
   padding: 8% 0;
+  text-align: left;
   text-decoration: none;
   color: #fff;
   font-size: 1.4em;
@@ -85,9 +88,17 @@ ul li a:last-child {
   float: left;
   clear: none;
   text-align: inherit;
-  width: 17.6%;
+  width: 14.166666666666664%;
   margin-left: 0%;
   margin-right: 3%;
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 16.666666666666664%;
+  margin-left: 0%;
+  margin-right: 0%;
+  padding: 6.5% 8%;
 }
 .navIcons:before,
 .navIcons:after {
@@ -100,14 +111,21 @@ ul li a:last-child {
 .navIcons:last-child {
   margin-right: 0%;
 }
-ul li a:hover {
+.navIcons:before,
+.navIcons:after {
+  content: '';
+  display: table;
+}
+.navIcons:after {
+  clear: both;
+}
+ul li :hover {
   background: #192128;
 }
 .mainDefaultBody {
   width: 85%;
   float: right;
   background: #fbf7e4;
-  height: 1000px;
 }
 .rubricSearch {
   *zoom: 1;
@@ -467,10 +485,10 @@ ul li a:hover {
 .addInfo input[type*="submit"]:hover {
   background: #424242;
 }
-.degree label {
-  font-family: arial;
+.degree label,
+font-family arial {
+  font-weight: bold;
 }
-font-weight bold,
 .degree button {
   *zoom: 1;
   float: left;
@@ -488,23 +506,216 @@ font-weight bold,
   text-align: center;
   padding: 10px 0;
 }
-font-weight bold:before,
 .degree button:before,
-font-weight bold:after,
 .degree button:after {
   content: '';
   display: table;
 }
-font-weight bold:after,
 .degree button:after {
   clear: both;
 }
-font-weight bold:last-child,
 .degree button:last-child {
   margin-right: 0%;
 }
 .degree button:hover {
   background: #424242;
+}
+.audit {
+  *zoom: 1;
+  width: auto;
+  max-width: 500px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  background: #38495d;
+  padding-bottom: 1%;
+}
+.audit:before,
+.audit:after {
+  content: '';
+  display: table;
+}
+.audit:after {
+  clear: both;
+}
+.audit h1 {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 3%;
+  font-family: 'futura';
+  color: #fff;
+  padding-left: 2%;
+  font-weight: 100;
+  font-size: 2em;
+}
+.audit h1:before,
+.audit h1:after {
+  content: '';
+  display: table;
+}
+.audit h1:after {
+  clear: both;
+}
+.audit h1:last-child {
+  margin-right: 0%;
+}
+.audit h2 {
+  font-family: 'futura';
+  color: #fff;
+  font-weight: 100;
+  padding-left: 2%;
+  font-size: 1.4em;
+}
+.audit header {
+  background: #192128;
+  color: #fff;
+  font-family: 'futura';
+  font-size: 2em;
+  padding: 3% 2%;
+}
+.audit dl {
+  *zoom: 1;
+  width: auto;
+  max-width: 450px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  background: #fff;
+  padding: 2%;
+}
+.audit dl:before,
+.audit dl:after {
+  content: '';
+  display: table;
+}
+.audit dl:after {
+  clear: both;
+}
+.audit dt {
+  color: #38495d;
+  font-family: 'futura';
+  font-size: 2em;
+  padding-left: 2%;
+}
+.audit dd {
+  font-family: 'baskerville Old Face';
+  padding: 2%;
+  line-height: 1.5;
+  margin-left: 0;
+}
+.audit li {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 22.75%;
+  margin-left: 0%;
+  margin-right: 3%;
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 25%;
+  margin-left: 0%;
+  margin-right: 0%;
+}
+.audit li:before,
+.audit li:after {
+  content: '';
+  display: table;
+}
+.audit li:after {
+  clear: both;
+}
+.audit li:last-child {
+  margin-right: 0%;
+}
+.audit li:before,
+.audit li:after {
+  content: '';
+  display: table;
+}
+.audit li:after {
+  clear: both;
+}
+.audit li button {
+  width: 100%;
+  background-color: #d32f2f;
+  color: #fff;
+  border: none;
+  border-right: 1px #962626 solid;
+  font-size: 1.5em;
+  padding: 2% 0;
+}
+.audit li button:hover {
+  background-color: #962626;
+  color: #fff;
+  cursor: pointer;
+}
+.audit textarea {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 3%;
+  font-family: 'baskerville Old Face';
+  font-size: 1.3em;
+}
+.audit textarea:before,
+.audit textarea:after {
+  content: '';
+  display: table;
+}
+.audit textarea:after {
+  clear: both;
+}
+.audit textarea:last-child {
+  margin-right: 0%;
+}
+.audit p button {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 31.33333333333333%;
+  margin-left: 0%;
+  margin-right: 3%;
+  position: relative;
+  left: 34.33333333333333%;
+  background: #7d9402;
+  color: #414904;
+  font-family: 'futura';
+  font-size: 1.5em;
+  border: none;
+  border-bottom: 3px #414904 solid;
+  border-radius: 5px;
+}
+.audit p button:before,
+.audit p button:after {
+  content: '';
+  display: table;
+}
+.audit p button:after {
+  clear: both;
+}
+.audit p button:last-child {
+  margin-right: 0%;
+}
+.audit p button:hover {
+  background: #414904;
+  color: #e7e8d1;
 }
 .wrapper {
   width: 90%;
