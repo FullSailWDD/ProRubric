@@ -1,7 +1,8 @@
 <div ng-controller="editCourse" class="mainDefaultBody">
     <label>{[{ editData._id }]}</label>
-    <input ng-value="editData._id">
-    <input ng-value="editData.title">
-    <input ng-value="editData.acronym">
-    <input ng-value="editData.description">
+    <input ng-model="editData._id">
+    <input ng-model="editData.title">
+    <input ng-model="editData.acronym">
+    <input ng-model="editData.description">
+    <button ng-click="courseUpdate()">Update</button>
 </div>

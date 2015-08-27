@@ -1,0 +1,29 @@
+<div ng-controller="dashboardController" class="mainDefaultBody">
+    <div id="rubricSearch">
+        <h1> Create Degree</h1>
+        <label>Degree Name Here:</label>
+        <input type="text" ng-model="degreeTitle" />
+        <label>Degree Acronym</label>
+        <input type="text" ng-model="degreeAcronym" />
+        <button ng-click="degreeAdd()"> Create Rubric</button>
+    </div>
+    <div id="wrapper">
+        <ul>
+            <li ng-repeat="x in degreeView">
+                <ul>
+                    <li>id: {[{x._id}]}</li>
+                    <li>dname: {[{x.title}]}</li>
+                    <li>acronym: {[{x.acronym}]}</li>
+                    <li ng-repeat="x in courseView">
+                        <ul>
+                            <li>id: {[{x._id}]}</li>
+                            <li>description: {[{x.description}]}</li>
+                            <li>acronym: {[{x.acronym}]}</li>
+                            <a href="#/edit/course/{[{x._id}]}">Edit Course</a>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

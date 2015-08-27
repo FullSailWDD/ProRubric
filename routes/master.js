@@ -12,18 +12,22 @@ module.exports = function(app, socket) {
 
         socket.on('connection', function (data) {
 
-
             Degree.all(function (doc) {
                 Course.all(function (doc) {
                     socket.emit('find course', doc);
                 }, function (err) {
-                    outputs.debug(err, 'Return all Degrees', false);
+                    console.log(err);
                 });
                 socket.emit('find degrees', doc);
             }, function (err) {
-                outputs.debug(err, 'Return all Degrees', false);
+                console.log(err);
             });
 
+            data.once('course update', function (data) {
+                Course.update(data, function(err){
+                    console.log(err, 'Return all update');
+                });
+            });
 
 
             data.once('course req', function (data) {
@@ -44,8 +48,8 @@ module.exports = function(app, socket) {
                 Course.add(callback);
             });
 
-        });
 
+        });
     app.get('/', function(req, res) {
 
         // route /

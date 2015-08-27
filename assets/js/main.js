@@ -4,6 +4,14 @@ angular.module('ProRubric', ['ngRoute'])
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider
+            .when('/', {
+                templateUrl: 'views/dashboard.html',
+                controller: 'dashboardController'
+            })
+            .when('/edit/course/:_id', {
+                templateUrl: 'views/editCourse.html',
+                controller: 'editCourse'
+            })
             .when('/audit/:rubric_id', {
                 templateUrl: 'views/audit.html',
                 controller: 'AuditController'
@@ -74,79 +82,86 @@ angular.module('ProRubric', ['ngRoute'])
         };
     }])
 
-    .service('Degree', function () {
-        this.view = function () {
-            socket.once('find degrees', function (data) {
-                angular.forEach(data, function (key) {
-                    $('.columns').append('<div class="pin"><p>' + key._id + ' ' + key.title + ' ' + key.acronym + '</p></div>');
-                });
-            });
-        };
-        this.save = function (degreeNew) {
-            socket.emit('add degree', degreeNew);
-        };
-        this.remove = function () {
-        };
-    })
 
-
-.factory('socket', function ($rootScope) {
-    var socket = io.connect();
-    return {
-        on: function (eventName, callback) {
-            socket.on(eventName, function () {
-                var args = arguments;
-                $rootScope.$apply(function () {
-                    callback.apply(socket, args);
-                });
-            });
-        },
-        emit: function (eventName, data, callback) {
-            socket.emit(eventName, data, function () {
-                var args = arguments;
-                $rootScope.$apply(function () {
-                    if (callback) {
+    .factory('socket', function ($rootScope) {
+        var socket = io.connect();
+        return {
+            on: function (eventName, callback) {
+                socket.on(eventName, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
                         callback.apply(socket, args);
-                    }
+                    });
                 });
-            })
-        }
-    };
-})
-
-
-
-.controller('editCourse', function ($scope, $routeParams, socket) {
-    socket.emit('course req', $routeParams._id);
-    socket.on('course send', function(data){
-        console.log(data);
-        $scope.editData = data;
+            },
+            emit: function (eventName, data, callback) {
+                socket.emit(eventName, data, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        if (callback) {
+                            callback.apply(socket, args);
+                        }
+                    });
+                })
+            }
+        };
     })
-})
 
-
-
-
-
-.controller('mainController', function ($scope, Degree) {
-        //Main Route Loading Point Start
-        Degree.view();
-        //Main Route Loading Point End
+    .controller('dashboardController', function ($scope, socket) {
+        $scope.$on('$viewContentLoaded', function () {
+            socket.on('find degrees', function (data) {
+                if (data.length) {
+                    $scope.degreeView = data;
+                } else {
+                    console.log('You has no degrees :(');
+                }
+            });
+            socket.on('find course', function (data) {
+                if (data.length) {
+                    $scope.courseView = data;
+                } else {
+                    console.log('You has no courses :(');
+                }
+            });
+        });
 
         $scope.degreeAdd = function () {
-            var degreeNew = {
+            $scope.reloadPage = function () {
+                window.location.reload();
+            };
+            var data = {
                 title: $scope.degreeTitle,
                 acronym: $scope.degreeAcronym
             };
-            Degree.save(degreeNew);
-        };
-
-
-    })
-    .controller('secondController', function () {
-
+            socket.emit('add degree', data);
+            $scope.reloadPage();
+        }
 
     })
+
+    .controller('editCourse', function ($scope, $routeParams, socket) {
+
+        socket.emit('course req', $routeParams._id);
+
+        socket.on('course send', function (data) {
+            $scope.editData = data;
+        });
+
+        $scope.courseUpdate = function () {
+            $scope.reloadPage = function () {
+                window.location.reload();
+            };
+            var data = {
+                _id: $scope.editData._id,
+                title: $scope.editData.title,
+                acronym: $scope.editData.acronym,
+                description: $scope.editData.description
+            };
+            socket.emit('course update', data);
+            $scope.reloadPage();
+        }
+    })
+
 
 
 
