@@ -42,39 +42,71 @@ angular.module('ProRubric', ['ngRoute'])
             });
     })
 
-    .service('Audit', [function() {
+    .service('Audit', [function () {
         // TODO Static Data currently. Feed this from the DB and create this data structure.
         this.data = {
-            auditMatrix:[],     // Not from the Database
+            auditMatrix: [],     // Not from the Database
             totalLineItems: 8,  // Not from the Database
             auditProgress: 0,   // Not from the Database
             auditGrade: 0,      // Not from the Database
-            _id:        '1324567896543',
-            title:      'Deployment Day II',
-            content:    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed libero sem, volutpat eget massa et, mattis accumsan velit. Praesent fermentum a est vel pulvinar. Maecenas vestibulum rutrum erat, sit amet venenatis mi scelerisque non. Integer elementum laoreet velit eu convallis. ',
-            gradeTiers: [1,0.75,0.40,0],
-            course:     { _id : '9876345345', title: 'Deployment of Web Projects', acronym : 'DWP'},
-            sections:   [
+            _id: '1324567896543',
+            title: 'Deployment Day II',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed libero sem, volutpat eget massa et, mattis accumsan velit. Praesent fermentum a est vel pulvinar. Maecenas vestibulum rutrum erat, sit amet venenatis mi scelerisque non. Integer elementum laoreet velit eu convallis. ',
+            gradeTiers: [1, 0.75, 0.40, 0],
+            course: {_id: '9876345345', title: 'Deployment of Web Projects', acronym: 'DWP'},
+            sections: [
                 {
-                    _id:            '44343433',
-                    title:          'Design',
-                    gradeWeight:    0.5,
-                    lineItems:      [
-                        { _id : '22233232323', title : 'Branding', content: 'Project utilizes consistent and pleasing color palette and font choices. Accents and contrast are used to highlight important elements. All visual elements complement the selected branding and design aesthetic.' },
-                        { _id : '22233232324', title : 'User Flow', content: 'Users should be able to intuitively navigate through the project. All areas are accessible and user actions are prompted with appropriate feedback.' },
-                        { _id : '22233232325', title : 'User Experience', content: 'The project implements logical UI patterns and the cognitive load of the user is relatively light. A well designed mobile experienced is delivered to the user utilizing positive subtle messaging to draw the user further into the application.' },
-                        { _id : '22233232326', title : 'Information Hierarchy', content: 'Attention is clearly and cleanly drawn to various elements depending on their well planned structured hierarchy of importance.' },
+                    _id: '44343433',
+                    title: 'Design',
+                    gradeWeight: 0.5,
+                    lineItems: [
+                        {
+                            _id: '22233232323',
+                            title: 'Branding',
+                            content: 'Project utilizes consistent and pleasing color palette and font choices. Accents and contrast are used to highlight important elements. All visual elements complement the selected branding and design aesthetic.'
+                        },
+                        {
+                            _id: '22233232324',
+                            title: 'User Flow',
+                            content: 'Users should be able to intuitively navigate through the project. All areas are accessible and user actions are prompted with appropriate feedback.'
+                        },
+                        {
+                            _id: '22233232325',
+                            title: 'User Experience',
+                            content: 'The project implements logical UI patterns and the cognitive load of the user is relatively light. A well designed mobile experienced is delivered to the user utilizing positive subtle messaging to draw the user further into the application.'
+                        },
+                        {
+                            _id: '22233232326',
+                            title: 'Information Hierarchy',
+                            content: 'Attention is clearly and cleanly drawn to various elements depending on their well planned structured hierarchy of importance.'
+                        },
                     ]
                 },
                 {
-                    _id:            '44343434',
-                    title:          'Code',
-                    gradeWeight:    0.5,
-                    lineItems:      [
-                        { _id : '22233232327', title : 'Semantics', content: 'The study of meaning. In this situation we’re interested in the meaning of your code. Variables, functions, classes, objects, CSS Classes, HTML tags, etc. should all be named clearly, cleanly and semantically to represent the content they contain.' },
-                        { _id : '22233232328', title : 'Comprehension', content: 'The ability for a 3rd party developer or peer reviewer to transverse your code easily. Unnecessarily complex code structures, code not in use or heavily commented out code are considered bad practices and will be penalized accordingly.' },
-                        { _id : '22233232329', title : 'MVC File Structure', content: 'Proper file structure and organization for an MVC framework. Views, Models, and Controllers are handled properly.' },
-                        { _id : '22233232320', title : 'Formatting, Comments, & Logs', content: 'All code should be formatted and commented professionally. Its highly recommended to adopt a consistent pattern and follow it, look into phpDocumentor for references. Additionally, labeled console.log()’s, when used, should be used appropriately and in moderation as to not bombard the reviewer / developer.' },
+                    _id: '44343434',
+                    title: 'Code',
+                    gradeWeight: 0.5,
+                    lineItems: [
+                        {
+                            _id: '22233232327',
+                            title: 'Semantics',
+                            content: 'The study of meaning. In this situation we’re interested in the meaning of your code. Variables, functions, classes, objects, CSS Classes, HTML tags, etc. should all be named clearly, cleanly and semantically to represent the content they contain.'
+                        },
+                        {
+                            _id: '22233232328',
+                            title: 'Comprehension',
+                            content: 'The ability for a 3rd party developer or peer reviewer to transverse your code easily. Unnecessarily complex code structures, code not in use or heavily commented out code are considered bad practices and will be penalized accordingly.'
+                        },
+                        {
+                            _id: '22233232329',
+                            title: 'MVC File Structure',
+                            content: 'Proper file structure and organization for an MVC framework. Views, Models, and Controllers are handled properly.'
+                        },
+                        {
+                            _id: '22233232320',
+                            title: 'Formatting, Comments, & Logs',
+                            content: 'All code should be formatted and commented professionally. Its highly recommended to adopt a consistent pattern and follow it, look into phpDocumentor for references. Additionally, labeled console.log()’s, when used, should be used appropriately and in moderation as to not bombard the reviewer / developer.'
+                        },
                     ]
                 }
             ]
@@ -129,11 +161,11 @@ angular.module('ProRubric', ['ngRoute'])
             $scope.reloadPage = function () {
                 window.location.reload();
             };
-            var data = {
+            var _data = {
                 title: $scope.degreeTitle,
                 acronym: $scope.degreeAcronym
             };
-            socket.emit('add degree', data);
+            socket.emit('add degree', _data);
             $scope.reloadPage();
         }
 
@@ -151,44 +183,42 @@ angular.module('ProRubric', ['ngRoute'])
             $scope.reloadPage = function () {
                 window.location.reload();
             };
-            var data = {
+            var _data = {
                 _id: $scope.editData._id,
                 title: $scope.editData.title,
                 acronym: $scope.editData.acronym,
                 description: $scope.editData.description
             };
-            socket.emit('course update', data);
+            socket.emit('course update', _data);
             $scope.reloadPage();
         }
     })
 
 
+    .controller('AuditController', ['$scope', 'Audit', function ($scope, Audit) {
 
-
-    .controller('AuditController', ['$scope', 'Audit', function( $scope, Audit ){
-        
         // Setup base var to run audits against.
-        $scope.rubric          = Audit.data;
+        $scope.rubric = Audit.data;
 
         // Update the Audit Grade
-        $scope.calculateGrade   = function(){
+        $scope.calculateGrade = function () {
 
             // temp Array
             var aryGrades = [];
 
             // Loop through the matrix and break out the values into a clean array
-            for(var key in $scope.rubric.auditMatrix){
+            for (var key in $scope.rubric.auditMatrix) {
                 aryGrades.push($scope.rubric.auditMatrix[key]);
             }
-            
+
             // Calculate the sum of an array
-            $scope.rubric.auditGrade = aryGrades.reduce(function(previousValue, currentValue, index, array) {
-              return previousValue + currentValue;
+            $scope.rubric.auditGrade = aryGrades.reduce(function (previousValue, currentValue, index, array) {
+                return previousValue + currentValue;
             });
         };
 
         // Determine % completed
-        $scope.calculateAuditProgress = function(lineItemID, grade, sectionWeight, totalSectionItems){
+        $scope.calculateAuditProgress = function (lineItemID, grade, sectionWeight, totalSectionItems) {
 
             // Add / Update Line Item's grade in the Audit Matix
             $scope.rubric.auditMatrix[lineItemID] = grade * (sectionWeight / totalSectionItems);
@@ -196,20 +226,20 @@ angular.module('ProRubric', ['ngRoute'])
 
             // How many Line Items have been Audited
             var currentAudited = Object.keys($scope.rubric.auditMatrix).length;
-            
 
-                // Calculate Grade after change 
-                $scope.calculateGrade();                
 
-            
+            // Calculate Grade after change
+            $scope.calculateGrade();
+
+
             // Create % of total Line Items Audited
-            $scope.rubric.auditProgress = ((currentAudited / $scope.rubric.totalLineItems)*100);
+            $scope.rubric.auditProgress = ((currentAudited / $scope.rubric.totalLineItems) * 100);
 
             return $scope.rubric.auditProgress;
         };
 
         // User Clicks on a grade weight of a Line Item
-        $scope.actionGrade  = function (lineItemID, grade) {
+        $scope.actionGrade = function (lineItemID, grade) {
 
             // Error handling for loop not finding supplied ID
             var matchedLineItem = false;
@@ -219,7 +249,7 @@ angular.module('ProRubric', ['ngRoute'])
                 angular.forEach(section.lineItems, function (lineItem, lineItemKey) {
 
                     // Match the ID Supplied against the section's loop's line item loop
-                    if(lineItem._id === lineItemID){
+                    if (lineItem._id === lineItemID) {
                         lineItem.grade = grade;
                         matchedLineItem = lineItem;
                         // console.log(section.lineItems.length);
@@ -230,13 +260,13 @@ angular.module('ProRubric', ['ngRoute'])
             });
 
             // Error Handling
-            if(!matchedLineItem){
+            if (!matchedLineItem) {
                 console.log('Error: No Item ID Matched for this Rubric');
             }
         };
 
         // TODO Enhance Output displayed to user.
-        $scope.actionOutput = function(){
+        $scope.actionOutput = function () {
             console.log($scope.rubric);
         };
 
