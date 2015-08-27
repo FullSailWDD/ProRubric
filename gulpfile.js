@@ -81,6 +81,12 @@ gulp.task('css', function () {
         }))
         .pipe(gulp.dest('./public/css/build'))
         .pipe(connect.reload());
+    gulp.src('./assets/css/**/*.css')
+        .pipe(stylus({
+            use: [jeet()]
+        }))
+        .pipe(gulp.dest('./public/css/build'))
+        .pipe(connect.reload());
 });
 
 //compiling js files and uglifying them
@@ -104,8 +110,10 @@ gulp.task('lint', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['./assets/css/*.styl', './test/*'], ['css']);
-    gulp.watch(['./assets/js/*.js', './test/*'], ['jsCompress']);
+    gulp.watch([        
+        './assets/**/*', 
+        './test/*'
+    ],['build']);
 });
 
 gulp.task('build', ['viewCompress', 'css', 'jsCompress']);
