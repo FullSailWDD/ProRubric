@@ -6,7 +6,7 @@
 	<p>Progress Bar {[{ rubric.auditProgress }]}% ({[{ rubric.totalLineItems }]} Total Items)</p>
 	<h2>Audit Grade: {[{ rubric.auditGrade * 100 }]}% </h2>
 	<section data-ng-repeat="section in rubric.sections">
-		<header> {[{ section.title }]} </header>
+		<div> {[{ section.title }]} </div>
 		<dl data-ng-repeat="lineItem in section.lineItems">
 			<aside>
 			 	<ol>
