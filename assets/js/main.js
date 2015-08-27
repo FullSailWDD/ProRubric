@@ -68,9 +68,17 @@ angular.module('ProRubric', ['ngRoute']);
 
      if ($routeParams.action === 'add'){
         console.log('adding');
+
      } else if($routeParams.action === 'update'){
 
          socket.emit('find rubric',$routeParams.id);
+
+         socket.on('returned id',function(data){
+
+             console.log(data);
+
+
+         })
 
      }
 
@@ -88,7 +96,7 @@ angular.module('ProRubric', ['ngRoute']);
 
         $scope.editRubric = function (){
 
-           socket.emit('edit rubric', $scope.newRubric);
+            socket.emit('edit rubric', $scope.newRubric);
 
             socket.on('edit rubric',function (data){
 
@@ -98,7 +106,9 @@ angular.module('ProRubric', ['ngRoute']);
 
             socket.on('error', function(error){//socket.on means the socket os listening for data
                 $scope.error = error.text;
-            })
+            });
+
+
 
         };
     });

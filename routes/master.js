@@ -44,7 +44,18 @@ module.exports = function(app, socket) {
 
             });
 
-            
+            data.on('find rubric',function(payload){
+
+                Rubric.find(payload,function(doc){
+
+                    socket.emit('returned id',doc);
+
+                },function(error){
+                    console.log(error);
+                });
+
+            });
+
         });
 
         res.render('index');
