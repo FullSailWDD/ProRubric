@@ -29,6 +29,12 @@ module.exports = function(app, socket) {
                 });
             });
 
+            data.once('degree update', function (data) {
+                Degree.update(data, function(err){
+                    console.log(err, 'Return all update');
+                });
+            });
+
 
             data.once('course req', function (data) {
                 console.log(data);
@@ -38,7 +44,15 @@ module.exports = function(app, socket) {
                 }, function (err) {
                     console.log(err, 'Return all Courses', false);
                 });
-
+            });
+            data.once('degree req', function (data) {
+                console.log(data);
+                Degree.findone(data, function (doc) {
+                    console.log(doc);
+                    socket.emit('degree send', doc);
+                }, function (err) {
+                    console.log(err, 'Return all Courses', false);
+                });
             });
 
             data.on('add degree', function (callback) {
@@ -46,6 +60,11 @@ module.exports = function(app, socket) {
             });
             data.on('add course', function (callback) {
                 Course.add(callback);
+            });
+
+            data.on('delete degree', function(callback){
+                console.log(callback);
+                Degree.remove(callback);
             });
 
 

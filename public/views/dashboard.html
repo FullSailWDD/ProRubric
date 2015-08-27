@@ -5,18 +5,19 @@
         <input type="text" ng-model="degreeTitle" />
         <label>Degree Acronym</label>
         <input type="text" ng-model="degreeAcronym" />
-        <button ng-click="degreeAdd()"> Create Rubric</button>
+        <button ng-click="degreeAdd()"> Create Degree</button>
     </div>
     <div id="wrapper">
         <ul>
-            <li ng-repeat="x in degreeView">
+            <li ng-repeat="x in degreeView | filter:{type:degree}">
                 <ul>
                     <li>id: {[{x._id}]}</li>
                     <li>dname: {[{x.title}]}</li>
                     <li>acronym: {[{x.acronym}]}</li>
+                    <li><button ng-click="degreeDelete(x._id)">Delete Degree</button><a href="#/edit/degree/{[{x._id}]}">Edit Degree</a></li>
                     <li ng-repeat="x in courseView">
                         <ul>
-                            <li>id: {[{x._id}]}</li>
+                            <li>{[{x._id}]}</li>
                             <li>description: {[{x.description}]}</li>
                             <li>acronym: {[{x.acronym}]}</li>
                             <a href="#/edit/course/{[{x._id}]}">Edit Course</a>

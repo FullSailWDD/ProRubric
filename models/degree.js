@@ -8,6 +8,7 @@ module.exports = function(app, socket){
     var degreeSchema = mongoose.Schema({
             title : String,
             acronym : String,
+            type: String,
             created_at : {type : Date, default: Date.now},
             updated_at : {type : Date, default: Date.now}
         }),
@@ -19,7 +20,8 @@ module.exports = function(app, socket){
 
             var newDegree = new _model({
                 title:        degree.title,
-                acronym:      degree.acronym
+                acronym:      degree.acronym,
+                type:         'degree',
             });
 
             newDegree.save(function(err){
@@ -41,6 +43,16 @@ module.exports = function(app, socket){
                 });
         },
 
+        _findOne = function(data, success,fail){
+            _model.find({_id:data}, function(err,doc) {
+                if (err) {
+                    fail(err);
+                } else {
+                    success(doc);
+                }
+            });
+        },
+
     // UPDATE 
         _update = function(degree,success,fail){
 
@@ -60,14 +72,12 @@ module.exports = function(app, socket){
         },
 
     // REMOVE
-        _remove = function(degree,success,fail){
-
-            _model.findByIdAndRemove({'_id':degree._id}, function(err,doc){
-                if (err) {
-                    fail(err);
-                }else{
-                    success(doc);
+        _remove = function(degree){
+            _model.findByIdAndRemove(degree, function(err){
+                if(err){
+                    console.log(err);
                 }
+
             });
         };
 
@@ -80,6 +90,7 @@ module.exports = function(app, socket){
         add :           _save,
         update :        _update,
         remove :        _remove,
-        all:            _findAll
+        all:            _findAll,
+        findone:        _findOne
     };
 }();

@@ -1,6 +1,6 @@
 'use strict';
 angular.module('ProRubric', ['ngRoute'])
-    .config(function ($interpolateProvider, $routeProvider) {
+    .config(['$interpolateProvider', '$routeProvider', function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider
@@ -8,10 +8,15 @@ angular.module('ProRubric', ['ngRoute'])
                 templateUrl: 'views/dashboard.html',
                 controller: 'dashboardController'
             })
-            .when('/edit/course/:_id', {
+            .when('/edit/degree/:degree_id', {
+                templateUrl: 'views/editDegree.html',
+                controller: 'editDegree'
+            })
+            .when('/edit/course/:course_id', {
                 templateUrl: 'views/editCourse.html',
                 controller: 'editCourse'
             })
+
             .when('/audit/:rubric_id', {
                 templateUrl: 'views/audit.html',
                 controller: 'AuditController'
@@ -39,8 +44,8 @@ angular.module('ProRubric', ['ngRoute'])
             .when('/text', {
                 templateUrl: 'views/text.html',
                 controller: 'secondController'
-            });
-    })
+            })
+    }])
 
     .service('Audit', [function () {
         // TODO Static Data currently. Feed this from the DB and create this data structure.
@@ -115,7 +120,7 @@ angular.module('ProRubric', ['ngRoute'])
     }])
 
 
-    .factory('socket', function ($rootScope) {
+.factory('socket',  ['$rootScope', function ($rootScope) {
         var socket = io.connect();
         return {
             on: function (eventName, callback) {
@@ -134,12 +139,17 @@ angular.module('ProRubric', ['ngRoute'])
                             callback.apply(socket, args);
                         }
                     });
-                })
+                });
             }
         };
-    })
+    }])
 
-    .controller('dashboardController', function ($scope, socket) {
+.controller('dashboardController', ['$scope', 'socket', function ($scope, socket) {
+
+        $scope.reloadPage = function () {
+            window.location.reload();
+        };
+
         $scope.$on('$viewContentLoaded', function () {
             socket.on('find degrees', function (data) {
                 if (data.length) {
@@ -158,31 +168,54 @@ angular.module('ProRubric', ['ngRoute'])
         });
 
         $scope.degreeAdd = function () {
-            $scope.reloadPage = function () {
-                window.location.reload();
-            };
             var _data = {
                 title: $scope.degreeTitle,
                 acronym: $scope.degreeAcronym
             };
             socket.emit('add degree', _data);
             $scope.reloadPage();
+        };
+
+        $scope.degreeDelete = function (_data) {
+            socket.emit('delete degree', _data);
+            $scope.reloadPage();
         }
 
-    })
+    }])
 
-    .controller('editCourse', function ($scope, $routeParams, socket) {
 
-        socket.emit('course req', $routeParams._id);
+    .controller('editDegree', ['$scope', '$routeParams', 'socket', function ($scope, $routeParams, socket) {
+        $scope.reloadPage = function () {
+            window.location.reload();
+        };
+        socket.emit('degree req', $routeParams.degree_id);
+
+        socket.on('degree send', function (data) {
+            $scope.degreeEdit = data[0];
+        });
+
+        $scope.degreeUpdate = function () {
+            var _data = {
+                title: $scope.degreeEdit.title,
+                acronym: $scope.degreeEdit.acronym
+            };
+            socket.emit('degree update', _data);
+            $scope.reloadPage();
+        }
+    }])
+
+
+    .controller('editCourse', ['$scope', '$routeParams', 'socket', function ($scope, $routeParams, socket) {
+        $scope.reloadPage = function () {
+            window.location.reload();
+        };
+        socket.emit('course req', $routeParams.course_id);
 
         socket.on('course send', function (data) {
             $scope.editData = data;
         });
 
         $scope.courseUpdate = function () {
-            $scope.reloadPage = function () {
-                window.location.reload();
-            };
             var _data = {
                 _id: $scope.editData._id,
                 title: $scope.editData.title,
@@ -192,7 +225,8 @@ angular.module('ProRubric', ['ngRoute'])
             socket.emit('course update', _data);
             $scope.reloadPage();
         }
-    })
+    }])
+
 
 
     .controller('AuditController', ['$scope', 'Audit', function ($scope, Audit) {
