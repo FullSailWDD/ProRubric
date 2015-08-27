@@ -46,22 +46,6 @@ angular.module('ProRubric').config(function ($interpolateProvider, $routeProvide
             });
     });
     
-angular.module('ProRubric').service('Degree', function () {
-        this.view = function () {
-            socket.once('find degrees', function (data) {
-                angular.forEach(data, function (key) {
-                    $('.columns').append('<div class="pin"><p>' + key._id + ' ' + key.title + ' ' + key.acronym + '</p></div>');
-                });
-            });
-        };
-        this.save = function (degreeNew) {
-            socket.emit('add degree', degreeNew);
-        };
-        this.remove = function () {
-        };
-
-        socket.emit('add degree', degreeNew);
-});
  
 
 angular.module('ProRubric').controller('mainController', function ($scope) {
@@ -90,7 +74,7 @@ angular.module('ProRubric').controller('rubricController', function ($scope) {
 
         angular.forEach($scope.tags, function (value, index) {
             gradeTierArray.push(Number(value.text));
-        })
+        });
 
         var rubricNew = {
             title: $scope.rubricTitle,

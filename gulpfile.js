@@ -71,7 +71,7 @@ gulp.task('viewCompress', function () {
         .pipe(htmlmin({
             collapseWhitespace: true
         }))
-        .pipe(gulp.dest('./public/views'))
+        .pipe(gulp.dest('./public/views'));
 });
 
 gulp.task('css', function () {
