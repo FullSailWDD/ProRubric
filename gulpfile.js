@@ -66,7 +66,7 @@ gulp.task('runTests', function () {
 });
 
 //moving views from assets to public and minifying them
-gulp.task('viewCompress', function () {
+gulp.task('htmlCompress', function () {
     gulp.src('./assets/views/*.html')
         .pipe(htmlmin({
             collapseWhitespace: true
@@ -116,7 +116,7 @@ gulp.task('watch', function () {
     ],['build']);
 });
 
-gulp.task('build', ['viewCompress', 'css', 'jsCompress']);
+gulp.task('build', ['htmlCompress', 'css', 'jsCompress']);
 gulp.task('test', ['clearStart', 'mongod', 'runTests']);
 gulp.task('dev', ['clearStart', 'build', 'mongod', 'watch', 'development']);
 gulp.task('default', ['build']);
