@@ -4,18 +4,16 @@ module.exports = function() {
         mongoose    = require('mongoose'),
         data        = require('../lib/sanitize.js');
 
-
     var rubricSchema = mongoose.Schema({
         title : String,
         content : String,
+        comment : String,
         course_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
     }),
-
     
     _model = mongoose.model('rubrics', rubricSchema);
-
 
 // CRUD Methods 
 // ==========================================================================
@@ -77,10 +75,7 @@ module.exports = function() {
             }
         });
     };
-    
-    
-    
-    
+
 // Publicly Available
 // ==========================================================================
     return {

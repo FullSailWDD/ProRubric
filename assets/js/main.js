@@ -19,6 +19,11 @@ angular.module('ProRubric', ['ngRoute']);
                 controller: 'rubricController'
             })
 
+            .when('/addComment', {
+                templateUrl: 'views/comment.html',
+                controller: 'rubricController'
+            })
+
             .when('/se', {
                 templateUrl: 'views/text.html',
                 controller: 'secondController'
@@ -31,7 +36,8 @@ angular.module('ProRubric', ['ngRoute']);
             .when('/addLineItem', {
                 templateUrl: 'views/addLineItem.html',
                 controller: 'lineItemController'
-            });
+            })
+
     });
 
     angular.module('ProRubric').controller('mainController', function ($scope) {
@@ -71,6 +77,7 @@ angular.module('ProRubric', ['ngRoute']);
 
      } else if($routeParams.action === 'update'){
 
+
          socket.emit('find rubric',$routeParams.id);
 
          socket.on('returned id',function(data){
@@ -78,10 +85,25 @@ angular.module('ProRubric', ['ngRoute']);
              console.log(data);
 
 
-         })
+         });
+
+         $scope.editRubric = function (){
+
+             socket.emit('edit rubric', $scope.newRubric);
+
+             socket.on('edit rubric',function (data){
+
+                 console.log(data);
+
+             });
+
+             socket.on('error', function(error){//socket.on means the socket os listening for data
+                 $scope.error = error.text;
+             });
+
+         };
 
      }
-
 
         $scope.rubricAdd = function () {
             var rubricNew = {
@@ -91,7 +113,6 @@ angular.module('ProRubric', ['ngRoute']);
             
             socket.emit('add rubric', rubricNew);
         };
-
 
 
         $scope.editRubric = function (){
@@ -107,9 +128,6 @@ angular.module('ProRubric', ['ngRoute']);
             socket.on('error', function(error){//socket.on means the socket os listening for data
                 $scope.error = error.text;
             });
-
-
-
         };
     });
 
