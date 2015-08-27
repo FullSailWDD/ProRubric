@@ -3,11 +3,11 @@ var express 				= require('express'),
     app 					= express(),
   	exphbs 					= require('express-handlebars'),
 	io 						= require('socket.io'),
-  	outputs  				= require('./lib/outputs.js')();
+	outputs 				= require('./lib/outputs.js')();
 
 // View Config
 // =============================================================================
-var		port 					= process.env.PORT || 3000;
+var		port 				= process.env.PORT || 3000;
 
 // View Engine
 // =============================================================================

@@ -1,4 +1,4 @@
-module.exports = function(app, socket) {
+module.exports = function (app, socket) {
 
     var Degree = require('../models/degree.js'),
         Course = require('../models/course.js'),
@@ -28,13 +28,13 @@ module.exports = function(app, socket) {
             });
 
             data.once('course update', function (data) {
-                Course.update(data, function(err){
+                Course.update(data, function (err) {
                     console.log(err, 'Return all update');
                 });
             });
 
             data.once('degree update', function (data) {
-                Degree.update(data, function(err){
+                Degree.update(data, function (err) {
                     console.log(data);
                     console.log(err, 'Return all update');
                 });
@@ -49,6 +49,12 @@ module.exports = function(app, socket) {
                 }, function (err) {
                     console.log(err, 'Return all Courses', false);
                 });
+            });
+            data.on('add lineItem', function (callback) {
+                LineItem.add(callback);
+            });
+            data.on('add rubric', function (callback) {
+                Rubric.add(callback);
             });
 
             data.once('degree req', function (data) {
@@ -68,16 +74,16 @@ module.exports = function(app, socket) {
                 Course.add(callback);
             });
 
-            data.on('delete degree', function(callback){
+            data.on('delete degree', function (callback) {
                 console.log(callback);
                 Degree.remove(callback);
             });
-            data.on('delete course', function(callback){
+            data.on('delete course', function (callback) {
                 console.log(callback);
                 Course.remove(callback);
             });
-
         });
+    // route /
     app.get('/', function(req, res) {
 
         // route /
