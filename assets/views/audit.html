@@ -1,14 +1,15 @@
 <div class="audit">
 	<h1>{[{ rubric.title }]}</h1>
-	<p>TEST BUTTON: <button ng-click="actionOutput()">
-			 			Output Audit
-			 		</button></p>
+	
 	<p>Progress Bar {[{ rubric.auditProgress }]}% ({[{ rubric.totalLineItems }]} Total Items)</p>
 	<h2>Audit Grade: {[{ rubric.auditGrade * 100 }]}% </h2>
 	<section data-ng-repeat="section in rubric.sections">
 		<header> {[{ section.title }]} </header>
 		<dl data-ng-repeat="lineItem in section.lineItems">
-			<aside>
+
+			<dt>{[{ lineItem.title }]}</dt>
+			<dd>{[{ lineItem.content }]}</dd>
+			<dd>
 			 	<ol>
 			 		<li data-ng-repeat="tier in rubric.gradeTiers">
 			 		<button data-ng-click="actionGrade(lineItem._id, tier)">
@@ -16,11 +17,14 @@
 			 		</button>
 			 		</li>
 			 	</ol>
-			 	<textarea data-ng-model="lineItem.comment"></textarea>
-			 </aside>
-			<dt>{[{ lineItem.title }]}</dt>
-			<dd>{[{ lineItem.content }]}</dd>
+			 	<h3>Comments:</h3>
+			 	<textarea data-ng-model="lineItem.comment" placeholder="Type the comments in here"></textarea>
+			 </dd>
 		</dl>
 	</section>
+
+	<p><button ng-click="actionOutput()">
+			 			Output Audit
+			 		</button></p>
 	
 </div>
