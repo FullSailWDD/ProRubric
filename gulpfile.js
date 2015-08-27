@@ -80,7 +80,6 @@ gulp.task('css', function () {
 //compiling js files and uglifying them
 gulp.task('jsCompress', function () {
     gulp.src('./assets/js/*.js')
-        .pipe(concat('main.js'))
         .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest('./public/js/build'))

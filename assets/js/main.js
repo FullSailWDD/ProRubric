@@ -1,6 +1,6 @@
 var socket = io.connect();
 
-angular.module('ProRubric', ['ngRoute']);
+angular.module('ProRubric', ['ngRoute','ngTagsInput']);
     angular.module('ProRubric').config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
@@ -64,16 +64,25 @@ angular.module('ProRubric', ['ngRoute']);
     angular.module('ProRubric').controller('rubricController', function ($scope) {
         
         
-        
         $scope.rubricAdd = function () {
             
-            var array = [100,75,40,0];
+            var array = [];
+        
+            angular.forEach($scope.tags,function(value,index){
+                array.push(Number(value.text));
+                console.log(value);
+            })
+            
+            
             
             var rubricNew = {
                 title: $scope.rubricTitle,
                 content: $scope.rubricContent,
-                gradeTiers: array    
+                gradeTiers: array
+                
             };
+            
+            console.log(array);
             
             socket.emit('add rubric', rubricNew);
         };    
