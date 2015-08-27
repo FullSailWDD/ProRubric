@@ -26,7 +26,7 @@ module.exports = function(app, socket) {
 
 
 
-            data.on('course req', function (data) {
+            data.once('course req', function (data) {
                 console.log(data);
                 Course.findone(data, function (doc) {
                     console.log(doc);

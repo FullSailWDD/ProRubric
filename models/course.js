@@ -70,7 +70,7 @@ module.exports = function() {
         },
 
         _findOne = function(data, success,fail){
-            _model.findById({'_id': data._id}, function(err,doc) {
+            _model.findById(data, function(err,doc) {
                 if (err) {
                     fail(err);
                 } else {
