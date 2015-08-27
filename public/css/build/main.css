@@ -243,7 +243,7 @@ ul li :hover {
 .addRubric div h2 {
   font-size: 1.3em;
 }
-.addRubric form {
+.addRubric .form {
   *zoom: 1;
   width: auto;
   max-width: 500px;
@@ -255,12 +255,12 @@ ul li :hover {
   padding-right: 0;
   padding: 2%;
 }
-.addRubric form:before,
-.addRubric form:after {
+.addRubric .form:before,
+.addRubric .form:after {
   content: '';
   display: table;
 }
-.addRubric form:after {
+.addRubric .form:after {
   clear: both;
 }
 .addRubric h3 {
@@ -401,7 +401,7 @@ ul li :hover {
   background: #424242;
   cursor: pointer;
 }
-.addInfo form {
+.addInfo .form {
   *zoom: 1;
   width: auto;
   max-width: 500px;
@@ -413,12 +413,12 @@ ul li :hover {
   padding-right: 0;
   padding: 2%;
 }
-.addInfo form:before,
-.addInfo form:after {
+.addInfo .form:before,
+.addInfo .form:after {
   content: '';
   display: table;
 }
-.addInfo form:after {
+.addInfo .form:after {
   clear: both;
 }
 .addInfo h3 {
