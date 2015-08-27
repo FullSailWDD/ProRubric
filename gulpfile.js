@@ -82,6 +82,8 @@ gulp.task('lint', function() {
 
 gulp.task('watch', function () {
   gulp.watch(['./assets/css/*.styl', './test/*'], ['css']);
+  gulp.watch(['./assets/js/*.js', './test/*'], ['js']);
+
 });
 
 gulp.task('build', ['css', 'js']);

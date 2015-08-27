@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function(app, socket) {
 
     var Degree = require('../models/degree.js'),
         Course = require('../models/course.js'),
@@ -6,28 +6,21 @@ module.exports = function(app) {
         Section = require('../models/section.js'),
         LineItem = require('../models/lineItem.js');
 
+
     // route /
     app.get('/', function(req, res) {
+        socket.on('connection', function (data) {
+                Degree.all(function(doc){
+                    socket.emit('find degrees',doc);
+                }, function(err){
+                    outputs.debug(err, 'Return all Degrees', false);
+                });
+
+            data.on('add degree', function (callback) {
+                Degree.add(callback);
+            });
+        });
+
         res.render('index');
     });
-    app.get('/degProcess:degData',function(req,res) {
-        var degName = req.params.degData;
-        res.send(degName);
-    });
-
-    app.get('/degProcess',function(req,res){
-        var degreeObj = 'Web Design and Deployment';
-        Degree.update(degreeObj);
-    });
-
-    app.get('/courseProcess',function(req,res){});
-
-    app.get('/degUpdate',function(req,res){
-        Degree.update(req.degreeId);
-    });
-
-    app.get('/degRemove',function(req,res){
-        Degree.remove(req.degreeId);
-    });
-
 };
