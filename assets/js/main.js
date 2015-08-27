@@ -61,8 +61,17 @@ angular.module('ProRubric').service('Degree', function () {
         };
 
         socket.emit('add degree', degreeNew);
-    };
+});
+ 
 
+angular.module('ProRubric').controller('mainController', function ($scope) {
+    $scope.degreeAdd = function () {
+        var degreeNew = {
+            title: $scope.degreeTitle,
+            acronym: $scope.degreeAcronym
+        };
+        socket.emit('add degree', degreeNew);
+    };
     socket.once('find degrees', function (data) {
         angular.forEach(data, function (key) {
             $('.columns').append('<div class="pin"><img src="http://placehold.it/140x100"> <h2 class="classname">' + key.title + '</h2> <a href="#">Delete Degree</a></div>');
@@ -80,7 +89,7 @@ angular.module('ProRubric').controller('rubricController', function ($scope) {
         var gradeTierArray = [];
 
         angular.forEach($scope.tags, function (value, index) {
-            array.push(Number(value.text));
+            gradeTierArray.push(Number(value.text));
         })
 
         var rubricNew = {
