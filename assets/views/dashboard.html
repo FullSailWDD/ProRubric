@@ -1,5 +1,5 @@
 <div ng-controller="dashboardController" class="mainDefaultBody">
-    <div id="rubricSearch">
+    <div class="rubricSearch">
         <h1>Create Degree</h1>
         <label>Degree Name Here:</label>
         <input type="text" ng-model="degreeTitle" />
@@ -7,18 +7,11 @@
         <input type="text" ng-model="degreeAcronym" />
         <button ng-click="degreeAdd()"> Create Degree</button>
     </div>
-    <div id="wrapper">
-        <div class="container">
-        <ul>
-            <li class="pin" ng-repeat="x in degreeView | filter:{type:degree}">
-                <ul>
-                    <li>id: {[{x._id}]}</li>
-                    <li>dname: {[{x.title}]}</li>
-                    <li>acronym: {[{x.acronym}]}</li>
-                    <li><button ng-click="degreeDelete(x._id)">Delete Degree</button><a href="#/edit/degree/{[{x._id}]}">Edit Degree</a></li>
-                </ul>
-            </li>
-        </ul>
-        </div>
+    <div class="wrapper">
+            <div class="pin" ng-repeat="x in degreeView | filter:{type:degree}">
+                    <h2 class="classname">{[{x.title}]}</h2>
+                    <p>{[{x.acronym}]}</p>
+                    <p><button ng-click="degreeDelete(x._id)">Delete Degree</button><a href="#/edit/degree/{[{x._id}]}">Edit Degree</a></p>
+            </div>
     </div>
 </div>
