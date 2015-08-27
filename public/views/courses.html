@@ -1,0 +1,27 @@
+<div ng-controller="coursesController" class="mainDefaultBody">
+    <div id="rubricSearch">
+        <h1>Create Course</h1>
+        <label>Course Name Here:</label>
+        <input type="text" ng-model="courseTitle" />
+        <label>Course Acronym</label>
+        <input type="text" ng-model="courseAcronym" />
+        <label>Course Description</label>
+        <input type="text" ng-model="courseDescription" />
+        <button ng-click="courseAdd()"> Create Course</button>
+    </div>
+    <div id="wrapper">
+        <ul>
+                    <li ng-repeat="x in courseView">
+                        <ul>
+                            <li>{[{x._id}]}</li>
+                            <li>title: {[{x.title}]}</li>
+                            <li>acronym: {[{x.acronym}]}</li>
+                            <li>Description: {[{x.description}]}</li>
+
+                            <a href="#/edit/course/{[{x._id}]}">Edit Course</a>
+                            <button ng-click="courseDelete(x._id)">Delete Course</button>
+                        </ul>
+                    </li>
+        </ul>
+    </div>
+</div>

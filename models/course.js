@@ -81,11 +81,9 @@ module.exports = function() {
                 // REMOVE
     _remove = function(course,success,fail){
 
-        _model.findByIdAndRemove({'_id':course._id}, function(err, doc){
+        _model.findByIdAndRemove(course, function(err){
             if (err) {
-                fail(err);
-            }else{
-                success(doc);
+                console.log(err);
             }
         });
     };

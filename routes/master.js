@@ -8,8 +8,6 @@ module.exports = function(app, socket) {
         outputs = require('../lib/outputs.js');
 
 
-
-
         socket.on('connection', function (data) {
 
             Degree.all(function (doc) {
@@ -19,6 +17,12 @@ module.exports = function(app, socket) {
                     console.log(err);
                 });
                 socket.emit('find degrees', doc);
+            }, function (err) {
+                console.log(err);
+            });
+
+            Course.all(function (doc) {
+                socket.emit('find courses', doc);
             }, function (err) {
                 console.log(err);
             });
@@ -68,7 +72,10 @@ module.exports = function(app, socket) {
                 console.log(callback);
                 Degree.remove(callback);
             });
-
+            data.on('delete course', function(callback){
+                console.log(callback);
+                Course.remove(callback);
+            });
 
         });
     app.get('/', function(req, res) {

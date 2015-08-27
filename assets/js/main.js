@@ -16,7 +16,10 @@ angular.module('ProRubric', ['ngRoute'])
                 templateUrl: 'views/editCourse.html',
                 controller: 'editCourse'
             })
-
+            .when('/course', {
+                templateUrl: 'views/courses.html',
+                controller: 'coursesController'
+            })
             .when('/audit/:rubric_id', {
                 templateUrl: 'views/audit.html',
                 controller: 'AuditController'
@@ -144,12 +147,11 @@ angular.module('ProRubric', ['ngRoute'])
         };
     }])
 
-.controller('dashboardController', ['$scope', 'socket', function ($scope, socket) {
+    .controller('dashboardController', ['$scope', 'socket', function ($scope, socket) {
 
         $scope.reloadPage = function () {
             window.location.reload();
         };
-
         $scope.$on('$viewContentLoaded', function () {
             socket.on('find degrees', function (data) {
                 if (data.length) {
@@ -158,7 +160,7 @@ angular.module('ProRubric', ['ngRoute'])
                     console.log('You has no degrees :(');
                 }
             });
-            socket.on('find course', function (data) {
+            socket.on('find courses', function (data) {
                 if (data.length) {
                     $scope.courseView = data;
                 } else {
@@ -178,6 +180,39 @@ angular.module('ProRubric', ['ngRoute'])
 
         $scope.degreeDelete = function (_data) {
             socket.emit('delete degree', _data);
+            $scope.reloadPage();
+        }
+
+    }])
+
+    .controller('coursesController', ['$scope', 'socket', function ($scope, socket) {
+
+        $scope.reloadPage = function () {
+            window.location.reload();
+        };
+        $scope.$on('$viewContentLoaded', function () {
+            socket.on('find courses', function (data) {
+                if (data.length) {
+                    console.log(data);
+                    $scope.courseView = data;
+                } else {
+                    console.log('You has no courses :(');
+                }
+            });
+        });
+
+        $scope.courseAdd = function () {
+            var _data = {
+                title: $scope.courseTitle,
+                acronym: $scope.courseAcronym,
+                description: $scope.courseDescription
+            };
+            socket.emit('add course', _data);
+            $scope.reloadPage();
+        };
+
+        $scope.courseDelete = function (_data) {
+            socket.emit('delete course', _data);
             $scope.reloadPage();
         }
 
