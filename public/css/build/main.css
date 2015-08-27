@@ -391,10 +391,10 @@ ul li a:hover {
 .addInfo input[type*="submit"]:hover {
   background: #424242;
 }
-.degree label,
-font-family arial {
-  font-weight: bold;
+.degree label {
+  font-family: arial;
 }
+font-weight bold,
 .degree button {
   *zoom: 1;
   float: left;
@@ -412,14 +412,18 @@ font-family arial {
   text-align: center;
   padding: 10px 0;
 }
+font-weight bold:before,
 .degree button:before,
+font-weight bold:after,
 .degree button:after {
   content: '';
   display: table;
 }
+font-weight bold:after,
 .degree button:after {
   clear: both;
 }
+font-weight bold:last-child,
 .degree button:last-child {
   margin-right: 0%;
 }

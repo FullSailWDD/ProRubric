@@ -1,7 +1,7 @@
 {
   "undef": false,
   "unused": false,
-  "predef": [ "require", "console", "process", "__dirname" ],
+  "predef": [ "console", "process", "__dirname" ],
   "node": true,
   "expr": true
 }
