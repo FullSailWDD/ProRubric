@@ -21,7 +21,6 @@ module.exports = function() {
     var _save = function(course, success, fail){
 
         var newCourse = new _model({
-            
             title:        course.title,
             acronym:      course.acronym,
             description:  course.description,
@@ -69,6 +68,16 @@ module.exports = function() {
                 }
             });
         },
+
+        _findOne = function(data, success,fail){
+            _model.findById({'_id': data._id}, function(err,doc) {
+                if (err) {
+                    fail(err);
+                } else {
+                    success(doc);
+                }
+            });
+        },
                 // REMOVE
     _remove = function(course,success,fail){
 
@@ -92,7 +101,8 @@ module.exports = function() {
         add :           _save,
         update :        _update,
         remove :        _remove,
-        all:            _findAll
+        all:            _findAll,
+        findone:        _findOne
     };
 }();
 
