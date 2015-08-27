@@ -1,9 +1,10 @@
 'use strict';
 /* globals io,angular,$*/
 var socket = io.connect();
-
-angular.module('ProRubric', ['ngRoute'])
-    .config(function ($interpolateProvider, $routeProvider) {
+            
+angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
+            
+angular.module('ProRubric').config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider
@@ -19,9 +20,17 @@ angular.module('ProRubric', ['ngRoute'])
                 templateUrl: 'views/addForm.html',
                 controller: 'secondController'
             })
+            .when('/', {
+                templateUrl: 'views/home.html',
+                controller: 'mainController'
+            })
             .when('/addRubric', {
                 templateUrl: 'views/addRubric.html',
-                controller: 'secondController'
+                controller: 'rubricController'
+            })
+            .when('/addLineItem', {
+                templateUrl: 'views/addLineItem.html',
+                controller: 'lineItemController'
             })
             .when('/home', {
                 templateUrl: 'views/home.html',
@@ -35,43 +44,69 @@ angular.module('ProRubric', ['ngRoute'])
                 templateUrl: 'views/text.html',
                 controller: 'secondController'
             });
-    })
-    .service('Degree', function () {
-        this.view = function () {
-            socket.once('find degrees', function (data) {
-                angular.forEach(data, function (key) {
-                    $('.columns').append('<div class="pin"><p>' + key._id + ' ' + key.title + ' ' + key.acronym + '</p></div>');
-                });
-            });
+    });
+    
+ 
+
+angular.module('ProRubric').controller('mainController', function ($scope) {
+    $scope.degreeAdd = function () {
+        var degreeNew = {
+            title: $scope.degreeTitle,
+            acronym: $scope.degreeAcronym
         };
-        this.save = function (degreeNew) {
-            socket.emit('add degree', degreeNew);
+        socket.emit('add degree', degreeNew);
+    };
+    socket.once('find degrees', function (data) {
+        angular.forEach(data, function (key) {
+            $('.columns').append('<div class="pin"><img src="http://placehold.it/140x100"> <h2 class="classname">' + key.title + '</h2> <a href="#">Delete Degree</a></div>');
+        });
+    });
+});
+
+
+
+
+angular.module('ProRubric').controller('rubricController', function ($scope) {
+
+    $scope.rubricAdd = function () {
+
+        var gradeTierArray = [];
+
+        angular.forEach($scope.tags, function (value, index) {
+            gradeTierArray.push(Number(value.text));
+        });
+
+        var rubricNew = {
+            title: $scope.rubricTitle,
+            content: $scope.rubricContent,
+            gradeTiers: gradeTierArray
         };
-        this.remove = function () {
+
+        console.log(gradeTierArray);
+
+        socket.emit('add rubric', rubricNew);
+    };
+});
+
+
+
+
+angular.module('ProRubric').controller('lineItemController', function ($scope) {
+
+
+    $scope.lineItemAdd = function () {
+        var lineItemNew = {
+            title: $scope.itemTitle,
+            content: $scope.itemContent
         };
-    })
 
-    .controller('mainController', function ($scope, Degree) {
-        //Main Route Loading Point Start
-        Degree.view();
-        //Main Route Loading Point End
-
-        $scope.degreeAdd = function () {
-            var degreeNew = {
-                title: $scope.degreeTitle,
-                acronym: $scope.degreeAcronym
-            };
-            Degree.save(degreeNew);
-        };
+        socket.emit('add lineItem', lineItemNew);
+    };
+});
 
 
-    })
-    .controller('secondController', function () {
-
-
-    })
-
-    .service('Audit', [function() {
+angular.module('ProRubric')
+    .service('Audit', function() {
         // TODO Static Data currently. Feed this from the DB and create this data structure.
         this.data = {
                 auditMatrix:[],     // Not from the Database
@@ -109,9 +144,10 @@ angular.module('ProRubric', ['ngRoute'])
                             ]
 
             };
-    }])
+    });
 
-    .controller('AuditController', ['$scope', 'Audit', function( $scope, Audit ){
+angular.module('ProRubric')
+    .controller('AuditController', function( $scope, Audit ){
         
         // Setup base var to run audits against.
         $scope.rubric          = Audit.data;
@@ -186,4 +222,4 @@ angular.module('ProRubric', ['ngRoute'])
             console.log($scope.rubric);
         };
 
-    }]);
+    });
