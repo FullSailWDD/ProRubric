@@ -27,11 +27,14 @@ edit()
 	text-align center
 
 #sideNav
-	col(1/7)
-	span(1/7)
+	// col(1/7)
+	// span(1/7)
+	width 15%
+	float left
 	background #38495D
 	text-align center
-	height 700px
+	min-height 700px
+	position fixed
 	
 .logo
 	margin-bottom 6%
@@ -58,13 +61,17 @@ ul li a:hover
 	background #192128
 
 .mainDefaultBody
-	col(6/7)
-	span(6/7)
+	// col(6/7)
+	// span(6/7)
+	width 85%
+	float right
 	background #FBF7E4
+	height 1000px
 	//Putting CSS Gradients on this breaks the Jeet apparently.
 
 .rubricSearch
 	center(500px)
+	margin-top 10%
 	padding 2%
 	background #E7E8D1
 	border 1px #D3CEAA solid
@@ -96,7 +103,7 @@ ul li a:hover
 		font-family 'futura'
 		background secondaryColor
 		text-align center
-		color lightColor
+		color white
 		border none
 		border-bottom 3px darkColor solid
 		border-radius 5px
