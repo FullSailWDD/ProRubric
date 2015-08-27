@@ -8,6 +8,10 @@ angular.module('ProRubric').config(function ($interpolateProvider, $routeProvide
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider
+            .when('/', {
+                templateUrl: 'views/searchBar.html',
+                controller: 'secondController'
+            })
             .when('/audit/:rubric_id', {
                 templateUrl: 'views/audit.html',
                 controller: 'AuditController'
@@ -19,10 +23,6 @@ angular.module('ProRubric').config(function ($interpolateProvider, $routeProvide
             .when('/addForm', {
                 templateUrl: 'views/addForm.html',
                 controller: 'secondController'
-            })
-            .when('/', {
-                templateUrl: 'views/home.html',
-                controller: 'mainController'
             })
             .when('/addRubric', {
                 templateUrl: 'views/addRubric.html',

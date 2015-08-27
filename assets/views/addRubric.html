@@ -1,19 +1,23 @@
 <div ng-controller="rubricController" class="addRubric">
+    <div class="form">
+        <div>
+            <h2>Web Design and Development</h2>
+            <h1>DWP - Deployment of Web Projects</h1>
+        </div>
+        
+            <h1> Create Rubric</h1>
 
-    <div id="rubricSearch">
-        <h1> Create Rubric</h1>
+            <label>Title:</label>
+            <input type="text" ng-model="rubricTitle" placeholder="Wk2 Assignment Title" />
 
-        <label>Rubic Name:</label>
-        <input type="text" ng-model="rubricTitle" placeholder="" />
+            <label>Description:</label>
+            <input type="text" ng-model="rubricContent" placeholder="Students are tasked to create..." />
 
-        <label>Content:</label>
-        <input type="text" ng-model="rubricContent" placeholder="" />
+            <label>Grade Options: (Press "Enter" Between Options)</label>
+            <tags-input min-length="1" max-length='3' allowed-tags-pattern='^[0-9]+$' type="text" ng-model="tags" placeholder="ex. 100, 75, 40, 0" />
 
-        <label>Grade Tiers:</label>
-        <tags-input min-length="1" max-length='3' allowed-tags-pattern='^[0-9]+$' type="text" ng-model="tags" placeholder="ex. 100, 75, 40, 0" />
+            <button ng-click="rubricAdd()"> Create </button>
 
-        <button ng-click="rubricAdd()"> Create </button>
-
+        
     </div>
-
 </div>
