@@ -44,7 +44,7 @@ module.exports = function() {
         var cleanData = data.sanitize(rubric);
 
         if (cleanData){
-            _model.update({'_id':rubric._id}, {$set:cleanData}, function(err,doc){
+            _model.update({'_id':cleanData._id}, {$set:cleanData}, function(err,doc){
                 if (err) {
                     fail(err);
                 }else{

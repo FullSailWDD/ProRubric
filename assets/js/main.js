@@ -9,10 +9,16 @@ angular.module('ProRubric', ['ngRoute']);
                 templateUrl: 'views/home.html',
                 controller: 'secondController'
             })
-            .when('/addRubric', {
-                templateUrl: 'views/addRubric.html',
-                controller: 'secondController'
+            .when('/rubric/:action/', {
+                templateUrl: 'views/rubricForm.html',
+                controller: 'rubricController'
             })
+
+            .when('/rubric/:action/:id', {
+                templateUrl: 'views/rubricForm.html',
+                controller: 'rubricController'
+            })
+
             .when('/se', {
                 templateUrl: 'views/text.html',
                 controller: 'secondController'
@@ -21,7 +27,7 @@ angular.module('ProRubric', ['ngRoute']);
             .when('/addSection',{
             templateUrl: 'views/addSection.html',
             controller: 'secondController'
-        })
+            })
             .when('/addLineItem', {
                 templateUrl: 'views/addLineItem.html',
                 controller: 'lineItemController'
@@ -58,9 +64,17 @@ angular.module('ProRubric', ['ngRoute']);
 
     });
 
-    angular.module('ProRubric').controller('rubricController', function ($scope) {
-        
-        
+    angular.module('ProRubric').controller('rubricController', function ($scope, $routeParams) {
+
+     if ($routeParams.action === 'add'){
+        console.log('adding');
+     } else if($routeParams.action === 'update'){
+
+         socket.emit('find rubric',$routeParams.id);
+
+     }
+
+
         $scope.rubricAdd = function () {
             var rubricNew = {
                 title: $scope.rubricTitle,
@@ -68,14 +82,22 @@ angular.module('ProRubric', ['ngRoute']);
             };
             
             socket.emit('add rubric', rubricNew);
-        }
+        };
 
-        $scope.editRubric = function (rubricId){
-           socket.emit('rubric id', rubricId);
+
+
+        $scope.editRubric = function (){
+
+           socket.emit('edit rubric', $scope.newRubric);
+
             socket.on('edit rubric',function (data){
 
                 console.log(data);
 
+            });
+
+            socket.on('error', function(error){//socket.on means the socket os listening for data
+                $scope.error = error.text;
             })
 
         };

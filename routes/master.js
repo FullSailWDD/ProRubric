@@ -20,8 +20,8 @@ module.exports = function(app, socket) {
                 Degree.add(callback);
             });
 
-            data.on('add section', function (callback) {
-                Section.add(callback);
+            data.on('add section', function (payload) {
+                Section.add(payload);
             });
             
             data.on('add rubric', function (callback) {
@@ -32,15 +32,19 @@ module.exports = function(app, socket) {
                 LineItem.add(callback);
             });
 
-            data.on('rubric id', function(callback){
-                Rubric.all(function(doc){
-                    socket.emit('find rubric',doc);
-                }, function(err){
-                    outputs.debug(err, 'Return all Rubrics', false);
+            data.on('edit rubric', function(payload){// payload is the object that is getting passed through from the front end
+
+                Rubric.update(payload, function(doc){//running the update function through the rubric model(1st and 2nd parameter from rubric update function)
+                    console.log('We totally updated a rubric');
+                    socket.emit('edited rubric',doc);//telling the front end to send the object back from the database
+
+                }, function(err){//3rd parameter in rubric model for error handling (fail)
+                    socket.emit('error',err)
                 });
 
             });
 
+            
         });
 
         res.render('index');
