@@ -31,6 +31,7 @@ module.exports = function(app, socket) {
 
             data.once('degree update', function (data) {
                 Degree.update(data, function(err){
+                    console.log(data);
                     console.log(err, 'Return all update');
                 });
             });
@@ -45,6 +46,7 @@ module.exports = function(app, socket) {
                     console.log(err, 'Return all Courses', false);
                 });
             });
+
             data.once('degree req', function (data) {
                 console.log(data);
                 Degree.findone(data, function (doc) {

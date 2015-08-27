@@ -21,7 +21,7 @@ module.exports = function(app, socket){
             var newDegree = new _model({
                 title:        degree.title,
                 acronym:      degree.acronym,
-                type:         'degree',
+                type:         'degree'
             });
 
             newDegree.save(function(err){

@@ -196,9 +196,11 @@ angular.module('ProRubric', ['ngRoute'])
 
         $scope.degreeUpdate = function () {
             var _data = {
+                _id: $scope.degreeEdit._id,
                 title: $scope.degreeEdit.title,
                 acronym: $scope.degreeEdit.acronym
             };
+            console.log(_data);
             socket.emit('degree update', _data);
             $scope.reloadPage();
         }
