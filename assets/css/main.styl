@@ -1,12 +1,12 @@
 @import 'jeet'
 
-hover = background #424242
-mainColor = #38495D
-secondaryColor = #377992
-darkColor = #192128
-lightColor = #FBF7E4
-primaryFont = 'futura'
-secondaryFont = 'baskerville Old Face'
+hover 				= background #424242
+mainColor 			= #38495D
+secondaryColor 		= #377992
+darkColor 			= #192128
+lightColor 			= #FBF7E4
+primaryFont 		= 'futura'
+secondaryFont 		= 'baskerville Old Face'
 
 // edit()
 
@@ -39,7 +39,7 @@ secondaryFont = 'baskerville Old Face'
 .logo
 	col(1/1)
 	margin-bottom 6%
-	font-family 'futura'
+	font-family primaryFont
 	font-size 3em
 	font-weight 900
 	
@@ -72,8 +72,13 @@ ul li a:hover
 	background #FBF7E4
 	height 1000px
 	//Putting CSS Gradients on this breaks the Jeet apparently.
+		
 
-.rubricSearch
+// ============================================
+// ============================================
+// ============================================
+
+.form
 	center(500px)
 	margin-top 10%
 	padding 2%
@@ -83,14 +88,16 @@ ul li a:hover
 	
 	h1
 		col(1/1)
-		font-family 'futura'
+		font-family primaryFont
 		color mainColor
 		font-weight 100
 		font-size 2em
 		
 	label
 		col(1/1)
-		
+	
+		span
+			text-transform capitalize
 	input
 		width 96%
 		padding 3% 2%
@@ -102,18 +109,24 @@ ul li a:hover
 	
 	button
 		col(1/2)
+			
 		shift(1/2)
-		font-size 2em
-		font-family 'futura'
+		font-size 1.6em
+		font-family primaryFont
 		background secondaryColor
 		text-align center
 		color white
 		border none
+		padding 2%
 		border-bottom 3px darkColor solid
 		border-radius 5px
 		
 	button:hover
 		background darkColor
+
+// ============================================
+// ============================================
+// ============================================
 
 .addRubric
 	div
@@ -316,3 +329,9 @@ h3
 		-moz-column-count 5
 		column-count 5
 //<!--******************** Pintrest like coloumns END ********************-->
+
+.form label
+	font-family 'futura'
+	color mainColor
+	font-weight 100
+	font-size 1.2em
