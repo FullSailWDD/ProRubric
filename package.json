@@ -1,8 +1,8 @@
 {
-  "name": "project_delta",
+  "name": "proRubrics",
   "engine": "node 0.12.7",
   "version": "0.3.0",
-  "description": "Full Sail University Graduate Showcase Site",
+  "description": "Dynamic Rubric Tool",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

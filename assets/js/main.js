@@ -109,7 +109,7 @@ angular.module('ProRubric').service('GenFormData', function() {
         this.title = str;
     };
     GenForm.prototype.extractFormData = function(){
-        var aryDataCollection = {};
+        var objDataCollection = {};
         var aryTargetProps = ['title','value'];
 
         // Loop all generated inputs
@@ -124,13 +124,14 @@ angular.module('ProRubric').service('GenFormData', function() {
 
                     // Transpose property and value onto temp obj, building throught the loop
                     objExtration[prop] = input[prop];
+                    
                 }   
             }
 
             // Once each input has all targeted props fully stripped and transposed pair up the data from the input
-            aryDataCollection[objExtration.title] = objExtration.value;
+            objDataCollection[objExtration.title] = objExtration.value;
         });
-        this.extractedData = aryDataCollection;
+        this.extractedData = objDataCollection;
         return this.extractedData;
     };
 
@@ -148,6 +149,7 @@ angular.module('ProRubric').controller('rubricController', function ($scope, Gen
         // Inform the Server of the new Data
         socket.emit('add rubric', rubricNewData);
 
+        // Active Success feature of the form
         $scope.rubricFormData.processed = true;
     };
 
@@ -169,6 +171,8 @@ angular.module('ProRubric').controller('rubricController', function ($scope, Gen
                 placeholder: 'Students Construct a Simple...'
             }]
     });
+
+    // {title: 'xxxx', content: 'yyyy'}
 
     $scope.actionAdd = rubricAdd;
 });
