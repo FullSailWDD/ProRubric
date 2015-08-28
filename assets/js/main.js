@@ -2,7 +2,7 @@
 /* globals io,angular,$*/
 var socket = io.connect();
             
-angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
+var App = angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
             
 angular.module('ProRubric').config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
@@ -10,7 +10,7 @@ angular.module('ProRubric').config(function ($interpolateProvider, $routeProvide
         $routeProvider
             .when('/', {
                 templateUrl: 'views/searchBar.html',
-                controller: 'secondController'
+                controller: 'rubricController'
             })
             .when('/audit/:rubric_id', {
                 templateUrl: 'views/audit.html',
@@ -64,27 +64,95 @@ angular.module('ProRubric').controller('mainController', function ($scope) {
 });
 
 
-
-
-angular.module('ProRubric').controller('rubricController', function ($scope) {
-
-    $scope.rubricAdd = function () {
-
-        var gradeTierArray = [];
-
-        angular.forEach($scope.tags, function (value, index) {
-            gradeTierArray.push(Number(value.text));
+angular.module('ProRubric').service('GenFormData', function() {
+    var GenForm = function(args) {
+        this.title          = args.title         || '';
+        this.inputs         = args.aryInputs     || [];
+        this.actionTitle    = args.actionTitle   || '';
+        this.extractedData;
+    };
+    GenForm.prototype.addInput = function(input){
+        this.inputs.push({
+            title: input.title,
+            dispTitle: input.dispTitle, 
+            placeholder: input.placeholder,
+            value: ''
         });
+            
+    };
+    GenForm.prototype.setActionTitle = function(str){
+        this.actionTitle = str;
+    };
+    GenForm.prototype.setTitle = function(str){
+        this.title = str;
+    };
+    GenForm.prototype.extractFormData = function(){
+        var aryDataCollection = {};
+        var aryTargetProps = ['title','value'];
 
-        var rubricNew = {
-            title: $scope.rubricTitle,
-            content: $scope.rubricContent,
-            gradeTiers: gradeTierArray
-        };
+        // Loop all generated inputs
+        angular.forEach(this.inputs, function(input, key){
+            var objExtration = {};
 
-        console.log(gradeTierArray);
+            // Loop all properties on each input
+            for(var prop in input){
+                
+                // Only target the props in aryTargetProps
+                if(aryTargetProps.indexOf(prop) >= 0){
 
-        socket.emit('add rubric', rubricNew);
+                    // Transpose property and value onto temp obj, building throught the loop
+                    objExtration[prop] = input[prop];
+                }   
+            }
+
+            // Once each input has all targeted props fully stripped and transposed pair up the data from the input
+            aryDataCollection[objExtration.title] = objExtration.value;
+        });
+        this.extractedData = aryDataCollection;
+        return this.extractedData;
+    };
+
+    return GenForm;
+});
+
+
+angular.module('ProRubric').controller('rubricController', function ($scope, GenFormData) {
+
+    var rubricAdd = function (data) {
+
+        // var gradeTierArray = [];
+
+        // angular.forEach($scope.tags, function (value, index) {
+        //     gradeTierArray.push(Number(value.text));
+        // });
+        
+        
+        
+        var rubricNewData = $scope.rubricFormData.extractFormData();
+        console.log(rubricNewData);
+        socket.emit('add rubric', rubricNewData);
+    };
+
+   
+
+    $scope.rubricFormData = new GenFormData({
+        title: 'Deployment of Web Projects',
+        actionTitle: 'Create Rubric',
+        aryInputs:[{
+                dispTitle: 'Rubric Title', 
+                title: 'title', 
+                value: '', 
+                placeholder: 'Wk2 Assignment Title'
+            }, {
+                dispTitle: 'Content',
+                title: 'content', 
+                value: '', 
+                placeholder: 'Students Construct a Simple...'
+            }]
+    });
+
+    $scope.actionAdd = function (data) {
+        rubricAdd(data);
     };
 });
 
@@ -222,4 +290,26 @@ angular.module('ProRubric')
             console.log($scope.rubric);
         };
 
+    });
+
+    App.controller('searchBarController', ['$scope', function( $scope ){
+      
+    }]);
+
+    App.directive('genForm', function() {
+
+        return {
+            restrict: 'E',
+            scope: { 
+                payload: '=', // '=' Two-way binding
+                callback: '&' // '&' Method Binding
+            },
+            template:   '<div class="form">' +
+                            '<h1> {[{ payload.title }]} </h1>' +
+                            '<label data-ng-repeat="input in payload.inputs"><span> {[{ input.dispTitle }]} </span>' +
+                                '<input type="text" data-ng-model="input.value" placeholder="{[{ input.placeholder }]}" />' +
+                            '</label>' +
+                            '<button data-ng-click="callback(payload)"> {[{ payload.actionTitle }]} </button>' +
+                        '</div>',
+        };
     });

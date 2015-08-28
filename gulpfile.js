@@ -12,7 +12,8 @@ var gulp            = require('gulp'),
     gutil           = require('gulp-util'),
     concat          = require('gulp-concat'),
     ngAnnotate      = require('gulp-ng-annotate'),
-    htmlmin         = require('gulp-html-minifier');
+    htmlmin         = require('gulp-html-minifier'),
+    livereload      = require('gulp-livereload');
 
 var config = {
     jshint: ['./*.js', './*/*.js']
@@ -40,6 +41,7 @@ gulp.task('development', function () {
             script: 'app.js',
             ext: 'html js styl',
             ignore: ['ignored.js'],
+            // tasks:[],
             env: {
                 "NODE_ENV": "development"
             }
@@ -91,10 +93,11 @@ gulp.task('css', function () {
 
 //compiling js files and uglifying them
 gulp.task('jsCompress', function () {
-    gulp.src('./assets/js/*.js')
+    gulp.src('./assets/js/**/*.js')
         .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest('./public/js/build'))
+        .pipe(livereload())
         .on('error', gutil.log);
 });
 
@@ -110,6 +113,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('watch', function () {
+    livereload.listen();
     gulp.watch([        
         './assets/**/*', 
         './test/*'
