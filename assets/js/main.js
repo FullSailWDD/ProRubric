@@ -133,9 +133,12 @@ angular.module('ProRubric')
 
 
 angular.module('ProRubric')
-    .controller('editDegree', function ($scope, $routeParams, socket) {
+    .controller('editDegree', function ($scope, $routeParams, socket, $window) {
         $scope.reloadPage = function () {
             window.location.reload();
+        };
+        $scope.navBack = function() {
+            $window.history.back();
         };
         socket.emit('degree req', $routeParams.degree_id);
 
@@ -201,9 +204,12 @@ angular.module('ProRubric')
 
 
 angular.module('ProRubric')
-            .controller('editCourse', function ($scope, $routeParams, socket) {
+            .controller('editCourse', function ($scope, $routeParams, socket, $window) {
         $scope.reloadPage = function () {
             window.location.reload();
+        };
+        $scope.navBack = function() {
+            $window.history.back();
         };
         socket.emit('course req', $routeParams.course_id);
 
