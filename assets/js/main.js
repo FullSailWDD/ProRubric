@@ -54,8 +54,7 @@ angular.module('ProRubric').config(function ($interpolateProvider, $routeProvide
             })
     })
 
-angular.module('ProRubric')
-    .controller('dashboardController', function ($scope, socket) {
+angular.module('ProRubric').controller('dashboardController', function ($scope, socket) {
 
         $scope.reloadPage = function () {
             window.location.reload();
@@ -66,13 +65,6 @@ angular.module('ProRubric')
                     $scope.degreeView = data;
                 } else {
                     console.log('You has no degrees :(');
-                }
-            });
-            socket.on('find courses', function (data) {
-                if (data.length) {
-                    $scope.courseView = data;
-                } else {
-                    console.log('You has no courses :(');
                 }
             });
         });
@@ -94,15 +86,26 @@ angular.module('ProRubric')
     })
 
 angular.module('ProRubric')
-    .controller('coursesController', function ($scope, socket) {
+    .controller('coursesController', function ($scope, socket, $window) {
 
         $scope.reloadPage = function () {
             window.location.reload();
         };
+        $scope.navBack = function() {
+            $window.history.back();
+        };
+
         $scope.$on('$viewContentLoaded', function () {
+            socket.on('find degrees', function (data) {
+                if (data.length) {
+                    $scope.degreeView = data;
+                } else {
+                    console.log('You has no degrees :(');
+                }
+            });
             socket.on('find courses', function (data) {
                 if (data.length) {
-                    console.log(data);
+                    console.log('Show me the data',data);
                     $scope.courseView = data;
                 } else {
                     console.log('You has no courses :(');
@@ -114,7 +117,8 @@ angular.module('ProRubric')
             var _data = {
                 title: $scope.courseTitle,
                 acronym: $scope.courseAcronym,
-                description: $scope.courseDescription
+                description: $scope.courseDescription,
+                courseDegree: $scope.courseDegree
             };
             socket.emit('add course', _data);
             $scope.reloadPage();

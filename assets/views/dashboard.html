@@ -8,10 +8,13 @@
         <button ng-click="degreeAdd()"> Create Degree</button>
     </div>
     <div class="wrapper">
+        <div class="columns">
             <div class="pin" ng-repeat="x in degreeView | filter:{type:degree}">
                     <h2 class="classname">{[{x.title}]}</h2>
                     <p>{[{x.acronym}]}</p>
-                    <p><button ng-click="degreeDelete(x._id)">Delete Degree</button><a href="#/edit/degree/{[{x._id}]}">Edit Degree</a></p>
+                    <p><button ng-click="degreeDelete(x._id)">Delete Degree</button></p>
+                <a href="#/edit/degree/{[{x._id}]}">Edit Degree</a>
             </div>
+        </div>
     </div>
 </div>

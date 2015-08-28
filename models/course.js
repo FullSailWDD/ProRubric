@@ -9,6 +9,8 @@ module.exports = function() {
         title : String,
         acronym : String,
         description : String,
+        type : String,
+        courseDegree: String,
         degree_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
@@ -24,6 +26,8 @@ module.exports = function() {
             title:        course.title,
             acronym:      course.acronym,
             description:  course.description,
+            type:         'course',
+            courseDegree: course.courseDegree,
             degree_id:    course.degree_id
         });
 

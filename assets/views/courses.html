@@ -1,27 +1,26 @@
 <div ng-controller="coursesController" class="mainDefaultBody">
     <div id="rubricSearch">
+        <button ng-click="navBack()">back</button>
         <h1>Create Course</h1>
         <label>Course Name Here:</label>
-        <input type="text" ng-model="courseTitle" />
+        <input type="text" ng-model="courseTitle" required/>
         <label>Course Acronym</label>
-        <input type="text" ng-model="courseAcronym" />
+        <input type="text" ng-model="courseAcronym" required/>
         <label>Course Description</label>
-        <input type="text" ng-model="courseDescription" />
+        <input type="text" ng-model="courseDescription" required/>
+        <label>Course Degree</label>
+        <select ng-model="courseDegree">
+            <option name="degree" ng-repeat="x in degreeView">{[{x.title}]}</option>
+        </select>
         <button ng-click="courseAdd()"> Create Course</button>
     </div>
-    <div id="wrapper">
-        <ul>
-                    <li ng-repeat="x in courseView">
-                        <ul>
-                            <li>{[{x._id}]}</li>
-                            <li>title: {[{x.title}]}</li>
-                            <li>acronym: {[{x.acronym}]}</li>
-                            <li>Description: {[{x.description}]}</li>
-
-                            <a href="#/edit/course/{[{x._id}]}">Edit Course</a>
-                            <button ng-click="courseDelete(x._id)">Delete Course</button>
-                        </ul>
-                    </li>
-        </ul>
-    </div>
+    <div class="wrapper">
+            <div ng-repeat="d in courseView">
+                {[{d.title}]}
+                <p>{[{d.acronym}]}</p>
+                <p>{[{d.description}]}</p>
+                <p><button ng-click="courseDelete(d._id)">Delete Course</button></p>
+                <a href="#/edit/course/{[{d._id}]}">Edit Course</a>
+            </div>
+        </div>
 </div>
