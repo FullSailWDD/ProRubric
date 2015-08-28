@@ -63,12 +63,34 @@ angular.module('ProRubric').controller('mainController', function ($scope) {
     });
 });
 
+angular.module('ProRubric').directive('genForm', function() {
+
+    return {
+        restrict: 'E',
+        scope: { 
+            payload: '=', // '=' Two-way binding
+            callback: '&' // '&' Method Binding
+        },
+        template:   '<div class="form">' +
+                        '<div ng-show="payload.processed"><h1> {[{ payload.successMsg }]} </h1></div>' +
+                        '<div ng-hide="payload.processed">' +
+                            '<h1> {[{ payload.title }]} </h1>' +
+                            '<label data-ng-repeat="input in payload.inputs"><span> {[{ input.dispTitle }]} </span>' +
+                                '<input type="text" data-ng-model="input.value" placeholder="{[{ input.placeholder }]}" />' +
+                            '</label>' +
+                            '<button data-ng-click="callback(payload)"> {[{ payload.actionTitle }]} </button>' +
+                        '</div>' +
+                    '</div>',
+    };
+});
 
 angular.module('ProRubric').service('GenFormData', function() {
     var GenForm = function(args) {
         this.title          = args.title         || '';
         this.inputs         = args.aryInputs     || [];
         this.actionTitle    = args.actionTitle   || '';
+        this.successMsg     = args.successMsg    || 'Success';
+        this.processed      = false;
         this.extractedData;
     };
     GenForm.prototype.addInput = function(input){
@@ -118,26 +140,23 @@ angular.module('ProRubric').service('GenFormData', function() {
 
 angular.module('ProRubric').controller('rubricController', function ($scope, GenFormData) {
 
-    var rubricAdd = function (data) {
+    var rubricAdd = function () {
 
-        // var gradeTierArray = [];
-
-        // angular.forEach($scope.tags, function (value, index) {
-        //     gradeTierArray.push(Number(value.text));
-        // });
-        
-        
-        
+        // Process the Generated Form's Captured Data
         var rubricNewData = $scope.rubricFormData.extractFormData();
-        console.log(rubricNewData);
+
+        // Inform the Server of the new Data
         socket.emit('add rubric', rubricNewData);
+
+        $scope.rubricFormData.processed = true;
     };
 
    
-
+    // Generate a form based upon this info
     $scope.rubricFormData = new GenFormData({
         title: 'Deployment of Web Projects',
         actionTitle: 'Create Rubric',
+        successMsg: 'New Rubric Added!',
         aryInputs:[{
                 dispTitle: 'Rubric Title', 
                 title: 'title', 
@@ -151,9 +170,7 @@ angular.module('ProRubric').controller('rubricController', function ($scope, Gen
             }]
     });
 
-    $scope.actionAdd = function (data) {
-        rubricAdd(data);
-    };
+    $scope.actionAdd = rubricAdd;
 });
 
 
@@ -295,21 +312,3 @@ angular.module('ProRubric')
     App.controller('searchBarController', ['$scope', function( $scope ){
       
     }]);
-
-    App.directive('genForm', function() {
-
-        return {
-            restrict: 'E',
-            scope: { 
-                payload: '=', // '=' Two-way binding
-                callback: '&' // '&' Method Binding
-            },
-            template:   '<div class="form">' +
-                            '<h1> {[{ payload.title }]} </h1>' +
-                            '<label data-ng-repeat="input in payload.inputs"><span> {[{ input.dispTitle }]} </span>' +
-                                '<input type="text" data-ng-model="input.value" placeholder="{[{ input.placeholder }]}" />' +
-                            '</label>' +
-                            '<button data-ng-click="callback(payload)"> {[{ payload.actionTitle }]} </button>' +
-                        '</div>',
-        };
-    });
