@@ -57,6 +57,15 @@ module.exports = function() {
             });
         }
     },
+    _findOne = function(data, success,fail){
+            _model.findById(data, function(err,doc) {
+                if (err) {
+                    fail(err);
+                } else {
+                    success(doc);
+                }
+            });
+        },
     
     // REMOVE
     _remove = function(rubric,success,fail){
@@ -80,6 +89,7 @@ module.exports = function() {
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        find:           _findOne
     };
 }();    

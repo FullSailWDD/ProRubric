@@ -16,6 +16,10 @@ angular.module('ProRubric').config(function ($interpolateProvider, $routeProvide
                 templateUrl: 'views/editCourse.html',
                 controller: 'editCourse'
             })
+            .when('/rubric/edit/:rubric_id', {
+                templateUrl: 'views/editRubric.html',
+                controller: 'editRubric'
+            })
             .when('/course', {
                 templateUrl: 'views/courses.html',
                 controller: 'coursesController'
@@ -31,10 +35,6 @@ angular.module('ProRubric').config(function ($interpolateProvider, $routeProvide
             .when('/addForm', {
                 templateUrl: 'views/addForm.html',
                 controller: 'secondController'
-            })
-            .when('/addRubric', {
-                templateUrl: 'views/addRubric.html',
-                controller: 'rubricController'
             })
             .when('/addLineItem', {
                 templateUrl: 'views/addLineItem.html',
@@ -157,9 +157,25 @@ angular.module('ProRubric')
             $scope.reloadPage();
         }
     });
-    
 
 
+angular.module('ProRubric')
+    .controller('editRubric', function ($scope, $routeParams) {
+
+        socket.emit('find rubric', $routeParams.rubric_id);
+
+        $scope.editRubric = function (){
+            socket.emit('edit rubric', $scope.newRubric);
+            socket.on('edit rubric',function (data){
+                console.log(data);
+            });
+            socket.on('error', function(error){
+                $scope.error = error.text;
+            });
+        };
+
+
+    });
 
 
 angular.module('ProRubric')
@@ -183,7 +199,8 @@ angular.module('ProRubric')
 
         socket.emit('add rubric', rubricNew);
     };
-});
+
+    });
 
 
 
