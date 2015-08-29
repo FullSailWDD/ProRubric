@@ -1,5 +1,5 @@
 module.exports = function (app, socket) {
-
+    
     var Degree = require('../models/degree.js'),
         Course = require('../models/course.js'),
         Rubric = require('../models/rubric.js'),
@@ -24,7 +24,6 @@ module.exports = function (app, socket) {
                     console.log(err, 'Return all update');
                 });
             });
-            
             Degree.all(function (doc) {
                 socket.emit('find degrees', doc);
             }, function (err) {

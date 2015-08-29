@@ -27,8 +27,14 @@ App.config(function ($interpolateProvider, $routeProvider) {
             .when('/rubric/new/:course_id', {
                 templateUrl: 'views/rubric.html',
                 controller: 'rubricController'
+            })
+            .when('/rubric/create/:title/:pid', {
+                templateUrl: 'views/rubric.html',
+                controller: 'rubricController'
+            })
+            .otherwise({
+                redirectTo: '#/'
             });
-            
     });
     
 App.factory('socket', function ($rootScope) {
@@ -245,7 +251,7 @@ App.controller('courseController', function ($scope, $routeParams, socket, GenFo
     
 });
 
-App.controller('rubricController', function ($scope,$routeParams ,GenFormData,socket) {
+App.controller('rubricController', function ($scope, $routeParams ,GenFormData,socket, $location) {
 
       $scope.$on('$viewContentLoaded', function () {
         socket.on('find rubrics', function (data) {
@@ -256,15 +262,33 @@ App.controller('rubricController', function ($scope,$routeParams ,GenFormData,so
                 }
             });
       });
-
-    var rubricAdd = function () {
+      
+      
+    if($routeParams){
+        
+        var data = {
+            title: $routeParams.title,
+            parentId: $routeParams.pid
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        var rubricAdd = function () {
     
         // Process the Generated Form's Captured Data
         var rubricNewData = $scope.rubricFormData.extractFormData();
         
-        console.log(rubricNewData);
-        // Inform the Server of the new Data
-        socket.emit('rubric res', rubricNewData);
+        
+        $location.path('/rubric/create/'+rubricNewData.title+'/'+rubricNewData.parentId);
         // Active Success feature of the form
         $scope.rubricFormData.processed = true;
     };
@@ -302,7 +326,59 @@ App.controller('rubricController', function ($scope,$routeParams ,GenFormData,so
     });
     // {title: 'xxxx', content: 'yyyy'}
     $scope.actionAdd = rubricAdd;
+        
     
+        
+        console.log(data);
+        
+    }else{  
+      
+
+    var rubricAdd = function () {
+    
+        // Process the Generated Form's Captured Data
+        var rubricNewData = $scope.rubricFormData.extractFormData();
+        
+        
+        $location.path('/rubric/create/'+rubricNewData.title+'/'+rubricNewData.parentId);
+        // Active Success feature of the form
+        $scope.rubricFormData.processed = true;
+    };
+
+    // Generate a form based upon this info
+    $scope.rubricFormData = new GenFormData({
+        
+        title: 'Create Rubric',
+        actionTitle: 'Create Rubric',
+        successMsg: 'New Rubric Added!',
+        aryInputs:[{
+            
+                dispTitle: 'Rubric Title', 
+                title: 'title', 
+                value: '', 
+                placeholder: 'Enter Assignment Title'
+            },
+            {
+                dispTitle: 'Sections',
+                title: 'sections', 
+                value: '', 
+                placeholder: 'Enter Sections Followed by a comma (code, aethetics, design)'
+            },
+            {
+                dispTitle: 'Grade Tiers',
+                title: 'gradeTiers', 
+                value: '', 
+                placeholder: 'Enter Grade Tiers (100, 75, 50, 30, 0)'
+            },
+            {
+                dispTitle: 'Course ID',
+                title: 'parentId',
+                value:  $routeParams.course_id,
+            }]
+    });
+    // {title: 'xxxx', content: 'yyyy'}
+    $scope.actionAdd = rubricAdd;
+    }
 });
 
 

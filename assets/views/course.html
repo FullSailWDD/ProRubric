@@ -2,7 +2,9 @@
     
     <gen-form data-payload="courseFormData" data-callback="actionAdd()"></gen-form>
     
-    <div ng-repeat="x in courseView" class="repeatContent">
+    <input type="search" ng-model="q" aria-label="filter degrees" />
+    
+    <div ng-repeat="x in courseView | filter:q as results" class="repeatContent">
         <ul>
             <li></li>
             <li>{[{x.title}]}</li>

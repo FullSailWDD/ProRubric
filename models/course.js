@@ -35,7 +35,7 @@ module.exports = function() {
                 success(newCourse);
             }
         });
-        },
+    },
     
     
     // UPDATE
@@ -43,11 +43,8 @@ module.exports = function() {
 
         var cleanData = data.sanitize(course);
 
-
         if(cleanData){
-
             _model.update({'_id':course._id}, {$set:cleanData}, function(err,doc){
-
                 if (err) {
                     fail(err);
                 }else{
@@ -55,14 +52,11 @@ module.exports = function() {
                 }
             });
         }
-
-
-        },
+    },
     
     
     // REMOVE
     _remove = function(course,success,fail){
-
         _model.findByIdAndRemove(course, function(err){
             if (err) {
                 fail(err);
@@ -81,14 +75,14 @@ module.exports = function() {
     
     // FIND
      _findAll = function(success,fail){
-                _model.find({}, function(err,doc){
-                    if (err) {
-                        fail(err);
-                    }else{
-                        success(doc);
-                    }
-                });
-            };
+            _model.find({}, function(err,doc){
+                if (err) {
+                    fail(err);
+                }else{
+                    success(doc);
+                }
+            });
+        };
     
     
 // Publicly Available

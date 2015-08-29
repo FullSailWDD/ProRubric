@@ -2,17 +2,16 @@
     
     <gen-form data-payload="dashboardFormData" data-callback="actionAdd()"></gen-form>
 
+        <input type="search" ng-model="q" aria-label="filter degrees" />
+
     <div>
-        <div ng-repeat="x in degreeView" class="repeatContent">
+        <div ng-repeat="x in degreeView | filter:q as results" class="repeatContent">
+            <div>
+                <a href="#/degree/update/{[{x._id}]}">Edit</a>
+                <a ng-click="degreeDelete(x._id)">Delete</a>
+            </div>
             <h2 class="rubricAcronym">{[{x.acronym}]}</h2>
             <h4 class="rubricTitle">{[{x.title}]}</h4>
-            <a href="#/degree/update/{[{x._id}]}">Edit</a>
-            <!--<ul>-->
-            <!--    <li class="rubricAcronym">{[{x.acronym}]}</li>-->
-            <!--    <li class="rubricTitle">{[{x.title}]}</li>-->
-            <!--    <li><a href="#/degree/update/{[{x._id}]}">Edit</a></li>-->
-            <!--</ul>-->
-            <button ng-click="degreeDelete(x._id)">Delete Degree</button>
         </div>
     </div>
     
