@@ -1,0 +1,15 @@
+<div ng-contoller='rubricController'>
+    
+    <gen-form data-payload="rubricFormData" data-callback="actionAdd()"></gen-form>
+    
+    <div ng-repeat="x in rubricView" class="repeatContent">
+        <ul>
+            <li></li>
+            <li>{[{x.title}]}</li>
+            <li>{[{x.acronym}]}</li>
+            <li>{[{x.description}]}</li>
+            <li><a href="#/rubric/update/{[{x._id}]}">Edit</a></li>
+            <li><button ng-click="rubricDelete(x._id)">Delete Rubric</button></li>
+        </ul>
+    </div>
+</div>

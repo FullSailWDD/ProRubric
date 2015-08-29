@@ -1,0 +1,14 @@
+<div ng-contoller='dashboardController'>
+    
+    <gen-form data-payload="dashboardFormData" data-callback="actionAdd()"></gen-form>
+    
+    
+    <div ng-repeat="x in degreeView" class="repeatContent">
+        <ul>
+            <li class="rubricTitle">{[{x.title}]}</li>
+            <li class="rubricAcronym">{[{x.acronym}]}</li>
+            <li><a href="#/degree/update/{[{x._id}]}">Edit</a></li>
+        </ul>
+        <button ng-click="degreeDelete(x._id)">Delete Degree</button>
+    </div>
+</div>

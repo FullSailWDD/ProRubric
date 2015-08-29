@@ -21,7 +21,6 @@ module.exports = function() {
     var _save = function(course, success, fail){
 
         var newCourse = new _model({
-            
             title:        course.title,
             acronym:      course.acronym,
             description:  course.description,
@@ -64,16 +63,32 @@ module.exports = function() {
     // REMOVE
     _remove = function(course,success,fail){
 
-        _model.findByIdAndRemove({'_id':course._id}, function(err, doc){
+        _model.findByIdAndRemove(course, function(err){
             if (err) {
                 fail(err);
-            }else{
-                success(doc);
             }
         });
-    };
+    },
+    _findOne = function(data, success,fail){
+            _model.find({_id:data}, function(err,doc) {
+                if (err) {
+                    fail(err);
+                } else {
+                    success(doc);
+                }
+            });
+        },
     
-    
+    // FIND
+     _findAll = function(success,fail){
+                _model.find({}, function(err,doc){
+                    if (err) {
+                        fail(err);
+                    }else{
+                        success(doc);
+                    }
+                });
+            }
     
     
 // Publicly Available
@@ -83,7 +98,9 @@ module.exports = function() {
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        find :          _findAll,
+        one:            _findOne
     };
 }();
 

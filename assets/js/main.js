@@ -1,69 +1,302 @@
 'use strict';
-/* globals io,angular,$*/
-var socket = io.connect();
-            
 var App = angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
             
-angular.module('ProRubric').config(function ($interpolateProvider, $routeProvider) {
+App.config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');
         $routeProvider
             .when('/', {
-                templateUrl: 'views/searchBar.html',
+                templateUrl: 'views/dashboard.html',
+                controller: 'dashboardController'
+            })
+             .when('/degree/update/:id', {
+                templateUrl: 'views/editDegree.html',
+                controller: 'dashboardController'
+            })
+            
+              .when('/course', {
+                templateUrl: 'views/course.html',
+                controller: 'courseController'
+            })
+            
+              .when('/course/update/:id', {
+                templateUrl: 'views/editCourse.html',
+                controller: 'courseController'
+            })
+            
+            .when('/rubric/new/:course_id', {
+                templateUrl: 'views/rubric.html',
                 controller: 'rubricController'
             })
-            .when('/audit/:rubric_id', {
-                templateUrl: 'views/audit.html',
-                controller: 'AuditController'
-            })
-            .when('/addInfo', {
-                templateUrl: 'views/addInfo.html',
-                controller: 'secondController'
-            })
-            .when('/addForm', {
-                templateUrl: 'views/addForm.html',
-                controller: 'secondController'
-            })
-            .when('/addRubric', {
-                templateUrl: 'views/addRubric.html',
-                controller: 'rubricController'
-            })
-            .when('/addLineItem', {
-                templateUrl: 'views/addLineItem.html',
-                controller: 'lineItemController'
-            })
-            .when('/home', {
-                templateUrl: 'views/home.html',
-                controller: 'secondController'
-            })
-            .when('/info', {
-                templateUrl: 'views/info.html',
-                controller: 'secondController'
-            })
-            .when('/text', {
-                templateUrl: 'views/text.html',
-                controller: 'secondController'
-            });
+            
     });
     
- 
-
-angular.module('ProRubric').controller('mainController', function ($scope) {
-    $scope.degreeAdd = function () {
-        var degreeNew = {
-            title: $scope.degreeTitle,
-            acronym: $scope.degreeAcronym
+App.factory('socket', function ($rootScope) {
+        var socket = io.connect();
+        return {
+            on: function (eventName, callback) {
+                socket.on(eventName, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        callback.apply(socket, args);
+                    });
+                });
+            },
+            emit: function (eventName, data, callback) {
+                socket.emit(eventName, data, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        if (callback) {
+                            callback.apply(socket, args);
+                        }
+                    });
+                });
+            }
         };
-        socket.emit('add degree', degreeNew);
-    };
-    socket.once('find degrees', function (data) {
-        angular.forEach(data, function (key) {
-            $('.columns').append('<div class="pin"><img src="http://placehold.it/140x100"> <h2 class="classname">' + key.title + '</h2> <a href="#">Delete Degree</a></div>');
-        });
+    })
+    
+App.controller('dashboardController', function ($scope, $routeParams, socket, GenFormData) {
+
+    if($routeParams.id){
+        socket.emit('degree req', $routeParams.id);
+        socket.on('degree send', function(data){
+
+        var degreeUpdate = function () {
+            // Process the Generated Form's Captured Data
+            var degreeUpdateData = $scope.dashboardUpdateFormData.extractFormData();
+            // Inform the Server of the new Data
+            socket.emit('update degree', degreeUpdateData);
+            // Active Success feature of the form
+            $scope.dashboardUpdateFormData.processed = true;
+        };
+        
+            // Generate a form based upon this info
+        $scope.dashboardUpdateFormData = new GenFormData({
+                title: 'Update Degree',
+                actionTitle: 'Update Degree',
+                successMsg: 'Degree Updated!',
+                aryInputs:[{
+                        title: 'title', 
+                        dispTitle: 'Title', 
+                        value: data[0].title,
+                    }, {
+                        title: 'acronym', 
+                        dispTitle: 'Acronym',
+                        value: data[0].acronym,
+                    },
+                    {
+                        title: 'id', 
+                        value: data[0]._id,
+                    }]
+            });
+            // {title: 'xxxx', content: 'yyyy'}
+            $scope.actionAdd = degreeUpdate;
     });
+     
+    }
+     
+
+    var degreeAdd = function () {
+        // Process the Generated Form's Captured Data
+        var degreeNewData = $scope.dashboardFormData.extractFormData();
+        // Inform the Server of the new Data
+        socket.emit('add degree', degreeNewData);
+        // Active Success feature of the form
+        $scope.dashboardFormData.processed = true;
+    };
+        // Generate a form based upon this info
+        $scope.dashboardFormData = new GenFormData({
+            title: 'Create Degree',
+            actionTitle: 'Create Degree',
+            successMsg: 'New Degree Added!',
+            aryInputs:[{
+                    dispTitle: 'Degree Title', 
+                    title: 'title', 
+                    placeholder: 'Enter Degree Title'
+                }, {
+                    dispTitle: 'Acronym',
+                    title: 'acronym', 
+                    placeholder: 'Enter Degree Acronym'
+                }]
+        });
+        // {title: 'xxxx', content: 'yyyy'}
+        $scope.actionAdd = degreeAdd;
+
+        $scope.$on('$viewContentLoaded', function () {
+            socket.on('find degrees', function (data) {
+                if (data.length) {
+                    $scope.degreeView = data;
+                } else {
+                    console.log('You has no degrees :(');
+                }
+            });
+      });
+      
+    $scope.reloadPage = function () {
+            window.location.reload();
+    };
+      
+    $scope.degreeDelete = function (_data) {
+        console.log(_data);
+            socket.emit('delete degree', _data);
+            $scope.reloadPage();
+    }
+      
+})
+
+App.controller('courseController', function ($scope, $routeParams, socket, GenFormData) {
+    
+ if($routeParams.id){
+        socket.emit('course req', $routeParams.id);
+        socket.on('course send', function(data){
+            
+        var courseUpdate = function () {
+            // Process the Generated Form's Captured Data
+            var courseUpdateData = $scope.courseUpdateFormData.extractFormData();
+            // Inform the Server of the new Data
+            socket.emit('update course', courseUpdateData);
+            // Active Success feature of the form
+            $scope.courseUpdateFormData.processed = true;
+        };
+        
+            // Generate a form based upon this info
+        $scope.courseUpdateFormData = new GenFormData({
+                title: 'Update Course',
+                actionTitle: 'Update Course',
+                successMsg: 'Course Updated!',
+                aryInputs:[{
+                        title: 'title', 
+                        dispTitle: 'Title', 
+                        value: data[0].title,
+                    }, {
+                        title: 'acronym', 
+                        dispTitle: 'Acronym',
+                        value: data[0].acronym,
+                    },
+                    {
+                        title : 'description',
+                        dispTitle: 'description',
+                        value : data[0].description,
+                        
+                    },
+                    {
+                        title: 'id', 
+                        value: data[0]._id,
+                    }]
+            });
+            // {title: 'xxxx', content: 'yyyy'}
+            $scope.actionAdd = courseUpdate;
+    });
+     
+    }
+    
+    
+        var courseAdd = function () {
+        // Process the Generated Form's Captured Data
+        var courseNewData = $scope.courseFormData.extractFormData();
+        // Inform the Server of the new Data
+        socket.emit('add course', courseNewData);
+        // Active Success feature of the form
+        $scope.courseFormData.processed = true;
+    };
+        // Generate a form based upon this info
+        $scope.courseFormData = new GenFormData({
+            title: 'Create Course',
+            actionTitle: 'Create Course',
+            successMsg: 'New Course Added!',
+            aryInputs:[{
+                    dispTitle: 'Course Title', 
+                    title: 'title', 
+                    placeholder: 'Enter Degree Title'
+                }, {
+                    dispTitle: 'Acronym',
+                    title: 'acronym', 
+                    placeholder: 'Enter Course Acronym'
+                },{
+                    dispTitle: 'Description',
+                    title: 'description',
+                    placeholder: 'Enter Description'
+                }]
+        });
+        // {title: 'xxxx', content: 'yyyy'}
+        $scope.actionAdd = courseAdd;
+      
+      $scope.$on('$viewContentLoaded', function () {
+        socket.on('find course', function (data) {
+                if (data.length) {
+                    $scope.courseView = data;
+                } else {
+                    console.log('You has no course :(');
+                }
+            });
+      });
+      
+    $scope.reloadPage = function () {
+            window.location.reload();
+    };
+      
+    $scope.courseDelete = function (_data) {
+        console.log(_data);
+            socket.emit('delete course', _data);
+            $scope.reloadPage();
+    }
+    
+    
 });
 
-angular.module('ProRubric').directive('genForm', function() {
+
+App.controller('rubricController', function ($scope,$routeParams ,GenFormData,socket) {
+
+    var rubricAdd = function () {
+    
+        // Process the Generated Form's Captured Data
+        var rubricNewData = $scope.rubricFormData.extractFormData();
+        
+        console.log(rubricNewData);
+        // Inform the Server of the new Data
+        socket.emit('rubric res', rubricNewData);
+        // Active Success feature of the form
+        $scope.rubricFormData.processed = true;
+    };
+
+    // Generate a form based upon this info
+    $scope.rubricFormData = new GenFormData({
+        
+        title: 'Create Rubric',
+        actionTitle: 'Create Rubric',
+        successMsg: 'New Rubric Added!',
+        aryInputs:[{
+            
+                dispTitle: 'Rubric Title', 
+                title: 'title', 
+                value: '', 
+                placeholder: 'Enter Assignment Title'
+            },
+            {
+                dispTitle: 'Sections',
+                title: 'sections', 
+                value: '', 
+                placeholder: 'Enter Sections Followed by a comma (code, aethetics, design)'
+            },
+            {
+                dispTitle: 'Grade Tiers',
+                title: 'gradeTiers', 
+                value: '', 
+                placeholder: 'Enter Grade Tiers (100, 75, 50, 30, 0)'
+            },
+            {
+                dispTitle: 'Course ID',
+                title: 'courseParent',
+                value:  $routeParams.course_id,
+            }]
+    });
+    // {title: 'xxxx', content: 'yyyy'}
+    $scope.actionAdd = rubricAdd;
+    
+});
+
+
+App.directive('genForm', function() {
 
     return {
         restrict: 'E',
@@ -84,9 +317,10 @@ angular.module('ProRubric').directive('genForm', function() {
     };
 });
 
-angular.module('ProRubric').service('GenFormData', function() {
+App.service('GenFormData', function() {
     var GenForm = function(args) {
         this.title          = args.title         || '';
+        this.nghide         = args.nghide         || '';
         this.inputs         = args.aryInputs     || [];
         this.actionTitle    = args.actionTitle   || '';
         this.successMsg     = args.successMsg    || 'Success';
@@ -107,6 +341,9 @@ angular.module('ProRubric').service('GenFormData', function() {
     };
     GenForm.prototype.setTitle = function(str){
         this.title = str;
+    };
+    GenForm.prototype.setNg = function(str){
+        this.setNg = str;
     };
     GenForm.prototype.extractFormData = function(){
         var objDataCollection = {};
@@ -139,63 +376,10 @@ angular.module('ProRubric').service('GenFormData', function() {
 });
 
 
-angular.module('ProRubric').controller('rubricController', function ($scope, GenFormData) {
-
-    var rubricAdd = function () {
-
-        // Process the Generated Form's Captured Data
-        var rubricNewData = $scope.rubricFormData.extractFormData();
-
-        // Inform the Server of the new Data
-        socket.emit('add rubric', rubricNewData);
-
-        // Active Success feature of the form
-        $scope.rubricFormData.processed = true;
-    };
-
-   
-    // Generate a form based upon this info
-    $scope.rubricFormData = new GenFormData({
-        title: 'Deployment of Web Projects',
-        actionTitle: 'Create Rubric',
-        successMsg: 'New Rubric Added!',
-        aryInputs:[{
-                dispTitle: 'Rubric Title', 
-                title: 'title', 
-                value: '', 
-                placeholder: 'Wk2 Assignment Title'
-            }, {
-                dispTitle: 'Content',
-                title: 'content', 
-                value: '', 
-                placeholder: 'Students Construct a Simple...'
-            }]
-    });
-
-    // {title: 'xxxx', content: 'yyyy'}
-
-    $scope.actionAdd = rubricAdd;
-});
 
 
 
-
-angular.module('ProRubric').controller('lineItemController', function ($scope) {
-
-
-    $scope.lineItemAdd = function () {
-        var lineItemNew = {
-            title: $scope.itemTitle,
-            content: $scope.itemContent
-        };
-
-        socket.emit('add lineItem', lineItemNew);
-    };
-});
-
-
-angular.module('ProRubric')
-    .service('Audit', function() {
+App.service('Audit', function() {
         // TODO Static Data currently. Feed this from the DB and create this data structure.
         this.data = {
                 auditMatrix:[],     // Not from the Database
@@ -235,8 +419,8 @@ angular.module('ProRubric')
             };
     });
 
-angular.module('ProRubric')
-    .controller('AuditController', function( $scope, Audit ){
+
+App.controller('AuditController', function( $scope, Audit ){
         
         // Setup base var to run audits against.
         $scope.rubric          = Audit.data;
@@ -312,7 +496,3 @@ angular.module('ProRubric')
         };
 
     });
-
-    App.controller('searchBarController', ['$scope', function( $scope ){
-      
-    }]);

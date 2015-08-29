@@ -9,6 +9,7 @@ module.exports = function() {
         title : String,
         content : String,
         gradeTiers : [Number],
+        parentId: String,
         course_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
@@ -30,6 +31,7 @@ module.exports = function() {
             title:        rubric.title,
             content:      rubric.content,
             course_id:    rubric.course_id,
+            parentId:     rubric.courseParent,
             gradeTiers:   rubric.gradeTiers
         });
 

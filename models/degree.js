@@ -58,15 +58,23 @@ module.exports = function(app, socket){
 
 
         },
-
-    // REMOVE
-        _remove = function(degree,success,fail){
-
-            _model.findByIdAndRemove({'_id':degree._id}, function(err,doc){
+        
+    _findOne = function(data, success,fail){
+            _model.find({_id:data}, function(err,doc) {
                 if (err) {
                     fail(err);
-                }else{
+                } else {
                     success(doc);
+                }
+            });
+        },
+
+    // REMOVE
+        _remove = function(degree, fail){
+
+            _model.findByIdAndRemove(degree, function(err,doc){
+                if (err) {
+                    fail(err);
                 }
             });
         };
@@ -80,6 +88,7 @@ module.exports = function(app, socket){
         add :           _save,
         update :        _update,
         remove :        _remove,
-        all:            _findAll
+        all:            _findAll,
+        one:            _findOne
     };
 }();
