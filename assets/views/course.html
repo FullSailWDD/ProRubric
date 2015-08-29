@@ -1,7 +1,6 @@
 <div ng-contoller='courseController'>
-    
     <gen-form data-payload="courseFormData" data-callback="actionAdd()"></gen-form>
-    
+
     <input type="search" ng-model="q" aria-label="filter degrees" />
     
     <div ng-repeat="x in courseView | filter:q as results" class="repeatContent">
@@ -10,7 +9,7 @@
             <li>{[{x.title}]}</li>
             <li>{[{x.acronym}]}</li>
             <li>{[{x.description}]}</li>
-            <li><a href="#/rubric/new/{[{x._id}]}">New Rubric</a></li>
+            <li><a href="#/rubric/new/add/{[{x._id}]}">New Rubric</a></li>
             <li><a href="#/course/update/{[{x._id}]}">Edit</a></li>
             <li><button ng-click="courseDelete(x._id)">Delete Course</button></li>
         </ul>

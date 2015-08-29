@@ -24,11 +24,11 @@ App.config(function ($interpolateProvider, $routeProvider) {
                 controller: 'courseController'
             })
             
-            .when('/rubric/new/:course_id', {
+            .when('/rubric/new/:action/:course_id', {
                 templateUrl: 'views/rubric.html',
                 controller: 'rubricController'
             })
-            .when('/rubric/create/:title/:pid', {
+            .when('/rubric/create/:action/:title/:pid/:section/:gradeTiers', {
                 templateUrl: 'views/rubric.html',
                 controller: 'rubricController'
             })
@@ -264,31 +264,14 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
       });
       
       
-    if($routeParams){
-        
-        var data = {
-            title: $routeParams.title,
-            parentId: $routeParams.pid
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        var rubricAdd = function () {
+    if($routeParams.action === 'add'){
+         var rubricAdd = function () {
     
         // Process the Generated Form's Captured Data
         var rubricNewData = $scope.rubricFormData.extractFormData();
         
         
-        $location.path('/rubric/create/'+rubricNewData.title+'/'+rubricNewData.parentId);
+        $location.path('/rubric/create/sections/'+rubricNewData.title+'/'+rubricNewData.parentId+'/'+rubricNewData.sections+'/'+rubricNewData.gradeTiers);
         // Active Success feature of the form
         $scope.rubricFormData.processed = true;
     };
@@ -325,39 +308,58 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
             }]
     });
     // {title: 'xxxx', content: 'yyyy'}
-    $scope.actionAdd = rubricAdd;
-        
-    
-        
-        console.log(data);
-        
-    }else{  
+    $scope.actionAdd = rubricAdd;   
       
+        
+    }
+    if($routeParams.action === 'sections'){  
+    
+     var _data = {
+            title: $routeParams.title,
+            parentId: $routeParams.pid,
+            section: $routeParams.section,
+            gradeTiers: $routeParams.gradeTiers
+        }
+        
+        var sectionString = _data.section,
+            sectionArray = sectionString.split(","),
+            gradeString = _data.gradeTiers,
+            gradeArray = gradeString.split(",");
+            
+        $scope.inputArray=[];
+        $scope.gradesArray=[];
 
-    var rubricAdd = function () {
+
+            
+        angular.forEach(sectionArray, function(input, key) {
+         var _data = {
+                dispTitle: input, 
+                title: input, 
+                placeholder: 'Add description here'
+            }
+            $scope.inputArray.push(_data);
+        })
+        
+        angular.forEach(gradeArray, function(input, key) {
+            $scope.gradesArray.push(input);
+        })
+
+        var rubricAdd = function () {
     
         // Process the Generated Form's Captured Data
         var rubricNewData = $scope.rubricFormData.extractFormData();
         
         
-        $location.path('/rubric/create/'+rubricNewData.title+'/'+rubricNewData.parentId);
         // Active Success feature of the form
         $scope.rubricFormData.processed = true;
     };
-
+    
     // Generate a form based upon this info
     $scope.rubricFormData = new GenFormData({
-        
         title: 'Create Rubric',
         actionTitle: 'Create Rubric',
         successMsg: 'New Rubric Added!',
-        aryInputs:[{
-            
-                dispTitle: 'Rubric Title', 
-                title: 'title', 
-                value: '', 
-                placeholder: 'Enter Assignment Title'
-            },
+        aryInputs: [
             {
                 dispTitle: 'Sections',
                 title: 'sections', 
@@ -369,13 +371,15 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
                 title: 'gradeTiers', 
                 value: '', 
                 placeholder: 'Enter Grade Tiers (100, 75, 50, 30, 0)'
-            },
-            {
-                dispTitle: 'Course ID',
-                title: 'parentId',
-                value:  $routeParams.course_id,
             }]
     });
+    
+    for(var i=0; i<$scope.inputArray.length; i++){
+        $scope.rubricFormData.inputs.push($scope.inputArray[i]);
+    }
+    
+    console.log($scope.rubricFormData.inputs);
+    console.log($scope.gradesArray);
     // {title: 'xxxx', content: 'yyyy'}
     $scope.actionAdd = rubricAdd;
     }
@@ -394,7 +398,7 @@ App.directive('genForm', function() {
                         '<div ng-show="payload.processed"><h1> {[{ payload.successMsg }]} </h1></div>' +
                         '<div ng-hide="payload.processed">' +
                             '<h1> {[{ payload.title }]} </h1>' +
-                            '<label data-ng-repeat="input in payload.inputs"><span> {[{ input.dispTitle }]} </span>' +
+                            '<label data-ng-repeat="input in payload.inputs track by $index"><span> {[{ input.dispTitle }]} </span>' +
                                 '<input type="text" data-ng-model="input.value" placeholder="{[{ input.placeholder }]}" />' +
                             '</label>' +
                             '<button data-ng-click="callback(payload)"> {[{ payload.actionTitle }]} </button>' +
@@ -458,10 +462,6 @@ App.service('GenFormData', function() {
     return GenForm;
 });
 
-
-
-
-
 App.service('Audit', function() {
         // TODO Static Data currently. Feed this from the DB and create this data structure.
         this.data = {
@@ -497,7 +497,7 @@ App.service('Audit', function() {
                                                         { _id : '22233232320', title : 'Formatting, Comments, & Logs', content: 'All code should be formatted and commented professionally. Its highly recommended to adopt a consistent pattern and follow it, look into phpDocumentor for references. Additionally, labeled console.log()’s, when used, should be used appropriately and in moderation as to not bombard the reviewer / developer.' },
                                                     ]
                                 }
-                            ]
+                    ]
 
             };
     });
