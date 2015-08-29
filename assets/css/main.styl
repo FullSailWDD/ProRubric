@@ -12,11 +12,11 @@ secondaryFont = 'baskerville Old Face'
 edit()
 
 body
-    margin 0 1%
+  margin 0 1%
     
 html
-    +below(800px)
-        background red
+  +below(800px)
+    background red
 
 //MAIN STYLING
 .header
@@ -25,39 +25,48 @@ html
 
 .logo
     col(1/2)
+    
     a
-        font-weight bold
-        font-size 2.3em
-        font-family primaryFont
-        font-weight 900
-        padding-left 2%
-        text-decoration none
-        color white
+      font-weight bold
+      font-size 2.3em
+      font-family primaryFont
+      font-weight 900
+      padding-left 2%
+      text-decoration none
+      color white
 
 .navigation
-    col(1/2)
-    background mainColor
-    
-    li
-        col(1/3)
-        list-style-type none
-        color white
-        font-family primaryFont
-        margin-right 0px
-    
-    a
-        color white
-        font-family primaryFont
-        text-decoration none
-        text-align center
-        font-size 1em
-        
+  col(1/2)
+  background mainColor
+  
+  .search
     input
-        margin-left 0px
+      font-size 2em
+      background white
+      padding 2% 0
+    
+  li
+    col(1/3)
+    list-style-type none
+    color white
+    font-family primaryFont
+    font-size 1.2em
+    padding 2% 0
+    margin-right 0px
+    
+  a
+    color white
+    font-family primaryFont
+    text-decoration none
+    text-align center
+    font-size 1em
         
-    ul
-        col(1/1)
-        margin 0px
+  input
+    margin-left 0px
+        
+  ul
+    col(1/1)
+    margin 0px
     
 
 
@@ -124,7 +133,8 @@ html
     color white
     font-size 1.5em
     font-family primaryFont
-    margin-bottom 1.5%
+    margin 0
+    
   h4  
     col(1/1)
     padding 2%
@@ -145,9 +155,10 @@ html
     color gray
     font-family secondaryFont
     font-size 1.2em
+    margin-left 15px
     
-  a:nth-child(2)
-    margin-left 10px
+  a:hover
+    color #FFF
         
 .wrapper
   margin-top 100px

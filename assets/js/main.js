@@ -265,13 +265,13 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
       
       
     if($routeParams.action === 'add'){
-         var rubricAdd = function () {
     
+    var rubricAdd = function () {
         // Process the Generated Form's Captured Data
         var rubricNewData = $scope.rubricFormData.extractFormData();
-        
-        
         $location.path('/rubric/create/sections/'+rubricNewData.title+'/'+rubricNewData.parentId+'/'+rubricNewData.sections+'/'+rubricNewData.gradeTiers);
+        
+        
         // Active Success feature of the form
         $scope.rubricFormData.processed = true;
     };
@@ -310,8 +310,8 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
     // {title: 'xxxx', content: 'yyyy'}
     $scope.actionAdd = rubricAdd;   
       
-        
     }
+    
     if($routeParams.action === 'sections'){  
     
      var _data = {
@@ -329,12 +329,11 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
         $scope.inputArray=[];
         $scope.gradesArray=[];
 
-
-            
         angular.forEach(sectionArray, function(input, key) {
          var _data = {
                 dispTitle: input, 
-                title: input, 
+                title: input,
+                value: '',
                 placeholder: 'Add description here'
             }
             $scope.inputArray.push(_data);
@@ -344,14 +343,14 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
             $scope.gradesArray.push(input);
         })
 
-        var rubricAdd = function () {
-    
+    var rubricSave = function () {
+
         // Process the Generated Form's Captured Data
         var rubricNewData = $scope.rubricFormData.extractFormData();
         
-        
+        console.log(rubricNewData);
         // Active Success feature of the form
-        $scope.rubricFormData.processed = true;
+        //$scope.rubricFormData.processed = true;
     };
     
     // Generate a form based upon this info
@@ -359,18 +358,10 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
         title: 'Create Rubric',
         actionTitle: 'Create Rubric',
         successMsg: 'New Rubric Added!',
-        aryInputs: [
-            {
-                dispTitle: 'Sections',
-                title: 'sections', 
-                value: '', 
-                placeholder: 'Enter Sections Followed by a comma (code, aethetics, design)'
-            },
-            {
-                dispTitle: 'Grade Tiers',
-                title: 'gradeTiers', 
-                value: '', 
-                placeholder: 'Enter Grade Tiers (100, 75, 50, 30, 0)'
+        aryInputs: [{
+                dispTitle: 'Course ID',
+                title: 'parentId',
+                value:  $routeParams.pid,
             }]
     });
     
@@ -378,10 +369,14 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
         $scope.rubricFormData.inputs.push($scope.inputArray[i]);
     }
     
-    console.log($scope.rubricFormData.inputs);
-    console.log($scope.gradesArray);
+    $scope.rubricFormData['grades'] = $scope.gradesArray;
+
+
+    console.log($scope.rubricFormData);
+
     // {title: 'xxxx', content: 'yyyy'}
-    $scope.actionAdd = rubricAdd;
+    $scope.actionAdd = rubricSave;
+    
     }
 });
 
@@ -448,7 +443,7 @@ App.service('GenFormData', function() {
                     // Transpose property and value onto temp obj, building throught the loop
                     objExtration[prop] = input[prop];
                     
-                }  
+                }    
                 
             }
 

@@ -1,3 +1,6 @@
+* {
+  background: rgba(0,0,0,0.05);
+}
 body {
   margin: 0 1%;
 }
@@ -77,6 +80,11 @@ body {
 .navigation:last-child {
   margin-right: 0%;
 }
+.navigation .search input {
+  font-size: 2em;
+  background: #fff;
+  padding: 2% 0;
+}
 .navigation li {
   *zoom: 1;
   float: left;
@@ -88,6 +96,8 @@ body {
   list-style-type: none;
   color: #fff;
   font-family: 'futura';
+  font-size: 1.2em;
+  padding: 2% 0;
   margin-right: 0px;
 }
 .navigation li:before,
@@ -304,7 +314,7 @@ body {
   color: #fff;
   font-size: 1.5em;
   font-family: 'futura';
-  margin-bottom: 1.5%;
+  margin: 0;
 }
 .repeatContent h2:before,
 .repeatContent h2:after {
@@ -369,9 +379,10 @@ body {
   color: #808080;
   font-family: 'baskerville Old Face';
   font-size: 1.2em;
+  margin-left: 15px;
 }
-.actionButtons a:nth-child(2) {
-  margin-left: 5px;
+.actionButtons a:hover {
+  color: #fff;
 }
 .wrapper {
   margin-top: 100px;
