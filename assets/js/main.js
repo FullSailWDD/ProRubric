@@ -27,7 +27,7 @@ App.config(function ($interpolateProvider, $routeProvider) {
             .when('/rubric/new/:course_id', {
                 templateUrl: 'views/rubric.html',
                 controller: 'rubricController'
-            })
+            });
             
     });
     
@@ -53,9 +53,9 @@ App.factory('socket', function ($rootScope) {
                 });
             }
         };
-    })
+    });
     
-App.controller('dashboardController', function ($scope, $routeParams, socket, GenFormData) {
+App.controller('dashboardController', function ($scope, $routeParams, $window, socket, GenFormData) {
 
     if($routeParams.id){
         socket.emit('degree req', $routeParams.id);
@@ -95,7 +95,6 @@ App.controller('dashboardController', function ($scope, $routeParams, socket, Ge
      
     }
      
-
     var degreeAdd = function () {
         // Process the Generated Form's Captured Data
         var degreeNewData = $scope.dashboardFormData.extractFormData();
@@ -133,16 +132,16 @@ App.controller('dashboardController', function ($scope, $routeParams, socket, Ge
       });
       
     $scope.reloadPage = function () {
-            window.location.reload();
+            $window.location.reload();
     };
       
     $scope.degreeDelete = function (_data) {
         console.log(_data);
             socket.emit('delete degree', _data);
             $scope.reloadPage();
-    }
+    };
       
-})
+});
 
 App.controller('courseController', function ($scope, $routeParams, socket, GenFormData) {
     
@@ -165,13 +164,17 @@ App.controller('courseController', function ($scope, $routeParams, socket, GenFo
                 actionTitle: 'Update Course',
                 successMsg: 'Course Updated!',
                 aryInputs:[{
+                    
                         title: 'title', 
                         dispTitle: 'Title', 
                         value: data[0].title,
+                        
                     }, {
+                        
                         title: 'acronym', 
                         dispTitle: 'Acronym',
                         value: data[0].acronym,
+                        
                     },
                     {
                         title : 'description',
@@ -189,7 +192,6 @@ App.controller('courseController', function ($scope, $routeParams, socket, GenFo
     });
      
     }
-    
     
         var courseAdd = function () {
         // Process the Generated Form's Captured Data
@@ -241,11 +243,19 @@ App.controller('courseController', function ($scope, $routeParams, socket, GenFo
             $scope.reloadPage();
     }
     
-    
 });
 
-
 App.controller('rubricController', function ($scope,$routeParams ,GenFormData,socket) {
+
+      $scope.$on('$viewContentLoaded', function () {
+        socket.on('find rubrics', function (data) {
+                if (data.length) {
+                    $scope.rubricView = data;
+                } else {
+                    console.log('You has no rubrics :(');
+                }
+            });
+      });
 
     var rubricAdd = function () {
     
@@ -286,7 +296,7 @@ App.controller('rubricController', function ($scope,$routeParams ,GenFormData,so
             },
             {
                 dispTitle: 'Course ID',
-                title: 'courseParent',
+                title: 'parentId',
                 value:  $routeParams.course_id,
             }]
     });
@@ -320,7 +330,6 @@ App.directive('genForm', function() {
 App.service('GenFormData', function() {
     var GenForm = function(args) {
         this.title          = args.title         || '';
-        this.nghide         = args.nghide         || '';
         this.inputs         = args.aryInputs     || [];
         this.actionTitle    = args.actionTitle   || '';
         this.successMsg     = args.successMsg    || 'Success';
@@ -342,9 +351,6 @@ App.service('GenFormData', function() {
     GenForm.prototype.setTitle = function(str){
         this.title = str;
     };
-    GenForm.prototype.setNg = function(str){
-        this.setNg = str;
-    };
     GenForm.prototype.extractFormData = function(){
         var objDataCollection = {};
         var aryTargetProps = ['title','value'];
@@ -362,7 +368,8 @@ App.service('GenFormData', function() {
                     // Transpose property and value onto temp obj, building throught the loop
                     objExtration[prop] = input[prop];
                     
-                }   
+                }  
+                
             }
 
             // Once each input has all targeted props fully stripped and transposed pair up the data from the input

@@ -51,7 +51,7 @@ module.exports = function (app, socket) {
         });
         
         Course.find(function(doc){
-            data.emit('find course', doc)
+            data.emit('find course', doc);
         }, function(err){
             console.log(err);
         });
@@ -77,26 +77,25 @@ module.exports = function (app, socket) {
         
         //Start Rubric Sockets
 
-            data.on('add rubric', function (callback) {
-                console.log(callback);
-                Rubric.add(callback);
-            });
+        data.on('add rubric', function (callback) {
+            Rubric.add(callback);
+        });
             
+        Rubric.all(function (doc) {
+                socket.emit('find rubrics', doc);
+            }, function (err) {
+                outputs.debug(err, 'Return all Degrees', false);
+        });
             
-            
-            
-            
-            
-            
-            
+        data.on('rubric res',function(callback){
+            Rubric.add(callback);
+        });
+        
             
             
         //End Rubric Sockets
         
         //Start Section Sockets
-        
-        
-        
         
         //End Section Sockets
         
@@ -105,18 +104,10 @@ module.exports = function (app, socket) {
             data.on('add lineItem', function (callback) {
                 LineItem.add(callback);
             });
-            
-            
-        
-            
-            
-            
+
         }); //End Sockets
 
-    
-    
-    
     app.get('/', function (req, res) {
         res.render('index');
     });
-}
+};

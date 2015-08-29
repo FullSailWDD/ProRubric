@@ -59,6 +59,17 @@ module.exports = function() {
             });
         }
     },
+            // Find
+    _findAll = function(success,fail){
+                _model.find({}, function(err,doc){
+                    if (err) {
+                        fail(err);
+                    }else{
+                        success(doc);
+                    }
+                });
+    },
+
     
     // REMOVE
     _remove = function(rubric,success,fail){
@@ -82,6 +93,7 @@ module.exports = function() {
         model :         _model,
         add :           _save,
         update :        _update,
-        remove :        _remove
+        remove :        _remove,
+        all:            _findAll
     };
 }();    

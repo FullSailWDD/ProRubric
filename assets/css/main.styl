@@ -11,6 +11,8 @@ secondaryFont = 'baskerville Old Face'
 
 edit()
 
+
+//MAIN STYLING
 .header
     col(1/1)
     background mainColor
@@ -94,15 +96,44 @@ edit()
     
 // REPEATING DIVS
 .repeatContent 
-    col(1/3,cycle:3)
+    col(1/3, cycle:3)
     background mainColor
     position relative
     top 100px
     margin-bottom 2%
-    li
+    +below(800px)
+    stack()
+    
+    h2
+        col(1/1)
+        color white
+        font-size 1.5em
+    h4  
+        col(1/1)
+        font-size 1em
         color white
         list-style-type none
-       
+        margin-top 0
+    a
+        col(1/4)
+        font-size 1.3em
+        text-decoration underline
+        text-align right
+        color white
+    button
+        col(1/3)
+        shift(1/3)
+        font-size 2em
+        font-family 'futura'
+        text-align center
+        background secondaryColor
+        color white
+        border none
+        border-bottom 3px darkColor solid
+        border-radius 5px
+        padding 2% 0
+        font-size 1em
+        
 .rubricTitle
     font-family primaryFont
     font-size 1.5em
@@ -111,28 +142,3 @@ edit()
 .rubricAcronym
     font-family primaryFont
     font-size 1em
-.repeatContent        
-    ul
-        
-        li
-            a
-                col(1/2)
-                shift(1/2)
-                font-size 1.3em
-                text-decoration underline
-                text-align right
-                color white
-        
-.repeatContent 
-    button
-        col(1/3)
-        // font-size 2em
-        // font-family 'futura'
-        // text-align center
-        // background secondaryColor
-        // color white
-        // border none
-        // border-bottom 3px darkColor solid
-        // border-radius 5px
-        // padding 2% 0
-        // font-size 1em
