@@ -4,7 +4,6 @@ module.exports = function(app, socket){
         mongoose    = require('mongoose');
         data        = require('../lib/sanitize.js');
 
-
     var degreeSchema = mongoose.Schema({
             title : String,
             acronym : String,
@@ -55,8 +54,6 @@ module.exports = function(app, socket){
                     }
                 });
             }
-
-
         },
         
     _findOne = function(data, success,fail){

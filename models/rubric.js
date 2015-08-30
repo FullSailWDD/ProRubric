@@ -7,20 +7,17 @@ module.exports = function() {
 
     var rubricSchema = mongoose.Schema({
         title : String,
+        inputs : String,
         content : String,
-        gradeTiers : [Number],
+        grades : String,
         parentId: String,
         course_id : {type : Number, default : 0},
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
     }),
 
-    
     _model = mongoose.model('rubrics', rubricSchema);
     
-    
-    
-
 // CRUD Methods 
 // ==========================================================================
     
@@ -29,10 +26,10 @@ module.exports = function() {
 
         var newRubric = new _model({
             title:        rubric.title,
+            inputs:       rubric.inputs,
+            grades:       rubric.grades,
             content:      rubric.content,
-            course_id:    rubric.course_id,
-            parentId:     rubric.courseParent,
-            gradeTiers:   rubric.gradeTiers
+            parentId:     rubric.parentId,
         });
 
             newRubric.save(function(err){
@@ -69,8 +66,16 @@ module.exports = function() {
                     }
                 });
     },
+    _findOne = function(data, success,fail){
+            _model.find(data, function(err,doc) {
+                if (err) {
+                    fail(err);
+                } else {
+                    success(doc);
+                }
+            });
+        },
 
-    
     // REMOVE
     _remove = function(rubric,success,fail){
 
@@ -83,9 +88,6 @@ module.exports = function() {
         });
     };
     
-    
-    
-    
 // Publicly Available
 // ==========================================================================
     return {
@@ -94,6 +96,7 @@ module.exports = function() {
         add :           _save,
         update :        _update,
         remove :        _remove,
-        all:            _findAll
+        all:            _findAll,
+        find:            _findOne
     };
 }();    

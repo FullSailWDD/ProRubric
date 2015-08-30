@@ -4,16 +4,15 @@ module.exports = function() {
         mongoose    = require('mongoose');
         data        = require('../lib/sanitize.js');
     
-    
     var courseSchema = mongoose.Schema({
         title : String,
         acronym : String,
         description : String,
-        degree_id : {type : Number, default : 0},
+        type:  String,
+        degree_id : String,
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
     }),
-    
     
      _model = mongoose.model('courses', courseSchema);
 
@@ -37,7 +36,6 @@ module.exports = function() {
         });
     },
     
-    
     // UPDATE
     _update = function(course,success,fail){
 
@@ -53,7 +51,6 @@ module.exports = function() {
             });
         }
     },
-    
     
     // REMOVE
     _remove = function(course,success,fail){
@@ -83,7 +80,6 @@ module.exports = function() {
                 }
             });
         };
-    
     
 // Publicly Available
 // ==========================================================================

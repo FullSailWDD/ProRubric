@@ -2,7 +2,7 @@
   background: rgba(0,0,0,0.05);
 }
 body {
-  margin: 0 1%;
+  margin: 0;
 }
 @media only screen and (max-width: 800px) {
   html {
@@ -81,9 +81,9 @@ body {
   margin-right: 0%;
 }
 .navigation .search input {
-  font-size: 2em;
   background: #fff;
-  padding: 2% 0;
+  width: 100%;
+  font-size: 2em;
 }
 .navigation li {
   *zoom: 1;
@@ -97,6 +97,7 @@ body {
   color: #fff;
   font-family: 'futura';
   font-size: 1.2em;
+  text-align: center;
   padding: 2% 0;
   margin-right: 0px;
 }
@@ -236,6 +237,7 @@ body {
   font-size: 1.75em;
   font-family: 'futura';
   background: #377992;
+  padding: 2% 0;
   text-align: center;
   color: #fff;
   border: none;
@@ -252,6 +254,11 @@ body {
 }
 .form button:last-child {
   margin-right: 0%;
+}
+.form button:hover {
+  margin-top: 3px;
+  background: #192128;
+  border-bottom: none;
 }
 .repeatContainer {
   *zoom: 1;
@@ -284,7 +291,7 @@ body {
   border-radius: 5px;
   position: relative;
   background: #38495d;
-  top: 100px;
+  top: 50px;
   margin-bottom: 2%;
 }
 .repeatContent:before,
@@ -301,6 +308,15 @@ body {
 }
 .repeatContent:nth-child(3n+1) {
   clear: both;
+}
+.repeatContent a {
+  text-decoration: none;
+  color: #808080;
+  font-family: 'baskerville Old Face';
+  font-size: 1.2em;
+}
+.repeatContent a:hover {
+  color: #fff;
 }
 .repeatContent h2 {
   *zoom: 1;
@@ -352,36 +368,77 @@ body {
 .repeatContent h4:last-child {
   margin-right: 0%;
 }
-.actionButtons {
+.repeatContent p {
   *zoom: 1;
   float: left;
   clear: none;
   text-align: inherit;
-  width: 31.33333333333333%;
+  width: 100%;
   margin-left: 0%;
   margin-right: 3%;
-  position: relative;
-  left: 68.66666666666666%;
   padding: 2%;
+  font-size: 1em;
+  color: #fff;
+  margin-top: 0;
+  font-family: 'baskerville Old Face';
 }
-.actionButtons:before,
-.actionButtons:after {
+.repeatContent p:before,
+.repeatContent p:after {
   content: '';
   display: table;
 }
-.actionButtons:after {
+.repeatContent p:after {
   clear: both;
 }
-.actionButtons:last-child {
+.repeatContent p:last-child {
   margin-right: 0%;
 }
-.actionButtons a {
+.repeatContent .actionButtons {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 3%;
+  padding: 2%;
+}
+.repeatContent .actionButtons:before,
+.repeatContent .actionButtons:after {
+  content: '';
+  display: table;
+}
+.repeatContent .actionButtons:after {
+  clear: both;
+}
+.repeatContent .actionButtons:last-child {
+  margin-right: 0%;
+}
+.repeatContent .actionButtons a {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 17.6%;
+  margin-left: 0%;
+  margin-right: 3%;
   color: #808080;
   font-family: 'baskerville Old Face';
   font-size: 1.2em;
-  margin-left: 15px;
+  text-decoration: none;
 }
-.actionButtons a:hover {
+.repeatContent .actionButtons a:before,
+.repeatContent .actionButtons a:after {
+  content: '';
+  display: table;
+}
+.repeatContent .actionButtons a:after {
+  clear: both;
+}
+.repeatContent .actionButtons a:last-child {
+  margin-right: 0%;
+}
+.repeatContent .actionButtons a:hover {
   color: #fff;
 }
 .wrapper {

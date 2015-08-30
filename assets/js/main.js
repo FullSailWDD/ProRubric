@@ -18,6 +18,10 @@ App.config(function ($interpolateProvider, $routeProvider) {
                 templateUrl: 'views/course.html',
                 controller: 'courseController'
             })
+            .when('/course/add/:id', {
+                templateUrl: 'views/course.html',
+                controller: 'courseController'
+            })
             
               .when('/course/update/:id', {
                 templateUrl: 'views/editCourse.html',
@@ -56,7 +60,7 @@ App.factory('socket', function ($rootScope) {
                             callback.apply(socket, args);
                         }
                     });
-                });
+               });
             }
         };
     });
@@ -135,6 +139,13 @@ App.controller('dashboardController', function ($scope, $routeParams, $window, s
                     console.log('You has no degrees :(');
                 }
             });
+            socket.on('find course', function (data) {
+                if (data.length) {
+                    $scope.courseView = data;
+                } else {
+                    console.log('You has no course :(');
+                }
+            });
       });
       
     $scope.reloadPage = function () {
@@ -202,6 +213,7 @@ App.controller('courseController', function ($scope, $routeParams, socket, GenFo
         var courseAdd = function () {
         // Process the Generated Form's Captured Data
         var courseNewData = $scope.courseFormData.extractFormData();
+        
         // Inform the Server of the new Data
         socket.emit('add course', courseNewData);
         // Active Success feature of the form
@@ -212,7 +224,8 @@ App.controller('courseController', function ($scope, $routeParams, socket, GenFo
             title: 'Create Course',
             actionTitle: 'Create Course',
             successMsg: 'New Course Added!',
-            aryInputs:[{
+            aryInputs:[
+            {
                     dispTitle: 'Course Title', 
                     title: 'title', 
                     placeholder: 'Enter Degree Title'
@@ -224,7 +237,11 @@ App.controller('courseController', function ($scope, $routeParams, socket, GenFo
                     dispTitle: 'Description',
                     title: 'description',
                     placeholder: 'Enter Description'
-                }]
+                },{
+                    dispTitle: 'Degree Id',
+                    title: 'degree_id',
+                    value: $routeParams.id
+            }]
         });
         // {title: 'xxxx', content: 'yyyy'}
         $scope.actionAdd = courseAdd;
@@ -263,14 +280,12 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
             });
       });
       
-      
     if($routeParams.action === 'add'){
     
     var rubricAdd = function () {
         // Process the Generated Form's Captured Data
         var rubricNewData = $scope.rubricFormData.extractFormData();
         $location.path('/rubric/create/sections/'+rubricNewData.title+'/'+rubricNewData.parentId+'/'+rubricNewData.sections+'/'+rubricNewData.gradeTiers);
-        
         
         // Active Success feature of the form
         $scope.rubricFormData.processed = true;
@@ -345,18 +360,21 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
 
     var rubricSave = function () {
 
-        // Process the Generated Form's Captured Data
-        var rubricNewData = $scope.rubricFormData.extractFormData();
-        
-        console.log(rubricNewData);
-        // Active Success feature of the form
-        //$scope.rubricFormData.processed = true;
+        socket.on('rubric find', function(data) {
+            console.log(data);
+            var rubricNewData = $scope.rubricFormData.extractFormData();
+            $scope.rubricFormData.processed = true;
+
+            
+        });
+
     };
     
     // Generate a form based upon this info
     $scope.rubricFormData = new GenFormData({
-        title: 'Create Rubric',
-        actionTitle: 'Create Rubric',
+        title: _data.title,
+        actionTitle: 'Save',
+        parentId: _data.parentId,
         successMsg: 'New Rubric Added!',
         aryInputs: [{
                 dispTitle: 'Course ID',
@@ -371,15 +389,13 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
     
     $scope.rubricFormData['grades'] = $scope.gradesArray;
 
-
-    console.log($scope.rubricFormData);
+    socket.emit('rubric req', $scope.rubricFormData);
 
     // {title: 'xxxx', content: 'yyyy'}
     $scope.actionAdd = rubricSave;
     
     }
 });
-
 
 App.directive('genForm', function() {
 
@@ -570,7 +586,7 @@ App.controller('AuditController', function( $scope, Audit ){
 
         // TODO Enhance Output displayed to user.
         $scope.actionOutput = function(){
-            console.log($scope.rubric);
+             console.log($scope.rubric);
         };
 
     });

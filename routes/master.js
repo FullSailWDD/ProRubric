@@ -71,14 +71,9 @@ module.exports = function (app, socket) {
                 });
             });
         
-        
         //End Courses Sockets
         
         //Start Rubric Sockets
-
-        data.on('add rubric', function (callback) {
-            Rubric.add(callback);
-        });
             
         Rubric.all(function (doc) {
                 socket.emit('find rubrics', doc);
@@ -86,9 +81,24 @@ module.exports = function (app, socket) {
                 outputs.debug(err, 'Return all Degrees', false);
         });
             
-        data.on('rubric res',function(callback){
+        data.on('rubric req',function(callback){
+            Rubric.add(callback);
+            Rubric.find(callback.title, function(doc) {
+                socket.emit('rubric find',doc);
+            },function(err) {
+            outputs.debug(err, 'Return all Rubrics', false);
+              
+        })
+            
+        });
+        
+        
+        
+        data.on('rubric save',function(callback){
             Rubric.add(callback);
         });
+        
+        
         
             
             

@@ -3,7 +3,6 @@ module.exports = function() {
         mongoose    = require('mongoose'),
         data        = require('../lib/sanitize.js');
     
-    
     var lineItemSchema = mongoose.Schema({
         title : String,
         content : String,
@@ -11,7 +10,6 @@ module.exports = function() {
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
     }),
-    
     
     _model = mongoose.model('lineItems', lineItemSchema);
 
@@ -22,7 +20,6 @@ module.exports = function() {
             content:    lineItem.content,
             section_id: lineItem.section_id
         });
-
 
         newLineItem.save(function(err){
                 if (err) {
@@ -64,7 +61,6 @@ module.exports = function() {
             }
         });
     };
-    
     
 // Publicly Available
 // ==========================================================================
