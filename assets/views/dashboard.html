@@ -1,0 +1,23 @@
+<div ng-contoller='dashboardController'>
+    
+    <gen-form data-payload="dashboardFormData" data-callback="actionAdd()"></gen-form>
+
+    <div class='wrapper'>
+
+        <div class="repeatContainer">
+            <div ng-repeat="x in degreeView | filter:q as results" class="repeatContent">
+                    <div class='actionButtons'>
+                        <a href="#/degree/update/{[{x._id}]}">Edit</a>
+                        <a href="#" ng-click="degreeDelete(x._id)">Delete</a>
+                    </div>
+                    <h2>{[{x.acronym}]}</h2>
+                    <h4>{[{x.title}]}</h4>
+
+                <a href="#/course/add/{[{x._id}]}">Add a Course</a>
+            
+
+            </div>
+            </div>
+        </div>
+            
+     </div>

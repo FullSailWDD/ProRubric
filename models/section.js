@@ -4,7 +4,6 @@ module.exports = function() {
         mongoose    = require('mongoose');
         data        = require('../lib/sanitize.js');
 
-
     var sectionSchema = mongoose.Schema({
         title : String,
         gradeWeight : Number,
@@ -12,7 +11,6 @@ module.exports = function() {
         created_at : {type : Date, default: Date.now},
         updated_at : {type : Date, default: Date.now}
     }),
-
 
     _model = mongoose.model('sections', sectionSchema),
 
@@ -54,7 +52,6 @@ module.exports = function() {
             }
         });
     };
-    
     
 // Publicly Available
 // ==========================================================================

@@ -4,7 +4,6 @@ module.exports = function(app, socket){
         mongoose    = require('mongoose');
         data        = require('../lib/sanitize.js');
 
-
     var degreeSchema = mongoose.Schema({
             title : String,
             acronym : String,
@@ -55,18 +54,24 @@ module.exports = function(app, socket){
                     }
                 });
             }
-
-
+        },
+        
+    _findOne = function(data, success,fail){
+            _model.find({_id:data}, function(err,doc) {
+                if (err) {
+                    fail(err);
+                } else {
+                    success(doc);
+                }
+            });
         },
 
     // REMOVE
-        _remove = function(degree,success,fail){
+        _remove = function(degree, fail){
 
-            _model.findByIdAndRemove({'_id':degree._id}, function(err,doc){
+            _model.findByIdAndRemove(degree, function(err,doc){
                 if (err) {
                     fail(err);
-                }else{
-                    success(doc);
                 }
             });
         };
@@ -80,6 +85,7 @@ module.exports = function(app, socket){
         add :           _save,
         update :        _update,
         remove :        _remove,
-        all:            _findAll
+        all:            _findAll,
+        one:            _findOne
     };
 }();
