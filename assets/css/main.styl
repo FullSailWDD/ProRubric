@@ -1,337 +1,184 @@
 @import 'jeet'
 
-hover 				= background #424242
-mainColor 			= #38495D
-secondaryColor 		= #377992
-darkColor 			= #192128
-lightColor 			= #FBF7E4
-primaryFont 		= 'futura'
-secondaryFont 		= 'baskerville Old Face'
+// COLORS AND FONTS
+hover = background #424242
+mainColor = #38495D
+secondaryColor = #377992
+darkColor = #192128
+lightColor = #FBF7E4
+primaryFont = 'futura'
+secondaryFont = 'baskerville Old Face'
 
-// edit()
 
-.rubricbuttons
-  	color #000000
-  	font-size 21px
-  	padding 10px 20px 10px 20px
-  	margin 2% 0 2% 0
-  	font-size .7em
-  	text-align left
-  	width 100%
+body
+  margin 0
+    
+html
+  +below(800px)
+    background red
 
-.classname
-	font-size 1.3em
-	text-align center
+//MAIN STYLING
+.header
+    col(1/1)
+    background mainColor
 
-.rubrics
-	text-align center
-
-#sideNav
-	// col(1/7)
-	// span(1/7)
-	width 15%
-	float left
-	background #38495D
-	text-align center
-	min-height 700px
-	position fixed
-	
 .logo
-	col(1/1)
-	margin-bottom 6%
-	font-family primaryFont
-	font-size 3em
-	font-weight 900
-	
-ul
-	padding-left 0
-	
-li
-	list-style-type none
-	
-ul li a
-	col(4/5)
-	padding 8% 0
-	text-decoration none
-	color white
-	font-size 1.4em
-	font-family primaryFont
-	
-.navIcons
-	col(1/5)
-	
-	
-ul li a:hover
-	background #192128
+    col(1/2)
+    
+    a
+      font-weight bold
+      font-size 2.3em
+      font-family primaryFont
+      font-weight 900
+      padding-left 2%
+      text-decoration none
+      color white
 
-.mainDefaultBody
-	// col(6/7)
-	// span(6/7)
-	width 85%
-	float right
-	background #FBF7E4
-	height 1000px
-	//Putting CSS Gradients on this breaks the Jeet apparently.
-		
+.navigation
+  col(1/2)
+  background mainColor
+  
+  .search
+    input
+      background white
+      width 100%
+      font-size 2em
+    
+  li
+    col(1/3)
+    list-style-type none
+    color white
+    font-family primaryFont
+    font-size 1.2em
+    text-align center
+    padding 2% 0
+    margin-right 0px
+    
+  a
+    color white
+    font-family primaryFont
+    text-decoration none
+    text-align center
+    font-size 1em
+        
+  input
+    margin-left 0px
+        
+  ul
+    col(1/1)
+    margin 0px
+    
 
-// ============================================
-// ============================================
-// ============================================
 
+// GENERATED FORM STYLING
 .form
-	center(500px)
-	margin-top 10%
-	padding 2%
-	background #E7E8D1
-	border 1px #D3CEAA solid
-	border-radius 5px
-	
-	h1
-		col(1/1)
-		font-family primaryFont
-		color mainColor
-		font-weight 100
-		font-size 2em
-		
-	label
-		col(1/1)
-	
-		span
-			text-transform capitalize
-	input
-		width 96%
-		padding 3% 2%
-		background white
-		border none
-		font-family 'baskerville Old Face'
-		font-size 1.2em
-		margin-bottom 5%
-	
-	button
-		col(1/2)
-			
-		shift(1/2)
-		font-size 1.6em
-		font-family primaryFont
-		background secondaryColor
-		text-align center
-		color white
-		border none
-		padding 2%
-		border-bottom 3px darkColor solid
-		border-radius 5px
-		
-	button:hover
-		background darkColor
+  center(500px)
+  position relative
+  top 90px
+  padding 2%
+  background #E7E8D1
+  border 1px #D3CEAA solid
+  border-radius 5px
 
-// ============================================
-// ============================================
-// ============================================
+  h1
+    col(1/1)
+    margin-top 0
+    font-family 'futura'
+    color mainColor
+    font-weight 100
+    font-size 2em
+  
+  label
+    col(1/1)
+    font-family 'futura'
+  
+  input
+    width 96%
+    padding 3% 2%
+    background white
+    border none
+    font-family 'baskerville Old Face'
+    font-size 1.2em
+    margin-top 2%
+    margin-bottom 5%
+    
+  button
+    col(1/2)
+    shift(1/2)
+    font-size 1.75em
+    font-family 'futura'
+    background secondaryColor
+    padding 2% 0
+    text-align center
+    color white
+    border none
+    border-bottom 3px darkColor solid
+    border-radius 5px
+    
+  button:hover
+    margin-top 3px
+    background darkColor
+    border-bottom none
+    
+// REPEATING DIVS
+.repeatContainer
+  col(1/1)
+    
+.repeatContent
+  col(1/3, cycle:3)
+  border-radius 5px
+  position relative
+  background mainColor
+  top 50px
+  margin-bottom 2%
+  
+  a
+    text-decoration none
+    color gray
+    font-family secondaryFont
+    font-size 1.2em
+    
+  a:hover
+    color #FFF
 
-.addRubric
-	div
-		background-color gray
-		h2
-			font-size 1.3em
+  h2
+    col(1/1)
+    padding 2%
+    color white
+    font-size 1.5em
+    font-family primaryFont
+    margin 0
+    
+  h4  
+    col(1/1)
+    padding 2%
+    font-size 1em
+    color white
+    margin-top 0
+    font-family primaryFont
 
-	.form
-		center(500px)
-		padding 2%
-		
-	h3
-		text-align left
-		font-size 2em
-		
-		label
-			font-size 1.3em
-
-	input
-		width 95%
-		padding 2%
-		font-size 1.3em
-		margin-bottom 5%
-		background-color white	
-		
-	input[type*="submit"]
-		col(1/7)
-		background-color gray
-		border none
-		
-	input[type*="submit"]:hover	
-		background #424242
-		
-
-.addCourse
-	form
-		center(500px)
-		padding 2%
-		
-		h3
-			text-align left
-			font-size 2em
-		
-		label
-			font-size 1.3em
-
-	input
-		width 95%
-		padding 2%
-		font-size 1.3em
-		margin-bottom 5%
-		background-color white	
-		
-	input[type*="submit"]
-		col(1/7)
-		background-color gray
-		border none
-		
-	input[type*="submit"]:hover	
-		background #424242
-		
-.info
-	center(500px)
-	padding 2%
-	div
-		background-color gray
-		h2
-			font-size 1.3em
-			
-		h3
-			text-align left
-			font-size 1.5em
-	button
-		background-color gray
-		border none
-		font-size 1.2em
-		padding 2%
-		
-	button:hover
-		background #424242
-		cursor pointer
-		
-.addInfo
-	.form
-		center(500px)
-		padding 2%
-	h3
-			text-align left
-			font-size 2em
-		
-		label
-			col(1/1)
-			font-size 1.3em
-
-	input
-		width 95%
-		padding 2%
-		font-size 1.3em
-		margin-bottom 5%
-		background-color white
-		
-	textarea
-		width 95.5%
-		padding 2%
-		font-size 1.3em
-		margin-bottom 5%
-		background-color white	
-	
-	input[type*="submit"]
-		col(1/7)
-		background-color gray
-		border none
-		
-	input[type*="submit"]:hover	
-		background #424242	
-
-
-.degree label
-  	font-family arial
-	font-weight bold
-	
-.degree button
-	col(1/2)
-	shift(1/2)
-	margin-top 5%
-	background-color gray
-	font-size 1.5em	
-	border none
-	text-align center
-	padding 10px 0
-	
-.degree button:hover
-	background #424242
-	
-
-//<!--******************** Pintrest like coloumns ********************-->
-
+  p
+    col(1/1)
+    padding 2%
+    font-size 1em
+    color white
+    margin-top 0
+    font-family secondaryFont
+        
+  .actionButtons
+    col(1/1)
+    padding 2%
+  
+    a
+      col(1/5)
+      color gray
+      font-family secondaryFont
+      font-size 1.2em
+      text-decoration none
+    
+    a:hover
+      color #FFF
+    
 .wrapper
-	width 90%
-	max-width 1100px
-	min-width 800px
-	margin 50px auto
-
-
-.columns
-	-webkit-column-count 3
-	-webkit-column-gap 10px
-	-webkit-column-fill auto
-	-moz-column-count 3
-	-moz-column-gap 10px
-	-moz-column-fill auto
-	column-count 3
-	column-gap 15px
-	column-fill auto
-	
-h3
-	text-align center
-
-
-.pin 
-	display inline-block
-	background #FEFEFE
-	border 2px solid #FAFAFA
-	box-shadow 0 1px 2px rgba(34, 25, 25, 0.4)
-	margin 0 2px 15px
-	-webkit-column-break-inside avoid
-	-moz-column-break-inside avoid
-	column-break-inside avoid
-	padding 15px
-	padding-bottom 5px
-	background -webkit-linear-gradient(45deg, #FFF, #F9F9F9)
-	opacity 1
-	-webkit-transition all .2s ease
-	-moz-transition all .2s ease
-	-o-transition all .2s ease
-	transition all .2s ease
-
-.pin img 
-	width 100%
-	border-bottom 1px solid #ccc
-	padding-bottom 15px
-	margin-bottom 5px
-
-
-.pin p 
-	font 12px/18px Arial, sans-serif
-	color #333
-	margin 0
-
-
-@media (min-width: 960px) 
-	#columns 
-		-webkit-column-count 4
-		-moz-column-count 4
-		column-count 4
-
-@media (min-width: 1100px) 
-	#columns 
-		-webkit-column-count 5
-		-moz-column-count 5
-		column-count 5
-//<!--******************** Pintrest like coloumns END ********************-->
-
-.form label
-	font-family 'futura'
-	color mainColor
-	font-weight 100
-	font-size 1.2em
+  margin-top 100px
+    

@@ -1,0 +1,21 @@
+<div ng-contoller='courseController'>
+    
+    <gen-form data-payload="courseFormData" data-callback="actionAdd()"></gen-form>
+
+
+    <div class='wrapper'>
+
+        <div class="repeatContainer">
+           <div ng-repeat="x in courseView | filter:q as results" class="repeatContent">
+                <div class='actionButtons'>
+                    <a href="#/course/update/{[{x._id}]}">Edit</a>
+                    <a href="#" ng-click="degreeDelete(x._id)">Delete</a>
+                </div>
+                <h2>{[{x.acronym}]}</h2>
+                <h4>{[{x.title}]}</h4>
+                <p>{[{x.description}]}<p>
+                <a href="#/rubric/new/add/{[{x._id}]}"><button>New Rubric</button></a>
+            </div>
+        </div>
+            
+     </div>
