@@ -1,4 +1,3 @@
-'use strict';
 var App = angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
             
 App.config(function ($interpolateProvider, $routeProvider) {
@@ -160,7 +159,7 @@ App.controller('dashboardController', function ($scope, $routeParams, $window, s
       
 });
 
-App.controller('courseController', function ($scope, $routeParams, socket, GenFormData) {
+App.controller('courseController', function ($scope, $routeParams, $window, socket, GenFormData) {
     
  if($routeParams.id){
         socket.emit('course req', $routeParams.id);
@@ -257,18 +256,18 @@ App.controller('courseController', function ($scope, $routeParams, socket, GenFo
       });
       
     $scope.reloadPage = function () {
-            window.location.reload();
+            $window.location.reload();
     };
       
     $scope.courseDelete = function (_data) {
         console.log(_data);
             socket.emit('delete course', _data);
             $scope.reloadPage();
-    }
+    };
     
 });
 
-App.controller('rubricController', function ($scope, $routeParams ,GenFormData,socket, $location) {
+App.controller('rubricController', function ($scope, $routeParams, $window ,GenFormData,socket, $location) {
 
       $scope.$on('$viewContentLoaded', function () {
         socket.on('find rubrics', function (data) {
@@ -334,7 +333,7 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
             parentId: $routeParams.pid,
             section: $routeParams.section,
             gradeTiers: $routeParams.gradeTiers
-        }
+        };
         
         var sectionString = _data.section,
             sectionArray = sectionString.split(","),
@@ -350,13 +349,13 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
                 title: input,
                 value: '',
                 placeholder: 'Add description here'
-            }
+            };
             $scope.inputArray.push(_data);
-        })
+        });
         
         angular.forEach(gradeArray, function(input, key) {
             $scope.gradesArray.push(input);
-        })
+        });
 
     var rubricSave = function () {
 
@@ -387,7 +386,7 @@ App.controller('rubricController', function ($scope, $routeParams ,GenFormData,s
         $scope.rubricFormData.inputs.push($scope.inputArray[i]);
     }
     
-    $scope.rubricFormData['grades'] = $scope.gradesArray;
+    $scope.rubricFormData.grades = $scope.gradesArray;
 
     socket.emit('rubric req', $scope.rubricFormData);
 

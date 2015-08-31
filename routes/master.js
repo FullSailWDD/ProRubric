@@ -87,9 +87,7 @@ module.exports = function (app, socket) {
                 socket.emit('rubric find',doc);
             },function(err) {
             outputs.debug(err, 'Return all Rubrics', false);
-              
-        })
-            
+        });
         });
         
         
