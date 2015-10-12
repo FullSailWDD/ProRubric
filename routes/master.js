@@ -1,33 +1,120 @@
-module.exports = function(app) {
-
+module.exports = function (app, socket) {
+    
     var Degree = require('../models/degree.js'),
         Course = require('../models/course.js'),
         Rubric = require('../models/rubric.js'),
         Section = require('../models/section.js'),
         LineItem = require('../models/lineItem.js');
 
-    // route /
-    app.get('/', function(req, res) {
+        socket.on('connection', function (data) {
+            
+        //Degree Sockets    
+            data.once('degree req', function (data) {
+                console.log(data);
+                Degree.one(data, function (doc) {
+                    socket.emit('degree send', doc);
+                }, function (err) {
+                    console.log(err, 'Return all Courses', false);
+                });
+            });
+            
+            data.once('update degree', function (data) {
+                Degree.update(data, function (err) {
+                    console.log(data);
+                    console.log(err, 'Return all update');
+                });
+            });
+            Degree.all(function (doc) {
+                socket.emit('find degrees', doc);
+            }, function (err) {
+                outputs.debug(err, 'Return all Degrees', false);
+            });
+            
+            data.on('delete degree', function (callback) {
+                Degree.remove(callback);
+            });
+
+            data.on('add degree', function (callback) {
+                Degree.add(callback);
+            });
+        //End Degree Sockets
+
+
+
+        //Start Courses Sockets
+        data.on('add course',function(callback){
+            Course.add(callback);
+        });
+        data.on('delete course', function(data){
+            Course.remove(data);
+        });
+        
+        Course.find(function(doc){
+            data.emit('find course', doc);
+        }, function(err){
+            console.log(err);
+        });
+
+        data.once('course req', function (data) {
+                console.log(data);
+                Course.one(data, function (doc) {
+                    socket.emit('course send', doc);
+                }, function (err) {
+                    console.log(err, 'Return all Courses', false);
+                });
+        });
+        
+        data.once('update course', function (data) {
+                Course.update(data, function (err) {
+                    console.log(data);
+                    console.log(err, 'Return all course update');
+                });
+            });
+        
+        //End Courses Sockets
+        
+        //Start Rubric Sockets
+            
+        Rubric.all(function (doc) {
+                socket.emit('find rubrics', doc);
+            }, function (err) {
+                outputs.debug(err, 'Return all Degrees', false);
+        });
+            
+        data.on('rubric req',function(callback){
+            Rubric.add(callback);
+            Rubric.find(callback.title, function(doc) {
+                socket.emit('rubric find',doc);
+            },function(err) {
+            outputs.debug(err, 'Return all Rubrics', false);
+        });
+        });
+        
+        
+        
+        data.on('rubric save',function(callback){
+            Rubric.add(callback);
+        });
+        
+        
+        
+            
+            
+        //End Rubric Sockets
+        
+        //Start Section Sockets
+        
+        //End Section Sockets
+        
+        //Start Line Item Sockets
+
+            data.on('add lineItem', function (callback) {
+                LineItem.add(callback);
+            });
+
+        }); //End Sockets
+
+    app.get('/', function (req, res) {
         res.render('index');
     });
-    app.get('/degProcess:degData',function(req,res) {
-        var degName = req.params.degData;
-        res.send(degName);
-    });
-
-    app.get('/degProcess',function(req,res){
-        var degreeObj = 'Web Design and Deployment';
-        Degree.update(degreeObj);
-    });
-
-    app.get('/courseProcess',function(req,res){});
-
-    app.get('/degUpdate',function(req,res){
-        Degree.update(req.degreeId);
-    });
-
-    app.get('/degRemove',function(req,res){
-        Degree.remove(req.degreeId);
-    });
-
 };

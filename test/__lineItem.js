@@ -1,16 +1,26 @@
 var expect          = require("chai").expect,
-    should          = require('should'),
-    lineItem        = require('../models/lineItem.js');
+    assert          = require('assert'),
+    degree          = require('../models/degree.js');
 
-
-describe('Line Item', function() {
-    it('Adds New', function (done) {
-        var testItem = {
-            title: "Branding",
-            content: "Some sort of content for a line item"
-        };
-        lineItem.add(testItem, function (doc) {
-            doc.title.should.equal('Branding');
+describe('Degree Info', function() {
+    
+    var testDegree = null;
+    
+    beforeEach(function(done){
+        
+        degree.add({
+                title: "Web Deployment",
+                acronym: "WD"
+            }, function (doc) {
+                testDegree = doc;
+                doc.title.should.equal('Web Deployment');
+                done();
+            });
+        
+    });
+    
+     afterEach( function (done) {
+        degree.remove(testDegree._id, function () {        
             done();
         });
     });

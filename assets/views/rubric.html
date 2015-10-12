@@ -1,0 +1,14 @@
+<div ng-contoller='rubricController'>
+    
+    <gen-form data-payload="rubricFormData" data-callback="actionAdd()"></gen-form>
+    
+    <div ng-repeat="x in rubricView track by $index" class="repeatContent">
+        <ul>
+            <li>{[{x._id}]}</li>
+            <li>{[{x.title}]}</li>
+            <li>{[{x.sections}]}</li>
+            <li>{[{x.gradeTiers[$index]}]}</li>
+            <li>{[{x.parentId}]}</li>
+        </ul>
+    </div>
+</div>

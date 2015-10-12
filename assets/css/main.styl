@@ -1,84 +1,184 @@
 @import 'jeet'
 
-edit()
+// COLORS AND FONTS
+hover = background #424242
+mainColor = #38495D
+secondaryColor = #377992
+darkColor = #192128
+lightColor = #FBF7E4
+primaryFont = 'futura'
+secondaryFont = 'baskerville Old Face'
 
+
+body
+  margin 0
+    
 html
-	background grey
+  +below(800px)
+    background red
 
-h1
-	text-align left
-	margin-left 10%
-	font-family arial
-	
-input
-	margin-left 10%
-	width 80%
-	height 30px
-	
-label
-	margin-left 10%
-	
-.createrubricbutton
-	margin-left 61%
-	margin-top 5%
-	margin-bottom 5%
-	background grey
-	width 30%
-	height 40px
+//MAIN STYLING
+.header
+    col(1/1)
+    background mainColor
 
-#topheader
-	col(6/6)
-	
 .logo
-	col(1/6)
+    col(1/2)
+    
+    a
+      font-weight bold
+      font-size 2.3em
+      font-family primaryFont
+      font-weight 900
+      padding-left 2%
+      text-decoration none
+      color white
 
-.siteheader
-	col(2/6)
+.navigation
+  col(1/2)
+  background mainColor
+  
+  .search
+    input
+      background white
+      width 100%
+      font-size 2em
+    
+  li
+    col(1/3)
+    list-style-type none
+    color white
+    font-family primaryFont
+    font-size 1.2em
+    text-align center
+    padding 2% 0
+    margin-right 0px
+    
+  a
+    color white
+    font-family primaryFont
+    text-decoration none
+    text-align center
+    font-size 1em
+        
+  input
+    margin-left 0px
+        
+  ul
+    col(1/1)
+    margin 0px
+    
 
-.searchbar
-	col(3/6)
-	margin-top 2%
 
-#box
-	col(4/4)
+// GENERATED FORM STYLING
+.form
+  center(500px)
+  position relative
+  top 90px
+  padding 2%
+  background #E7E8D1
+  border 1px #D3CEAA solid
+  border-radius 5px
 
-.contentbox
-	col(2/4)
-	background lightgrey
-	margin-top 10%
-	margin-left 30%
+  h1
+    col(1/1)
+    margin-top 0
+    font-family 'futura'
+    color mainColor
+    font-weight 100
+    font-size 2em
+  
+  label
+    col(1/1)
+    font-family 'futura'
+  
+  input
+    width 96%
+    padding 3% 2%
+    background white
+    border none
+    font-family 'baskerville Old Face'
+    font-size 1.2em
+    margin-top 2%
+    margin-bottom 5%
+    
+  button
+    col(1/2)
+    shift(1/2)
+    font-size 1.75em
+    font-family 'futura'
+    background secondaryColor
+    padding 2% 0
+    text-align center
+    color white
+    border none
+    border-bottom 3px darkColor solid
+    border-radius 5px
+    
+  button:hover
+    margin-top 3px
+    background darkColor
+    border-bottom none
+    
+// REPEATING DIVS
+.repeatContainer
+  col(1/1)
+    
+.repeatContent
+  col(1/3, cycle:3)
+  border-radius 5px
+  position relative
+  background mainColor
+  top 50px
+  margin-bottom 2%
+  
+  a
+    text-decoration none
+    color gray
+    font-family secondaryFont
+    font-size 1.2em
+    
+  a:hover
+    color #FFF
 
-header
-	center(80%)	
-	
-nav 
-	col(1/5)
-	span(1/5)
-	padding-bottom:100%
-	position:relative	
-	background: gray
-	
-#logo
-	center()
-	
-#elBody
-	col(4/5)
-	background: url("http://i.imgur.com/EOc88zU.png") no-repeat
-	max-width:100%
-	padding-bottom:100%
+  h2
+    col(1/1)
+    padding 2%
+    color white
+    font-size 1.5em
+    font-family primaryFont
+    margin 0
+    
+  h4  
+    col(1/1)
+    padding 2%
+    font-size 1em
+    color white
+    margin-top 0
+    font-family primaryFont
 
-a
-	stack()
-	font-size: 2em
-	padding: 10px 0px
-	border-bottom:1px gray solid
-	
-		
-h1
-	col(1/2)
-	color:purple
-	font-size:3em
-
-#test
-	clear both
-	
+  p
+    col(1/1)
+    padding 2%
+    font-size 1em
+    color white
+    margin-top 0
+    font-family secondaryFont
+        
+  .actionButtons
+    col(1/1)
+    padding 2%
+  
+    a
+      col(1/5)
+      color gray
+      font-family secondaryFont
+      font-size 1.2em
+      text-decoration none
+    
+    a:hover
+      color #FFF
+    
+.wrapper
+  margin-top 100px
+    
