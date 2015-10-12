@@ -1,8 +1,5 @@
 var App = angular.module('ProRubric', ['ngRoute', 'ngTagsInput']);
 
-// 
-//  Some Code blah blah
-// 
             
 App.config(function ($interpolateProvider, $routeProvider) {
         $interpolateProvider.startSymbol('{[{');
